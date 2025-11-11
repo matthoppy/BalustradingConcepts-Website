@@ -1,24 +1,52 @@
+import { useState } from "react";
 import gallery1 from "@/assets/gallery-1.jpg";
 import gallery2 from "@/assets/gallery-2.jpg";
 import gallery3 from "@/assets/gallery-3.jpg";
 import gallery4 from "@/assets/gallery-4.jpg";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const Gallery = () => {
+  const [selectedProject, setSelectedProject] = useState<number | null>(null);
+
   const projects = [
     {
-      image: gallery1,
+      name: "Commercial Glass Balustrading",
+      style: "Frameless Glass",
+      mainImage: gallery1,
+      images: [gallery1],
       alt: "Commercial glass balustrading on modern building",
     },
     {
-      image: gallery2,
+      name: "Luxury Home Staircase",
+      style: "Frameless Glass",
+      mainImage: gallery2,
+      images: [gallery2],
       alt: "Frameless glass staircase in luxury home",
     },
     {
-      image: gallery3,
+      name: "Outdoor Deck Railing",
+      style: "Glass Panel",
+      mainImage: gallery3,
+      images: [gallery3],
       alt: "Outdoor deck with glass panel railing",
     },
     {
-      image: gallery4,
+      name: "Shopping Mall Installation",
+      style: "",
+      mainImage: gallery4,
+      images: [gallery4],
       alt: "Shopping mall glass balustrading system",
     },
   ];
@@ -42,9 +70,10 @@ const Gallery = () => {
             <div
               key={index}
               className="relative aspect-[4/3] overflow-hidden group cursor-pointer"
+              onClick={() => setSelectedProject(index)}
             >
               <img
-                src={project.image}
+                src={project.mainImage}
                 alt={project.alt}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
@@ -56,6 +85,46 @@ const Gallery = () => {
             </div>
           ))}
         </div>
+
+        {/* Project Dialog */}
+        <Dialog open={selectedProject !== null} onOpenChange={() => setSelectedProject(null)}>
+          <DialogContent className="max-w-4xl">
+            <DialogHeader>
+              <DialogTitle className="text-2xl">
+                {selectedProject !== null && projects[selectedProject].name}
+              </DialogTitle>
+              {selectedProject !== null && projects[selectedProject].style && (
+                <p className="text-muted-foreground">
+                  Style: {projects[selectedProject].style}
+                </p>
+              )}
+            </DialogHeader>
+            
+            {selectedProject !== null && (
+              <Carousel className="w-full">
+                <CarouselContent>
+                  {projects[selectedProject].images.map((image, idx) => (
+                    <CarouselItem key={idx}>
+                      <div className="aspect-[16/10] overflow-hidden rounded-lg">
+                        <img
+                          src={image}
+                          alt={`${projects[selectedProject].name} - Image ${idx + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                {projects[selectedProject].images.length > 1 && (
+                  <>
+                    <CarouselPrevious />
+                    <CarouselNext />
+                  </>
+                )}
+              </Carousel>
+            )}
+          </DialogContent>
+        </Dialog>
       </div>
     </section>
   );
