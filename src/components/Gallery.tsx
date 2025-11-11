@@ -4,6 +4,10 @@ import gallery2 from "@/assets/gallery-2.jpg";
 import gallery3 from "@/assets/gallery-3.jpg";
 import gallery4 from "@/assets/gallery-4.jpg";
 import gallery5 from "@/assets/gallery-5.jpg";
+import gallery6 from "@/assets/gallery-6.jpg";
+import gallery7 from "@/assets/gallery-7.jpg";
+import gallery8 from "@/assets/gallery-8.jpg";
+import gallery9 from "@/assets/gallery-9.jpg";
 import {
   Dialog,
   DialogContent,
@@ -37,6 +41,14 @@ const Gallery = () => {
       mainImage: gallery5,
       images: [gallery5],
       alt: "Mini post pool fence installation",
+    },
+    {
+      name: "Finline Hidden",
+      style: "Finline Hidden",
+      category: "balustrade",
+      mainImage: gallery6,
+      images: [gallery6, gallery7, gallery8, gallery9],
+      alt: "Finline hidden balustrading on deck",
     },
   ];
 
