@@ -43,12 +43,12 @@ const Gallery = () => {
       alt: "Mini post pool fence installation",
     },
     {
-      name: "Finline Hidden",
-      style: "Finline Hidden",
+      name: "Arney Crestent Job",
+      style: "Finline",
       category: "balustrade",
       mainImage: gallery6,
       images: [gallery6, gallery7, gallery8, gallery9],
-      alt: "Finline hidden balustrading on deck",
+      alt: "Finline balustrading on deck at Arney Crestent",
     },
   ];
 
