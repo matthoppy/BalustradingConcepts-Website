@@ -3,6 +3,7 @@ import gallery1 from "@/assets/gallery-1.jpg";
 import gallery2 from "@/assets/gallery-2.jpg";
 import gallery3 from "@/assets/gallery-3.jpg";
 import gallery4 from "@/assets/gallery-4.jpg";
+import gallery5 from "@/assets/gallery-5.jpg";
 import {
   Dialog,
   DialogContent,
@@ -24,6 +25,7 @@ const Gallery = () => {
     {
       name: "Commercial Glass Balustrading",
       style: "Frameless Glass",
+      category: "commercial",
       mainImage: gallery1,
       images: [gallery1],
       alt: "Commercial glass balustrading on modern building",
@@ -31,6 +33,7 @@ const Gallery = () => {
     {
       name: "Luxury Home Staircase",
       style: "Frameless Glass",
+      category: "balustrade",
       mainImage: gallery2,
       images: [gallery2],
       alt: "Frameless glass staircase in luxury home",
@@ -38,6 +41,7 @@ const Gallery = () => {
     {
       name: "Outdoor Deck Railing",
       style: "Glass Panel",
+      category: "balustrade",
       mainImage: gallery3,
       images: [gallery3],
       alt: "Outdoor deck with glass panel railing",
@@ -45,9 +49,18 @@ const Gallery = () => {
     {
       name: "Shopping Mall Installation",
       style: "",
+      category: "commercial",
       mainImage: gallery4,
       images: [gallery4],
       alt: "Shopping mall glass balustrading system",
+    },
+    {
+      name: "Mini Posts",
+      style: "Pool Fence",
+      category: "poolfence",
+      mainImage: gallery5,
+      images: [gallery5],
+      alt: "Mini post pool fence installation",
     },
   ];
 
