@@ -35,14 +35,6 @@ const Gallery = () => {
       alt: "Commercial glass balustrading on modern building",
     },
     {
-      name: "Mini Posts",
-      style: "Pool Fence",
-      category: "poolfence",
-      mainImage: gallery5,
-      images: [gallery5],
-      alt: "Mini post pool fence installation",
-    },
-    {
       name: "Arney Crestent Job",
       style: "Finline",
       category: "balustrade",
