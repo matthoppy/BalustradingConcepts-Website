@@ -8,6 +8,8 @@ import gallery6 from "@/assets/gallery-6.jpg";
 import gallery7 from "@/assets/gallery-7.jpg";
 import gallery8 from "@/assets/gallery-8.jpg";
 import gallery9 from "@/assets/gallery-9.jpg";
+import gallery10 from "@/assets/gallery-10.jpg";
+import gallery11 from "@/assets/gallery-11.jpg";
 import {
   Dialog,
   DialogContent,
@@ -41,6 +43,14 @@ const Gallery = () => {
       mainImage: gallery6,
       images: [gallery6, gallery7, gallery8, gallery9],
       alt: "Finline balustrading on deck at Arney Crestent",
+    },
+    {
+      name: "Birkenhead",
+      style: "Finline",
+      category: "balustrade",
+      mainImage: gallery10,
+      images: [gallery10, gallery11],
+      alt: "Finline balustrading at Birkenhead property",
     },
   ];
 
