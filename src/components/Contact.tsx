@@ -1,7 +1,58 @@
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, Upload } from "lucide-react";
 import { Button } from "./ui/button";
+import { useState, useRef } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
+import { useToast } from "./ui/use-toast";
 
 const Contact = () => {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [captchaValue, setCaptchaValue] = useState<string | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const { toast } = useToast();
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      // Validate file size (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        toast({
+          title: "File too large",
+          description: "Please select an image under 5MB",
+          variant: "destructive",
+        });
+        return;
+      }
+      // Validate file type
+      if (!file.type.startsWith('image/')) {
+        toast({
+          title: "Invalid file type",
+          description: "Please select an image file",
+          variant: "destructive",
+        });
+        return;
+      }
+      setSelectedFile(file);
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!captchaValue) {
+      toast({
+        title: "Verification required",
+        description: "Please complete the CAPTCHA",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Form submission logic here
+    toast({
+      title: "Message sent!",
+      description: "We'll get back to you soon.",
+    });
+  };
   return (
     <section id="contact" className="py-24 bg-background">
       <div className="container mx-auto px-6">
@@ -73,7 +124,7 @@ const Contact = () => {
           {/* Contact Form */}
           <div className="bg-secondary p-8">
             <h3 className="text-2xl font-bold text-foreground mb-6">Request A Quote</h3>
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
@@ -125,6 +176,44 @@ const Contact = () => {
                   className="w-full px-4 py-3 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300 resize-none"
                   placeholder="Tell us about your project..."
                 ></textarea>
+              </div>
+              
+              <div>
+                <label htmlFor="photo" className="block text-sm font-medium text-foreground mb-2">
+                  Photo (Optional)
+                </label>
+                <div className="relative">
+                  <input
+                    type="file"
+                    id="photo"
+                    name="photo"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    className="hidden"
+                  />
+                  <label
+                    htmlFor="photo"
+                    className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-background border border-input hover:border-primary cursor-pointer transition-colors duration-300"
+                  >
+                    <Upload className="w-5 h-5 text-muted-foreground" />
+                    <span className="text-muted-foreground">
+                      {selectedFile ? selectedFile.name : "Upload a photo of your project"}
+                    </span>
+                  </label>
+                  {selectedFile && (
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Max file size: 5MB
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex justify-center">
+                <ReCAPTCHA
+                  ref={recaptchaRef}
+                  sitekey="YOUR_RECAPTCHA_SITE_KEY"
+                  onChange={setCaptchaValue}
+                />
               </div>
               
               <Button type="submit" className="w-full">
