@@ -231,12 +231,12 @@ const Gallery = () => {
       alt: "Avon balustrade and Safa Slat privacy screen installation on timber deck",
     },
     {
-      name: "Glass Balustrade",
+      name: "Aluminium Balustrade",
       style: "Windsor",
       category: "balustrade",
       mainImage: gallery60,
       images: [gallery60, gallery61, gallery62, gallery63, gallery64],
-      alt: "Windsor glass balustrade on elevated timber deck with views",
+      alt: "Windsor aluminium balustrade on elevated timber deck with views",
     },
     {
       name: "Glass Balustrade with Privacy Screen",
