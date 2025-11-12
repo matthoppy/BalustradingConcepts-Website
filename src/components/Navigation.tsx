@@ -68,24 +68,28 @@ const Navigation = () => {
               
               {isServicesOpen && (
                 <div 
-                  className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-background border border-border shadow-xl rounded-md z-50"
+                  className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50"
+                  onMouseEnter={() => setIsServicesOpen(true)}
+                  onMouseLeave={() => setIsServicesOpen(false)}
                 >
-                  <div className="flex gap-4 p-6">
-                    {serviceItems.map((service) => {
-                      const Icon = service.icon;
-                      return (
-                        <Link
-                          key={service.label}
-                          to={service.href}
-                          className="flex flex-col items-center gap-3 px-6 py-4 text-center hover:bg-secondary rounded-md transition-colors duration-200 group min-w-[180px]"
-                        >
-                          <Icon className="w-10 h-10 text-primary group-hover:scale-110 transition-transform" />
-                          <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
-                            {service.label}
-                          </span>
-                        </Link>
-                      );
-                    })}
+                  <div className="bg-background border border-border shadow-xl rounded-md">
+                    <div className="flex gap-4 p-6">
+                      {serviceItems.map((service) => {
+                        const Icon = service.icon;
+                        return (
+                          <Link
+                            key={service.label}
+                            to={service.href}
+                            className="flex flex-col items-center gap-3 px-6 py-4 text-center hover:bg-secondary rounded-md transition-colors duration-200 group min-w-[180px]"
+                          >
+                            <Icon className="w-10 h-10 text-primary group-hover:scale-110 transition-transform" />
+                            <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                              {service.label}
+                            </span>
+                          </Link>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               )}
