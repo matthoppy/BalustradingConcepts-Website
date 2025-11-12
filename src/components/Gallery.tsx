@@ -58,6 +58,17 @@ import gallery56 from "@/assets/gallery-56.jpg";
 import gallery57 from "@/assets/gallery-57.jpg";
 import gallery58 from "@/assets/gallery-58.jpg";
 import gallery59 from "@/assets/gallery-59.jpg";
+import gallery60 from "@/assets/gallery-60.jpg";
+import gallery61 from "@/assets/gallery-61.jpg";
+import gallery62 from "@/assets/gallery-62.jpg";
+import gallery63 from "@/assets/gallery-63.jpg";
+import gallery64 from "@/assets/gallery-64.jpg";
+import gallery65 from "@/assets/gallery-65.jpg";
+import gallery66 from "@/assets/gallery-66.jpg";
+import gallery67 from "@/assets/gallery-67.jpg";
+import gallery68 from "@/assets/gallery-68.jpg";
+import gallery69 from "@/assets/gallery-69.jpg";
+import gallery70 from "@/assets/gallery-70.jpg";
 import {
   Dialog,
   DialogContent,
@@ -218,6 +229,22 @@ const Gallery = () => {
       mainImage: gallery56,
       images: [gallery56, gallery57, gallery58, gallery59],
       alt: "Avon balustrade and Safa Slat privacy screen installation on timber deck",
+    },
+    {
+      name: "Glass Balustrade",
+      style: "Windsor",
+      category: "balustrade",
+      mainImage: gallery60,
+      images: [gallery60, gallery61, gallery62, gallery63, gallery64],
+      alt: "Windsor glass balustrade on elevated timber deck with views",
+    },
+    {
+      name: "Glass Balustrade with Privacy Screen",
+      style: "Spectra and Safa Slat",
+      category: "balustrade",
+      mainImage: gallery65,
+      images: [gallery65, gallery66, gallery67, gallery68, gallery69, gallery70],
+      alt: "Spectra glass balustrade with Safa Slat privacy screen on elevated deck",
     },
   ];
 
