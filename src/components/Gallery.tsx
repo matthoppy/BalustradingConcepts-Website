@@ -193,6 +193,22 @@ const Gallery = ({ filter }: { filter?: string }) => {
       alt: "Ascot and Spectra hidden pool fencing around elevated pool on timber deck",
     },
     {
+      name: "Evril Orr Retirement Home",
+      style: "Finline and Ascot Handrails",
+      category: "commercial",
+      mainImage: gallery102,
+      images: [gallery102, gallery99, gallery100, gallery101, gallery103, gallery104, gallery105, gallery106, gallery107, gallery108, gallery109, gallery110, gallery111, gallery112, gallery113, gallery114],
+      alt: "Finline and Ascot handrails at Evril Orr Retirement Home commercial project",
+    },
+    {
+      name: "Pukekohe Project",
+      style: "Finline",
+      category: "commercial",
+      mainImage: gallery115,
+      images: [gallery115, gallery116, gallery117, gallery118],
+      alt: "Finline commercial balustrading at Pukekohe Project",
+    },
+    {
       name: "Parnell Project",
       style: "finline",
       category: "balustrade",
@@ -399,22 +415,6 @@ const Gallery = ({ filter }: { filter?: string }) => {
       mainImage: gallery94,
       images: [gallery94, gallery95, gallery96, gallery97, gallery98],
       alt: "Windsor style commercial balustrading at Diocesan School",
-    },
-    {
-      name: "Evril Orr Retirement Home",
-      style: "Finline and Ascot Handrails",
-      category: "commercial",
-      mainImage: gallery102,
-      images: [gallery102, gallery99, gallery100, gallery101, gallery103, gallery104, gallery105, gallery106, gallery107, gallery108, gallery109, gallery110, gallery111, gallery112, gallery113, gallery114],
-      alt: "Finline and Ascot handrails at Evril Orr Retirement Home commercial project",
-    },
-    {
-      name: "Pukekohe Project",
-      style: "Finline",
-      category: "commercial",
-      mainImage: gallery115,
-      images: [gallery115, gallery116, gallery117, gallery118],
-      alt: "Finline commercial balustrading at Pukekohe Project",
     },
   ];
 
