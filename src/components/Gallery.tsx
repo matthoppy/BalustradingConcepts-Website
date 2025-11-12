@@ -115,6 +115,26 @@ import gallery95 from "@/assets/gallery-95.jpg";
 import gallery96 from "@/assets/gallery-96.jpg";
 import gallery97 from "@/assets/gallery-97.jpg";
 import gallery98 from "@/assets/gallery-98.jpg";
+import gallery99 from "@/assets/gallery-99.jpg";
+import gallery100 from "@/assets/gallery-100.jpg";
+import gallery101 from "@/assets/gallery-101.jpg";
+import gallery102 from "@/assets/gallery-102.jpg";
+import gallery103 from "@/assets/gallery-103.jpg";
+import gallery104 from "@/assets/gallery-104.jpg";
+import gallery105 from "@/assets/gallery-105.jpg";
+import gallery106 from "@/assets/gallery-106.jpg";
+import gallery107 from "@/assets/gallery-107.jpg";
+import gallery108 from "@/assets/gallery-108.jpg";
+import gallery109 from "@/assets/gallery-109.jpg";
+import gallery110 from "@/assets/gallery-110.jpg";
+import gallery111 from "@/assets/gallery-111.jpg";
+import gallery112 from "@/assets/gallery-112.jpg";
+import gallery113 from "@/assets/gallery-113.jpg";
+import gallery114 from "@/assets/gallery-114.jpg";
+import gallery115 from "@/assets/gallery-115.jpg";
+import gallery116 from "@/assets/gallery-116.jpg";
+import gallery117 from "@/assets/gallery-117.jpg";
+import gallery118 from "@/assets/gallery-118.jpg";
 import {
   Dialog,
   DialogContent,
@@ -379,6 +399,22 @@ const Gallery = ({ filter }: { filter?: string }) => {
       mainImage: gallery94,
       images: [gallery94, gallery95, gallery96, gallery97, gallery98],
       alt: "Windsor style commercial balustrading at Diocesan School",
+    },
+    {
+      name: "Evril Orr Retirement Home",
+      style: "Finline and Ascot Handrails",
+      category: "commercial",
+      mainImage: gallery99,
+      images: [gallery99, gallery100, gallery101, gallery102, gallery103, gallery104, gallery105, gallery106, gallery107, gallery108, gallery109, gallery110, gallery111, gallery112, gallery113, gallery114],
+      alt: "Finline and Ascot handrails at Evril Orr Retirement Home commercial project",
+    },
+    {
+      name: "Pukekohe Project",
+      style: "Finline",
+      category: "commercial",
+      mainImage: gallery115,
+      images: [gallery115, gallery116, gallery117, gallery118],
+      alt: "Finline commercial balustrading at Pukekohe Project",
     },
   ];
 
