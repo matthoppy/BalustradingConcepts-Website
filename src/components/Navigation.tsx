@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Home, Waves, Building2 } from "lucide-react";
 import { Button } from "./ui/button";
 import logo from "@/assets/logo.png";
 import { Link } from "react-router-dom";
@@ -25,9 +25,9 @@ const Navigation = () => {
   ];
 
   const serviceItems = [
-    { label: "Residential Balustrading", href: "/residential-balustrading" },
-    { label: "Pool Fencing", href: "/pool-fencing" },
-    { label: "Commercial Projects", href: "/commercial-projects" },
+    { label: "Residential Balustrading", href: "/residential-balustrading", icon: Home },
+    { label: "Pool Fencing", href: "/pool-fencing", icon: Waves },
+    { label: "Commercial Projects", href: "/commercial-projects", icon: Building2 },
   ];
 
   return (
@@ -67,22 +67,28 @@ const Navigation = () => {
               </button>
               
               {isServicesOpen && (
-                <div className="absolute top-full left-0 mt-2 w-64 bg-background border border-border shadow-lg rounded-md overflow-hidden z-50">
-                  {serviceItems.map((service) => (
-                    <Link
-                      key={service.label}
-                      to={service.href}
-                      className="block px-6 py-3 text-foreground hover:bg-secondary hover:text-primary transition-colors duration-200"
-                    >
-                      {service.label}
-                    </Link>
-                  ))}
-                  <a
-                    href="/#services"
-                    className="block px-6 py-3 text-foreground hover:bg-secondary hover:text-primary transition-colors duration-200 border-t border-border"
-                  >
-                    View All Services
-                  </a>
+                <div 
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-background border border-border shadow-xl rounded-md z-50"
+                  onMouseEnter={() => setIsServicesOpen(true)}
+                  onMouseLeave={() => setIsServicesOpen(false)}
+                >
+                  <div className="flex gap-4 p-6">
+                    {serviceItems.map((service) => {
+                      const Icon = service.icon;
+                      return (
+                        <Link
+                          key={service.label}
+                          to={service.href}
+                          className="flex flex-col items-center gap-3 px-6 py-4 text-center hover:bg-secondary rounded-md transition-colors duration-200 group min-w-[180px]"
+                        >
+                          <Icon className="w-10 h-10 text-primary group-hover:scale-110 transition-transform" />
+                          <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                            {service.label}
+                          </span>
+                        </Link>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
             </div>
@@ -137,13 +143,6 @@ const Navigation = () => {
                     {service.label}
                   </Link>
                 ))}
-                <a
-                  href="/#services"
-                  className="block py-2 text-muted-foreground hover:text-primary transition-colors duration-300"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  View All Services
-                </a>
               </div>
             </div>
             
