@@ -106,6 +106,9 @@ import gallery86 from "@/assets/gallery-86.jpg";
 import gallery87 from "@/assets/gallery-87.jpg";
 import gallery88 from "@/assets/gallery-88.jpg";
 import gallery89 from "@/assets/gallery-89.jpg";
+import gallery90 from "@/assets/gallery-90.jpg";
+import gallery91 from "@/assets/gallery-91.jpg";
+import gallery92 from "@/assets/gallery-92.jpg";
 import {
   Dialog,
   DialogContent,
@@ -354,6 +357,14 @@ const Gallery = ({ filter }: { filter?: string }) => {
       mainImage: gallery88,
       images: [gallery88, gallery89],
       alt: "Ascot style commercial balustrading at dealership",
+    },
+    {
+      name: "Lincoln Project",
+      style: "Windsor",
+      category: "commercial",
+      mainImage: gallery90,
+      images: [gallery90, gallery91, gallery92],
+      alt: "Windsor style commercial balustrading at Lincoln Project",
     },
   ];
 
