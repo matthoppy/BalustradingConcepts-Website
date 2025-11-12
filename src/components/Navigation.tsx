@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Phone, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "./ui/button";
 import logo from "@/assets/logo.png";
 
@@ -49,15 +49,11 @@ const Navigation = () => {
             ))}
           </nav>
 
-          {/* Phone Number */}
+          {/* Get Quote Button */}
           <div className="hidden md:flex items-center gap-4">
-            <a
-              href="tel:0982888858"
-              className="flex items-center gap-2 text-primary hover:text-primary-hover transition-colors duration-300"
-            >
-              <Phone className="w-5 h-5" />
-              <span className="font-semibold text-lg">09 828 8858</span>
-            </a>
+            <Button asChild>
+              <a href="#contact">Get a Free Quote</a>
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -87,13 +83,9 @@ const Navigation = () => {
                 {item.label}
               </a>
             ))}
-            <a
-              href="tel:0982888858"
-              className="flex items-center gap-2 py-3 text-primary hover:text-primary-hover transition-colors duration-300 font-semibold"
-            >
-              <Phone className="w-5 h-5" />
-              09 828 8858
-            </a>
+            <Button asChild className="mt-3">
+              <a href="#contact">Get a Free Quote</a>
+            </Button>
           </nav>
         )}
       </div>
