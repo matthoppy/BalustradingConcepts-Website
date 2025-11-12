@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import gallery1 from "@/assets/gallery-1.jpg";
 import gallery2 from "@/assets/gallery-2.jpg";
 import gallery3 from "@/assets/gallery-3.jpg";
@@ -35,10 +35,25 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from "@/components/ui/carousel";
 
 const Gallery = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
+  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!carouselApi) return;
+
+    setCount(carouselApi.scrollSnapList().length);
+    setCurrent(carouselApi.selectedScrollSnap() + 1);
+
+    carouselApi.on("select", () => {
+      setCurrent(carouselApi.selectedScrollSnap() + 1);
+    });
+  }, [carouselApi]);
 
   const projects = [
     {
@@ -141,27 +156,34 @@ const Gallery = () => {
             </DialogHeader>
             
             {selectedProject !== null && (
-              <Carousel className="w-full">
-                <CarouselContent>
-                  {projects[selectedProject].images.map((image, idx) => (
-                    <CarouselItem key={idx}>
-                      <div className="aspect-[16/10] overflow-hidden rounded-lg">
-                        <img
-                          src={image}
-                          alt={`${projects[selectedProject].name} - Image ${idx + 1}`}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
+              <div className="relative">
+                <Carousel className="w-full" setApi={setCarouselApi}>
+                  <CarouselContent>
+                    {projects[selectedProject].images.map((image, idx) => (
+                      <CarouselItem key={idx}>
+                        <div className="aspect-[16/10] overflow-hidden rounded-lg">
+                          <img
+                            src={image}
+                            alt={`${projects[selectedProject].name} - Image ${idx + 1}`}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  {projects[selectedProject].images.length > 1 && (
+                    <>
+                      <CarouselPrevious className="left-4 h-12 w-12 border-2 border-primary bg-background/95 hover:bg-primary hover:text-primary-foreground" />
+                      <CarouselNext className="right-4 h-12 w-12 border-2 border-primary bg-background/95 hover:bg-primary hover:text-primary-foreground" />
+                    </>
+                  )}
+                </Carousel>
                 {projects[selectedProject].images.length > 1 && (
-                  <>
-                    <CarouselPrevious />
-                    <CarouselNext />
-                  </>
+                  <div className="text-center mt-4 text-sm text-muted-foreground font-medium">
+                    Image {current} of {count}
+                  </div>
                 )}
-              </Carousel>
+              </div>
             )}
           </DialogContent>
         </Dialog>
