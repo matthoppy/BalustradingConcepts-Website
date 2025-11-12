@@ -44,6 +44,12 @@ import gallery42 from "@/assets/gallery-42.jpg";
 import gallery43 from "@/assets/gallery-43.jpg";
 import gallery44 from "@/assets/gallery-44.jpg";
 import gallery45 from "@/assets/gallery-45.jpg";
+import gallery46 from "@/assets/gallery-46.jpg";
+import gallery47 from "@/assets/gallery-47.jpg";
+import gallery48 from "@/assets/gallery-48.jpg";
+import gallery49 from "@/assets/gallery-49.jpg";
+import gallery50 from "@/assets/gallery-50.jpg";
+import gallery51 from "@/assets/gallery-51.jpg";
 import {
   Dialog,
   DialogContent,
@@ -172,6 +178,22 @@ const Gallery = () => {
       mainImage: gallery41,
       images: [gallery41, gallery42, gallery43, gallery44, gallery45],
       alt: "Spectra glass balustrade at beachfront Taupo Bay bach",
+    },
+    {
+      name: "Millwater Project",
+      style: "Windsor balustrade and Assure Panels + Gates",
+      category: "balustrade",
+      mainImage: gallery46,
+      images: [gallery46, gallery47, gallery48],
+      alt: "Windsor balustrade with Assure panels and gates at Millwater",
+    },
+    {
+      name: "Privacy Screen",
+      style: "Extreme Etchlite glass",
+      category: "commercial",
+      mainImage: gallery49,
+      images: [gallery49, gallery50, gallery51],
+      alt: "Extreme Etchlite glass privacy screen installation",
     },
   ];
 
