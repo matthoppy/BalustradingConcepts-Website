@@ -75,6 +75,9 @@ import gallery73 from "@/assets/gallery-73.jpg";
 import gallery74 from "@/assets/gallery-74.jpg";
 import gallery75 from "@/assets/gallery-75.jpg";
 import gallery76 from "@/assets/gallery-76.jpg";
+import gallery77 from "@/assets/gallery-77.jpg";
+import gallery78 from "@/assets/gallery-78.jpg";
+import gallery79 from "@/assets/gallery-79.jpg";
 import {
   Dialog,
   DialogContent,
@@ -259,6 +262,14 @@ const Gallery = () => {
       mainImage: gallery71,
       images: [gallery71, gallery72, gallery73, gallery74, gallery75],
       alt: "Panorama glass balustrade installation",
+    },
+    {
+      name: "Stairway Handrail",
+      style: "Ascot",
+      category: "commercial",
+      mainImage: gallery77,
+      images: [gallery77, gallery78, gallery79],
+      alt: "Ascot handrail installation on curved concrete stairs",
     },
   ];
 
