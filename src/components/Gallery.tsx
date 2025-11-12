@@ -98,6 +98,14 @@ import poolFence17 from "@/assets/pool-fence-17.jpg";
 import poolFence18 from "@/assets/pool-fence-18.jpg";
 import gallery80 from "@/assets/gallery-80.jpg";
 import gallery81 from "@/assets/gallery-81.jpg";
+import gallery82 from "@/assets/gallery-82.jpg";
+import gallery83 from "@/assets/gallery-83.jpg";
+import gallery84 from "@/assets/gallery-84.jpg";
+import gallery85 from "@/assets/gallery-85.jpg";
+import gallery86 from "@/assets/gallery-86.jpg";
+import gallery87 from "@/assets/gallery-87.jpg";
+import gallery88 from "@/assets/gallery-88.jpg";
+import gallery89 from "@/assets/gallery-89.jpg";
 import {
   Dialog,
   DialogContent,
@@ -322,6 +330,30 @@ const Gallery = ({ filter }: { filter?: string }) => {
       mainImage: gallery80,
       images: [gallery80, gallery81],
       alt: "Extreme Ascot commercial balustrading installation at Oranga School",
+    },
+    {
+      name: "Glen Eden Apartments",
+      style: "Hampton",
+      category: "commercial",
+      mainImage: gallery82,
+      images: [gallery82, gallery83, gallery84],
+      alt: "Hampton style commercial balustrading at Glen Eden Apartments",
+    },
+    {
+      name: "Accessibility Walkway",
+      style: "Handrail",
+      category: "commercial",
+      mainImage: gallery85,
+      images: [gallery85, gallery86, gallery87],
+      alt: "Commercial handrail installation for accessibility walkway",
+    },
+    {
+      name: "Dealership Project",
+      style: "Ascot",
+      category: "commercial",
+      mainImage: gallery88,
+      images: [gallery88, gallery89],
+      alt: "Ascot style commercial balustrading at dealership",
     },
   ];
 
