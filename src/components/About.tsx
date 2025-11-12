@@ -5,7 +5,7 @@ import aboutImage2 from "@/assets/about-image-2.jpg";
 const About = () => {
   const features = [
     "Over 15 years of industry experience",
-    "New Zealand owned and operated",
+    "Family owned and operated",
     "Premium quality materials",
     "Expert installation team",
     "10 year warranty on materials",
