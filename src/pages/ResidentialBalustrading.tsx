@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import FixedContactButtons from "@/components/FixedContactButtons";
+import residentialHeroImage from "@/assets/residential-hero.jpg";
 
 const ResidentialBalustrading = () => {
   const features = [
@@ -19,29 +20,38 @@ const ResidentialBalustrading = () => {
       <Navigation />
       <FixedContactButtons />
       
-      <main className="pt-24">
+      <main>
         {/* Hero Section */}
-        <section className="py-16 bg-secondary">
-          <div className="container mx-auto px-6">
-            <Button variant="ghost" asChild className="mb-6">
-              <a href="/#services" className="flex items-center gap-2">
-                <ArrowLeft className="w-4 h-4" />
-                Back to Services
-              </a>
-            </Button>
-            
-            <div className="flex items-center gap-4 mb-6">
-              <Home className="w-12 h-12 text-primary" />
-              <h1 className="text-4xl md:text-5xl font-bold text-foreground uppercase">
+        <section className="relative h-screen w-full overflow-hidden">
+          {/* Background Image */}
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${residentialHeroImage})` }}
+          >
+            <div className="absolute inset-0 bg-overlay/50" />
+          </div>
+
+          {/* Hero Content */}
+          <div className="relative h-full flex items-center justify-center text-center px-6">
+            <div className="max-w-5xl">
+              <div className="flex items-center justify-center gap-4 mb-6">
+                <Home className="w-16 h-16 text-primary-foreground" />
+              </div>
+              <h1 className="text-5xl md:text-7xl font-black text-primary-foreground uppercase tracking-wider mb-6 animate-fade-in">
                 Residential Balustrading
               </h1>
+              <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto font-light">
+                Transform your Auckland home with premium glass and aluminium balustrading solutions
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button variant="hero" asChild>
+                  <a href="/#contact">Get a Free Quote</a>
+                </Button>
+                <Button variant="outline" size="lg" className="bg-white text-foreground hover:bg-white/90" asChild>
+                  <a href="#gallery">View Residential Projects</a>
+                </Button>
+              </div>
             </div>
-            
-            <p className="text-xl text-muted-foreground max-w-3xl">
-              Transform your Auckland home with premium glass and aluminium balustrading solutions. 
-              We specialise in creating safe, elegant balustrades that enhance your property's aesthetic 
-              and add lasting value.
-            </p>
           </div>
         </section>
 
@@ -90,7 +100,7 @@ const ResidentialBalustrading = () => {
         </section>
 
         {/* Gallery CTA */}
-        <section className="py-16 bg-secondary">
+        <section id="gallery" className="py-16 bg-secondary">
           <div className="container mx-auto px-6 text-center">
             <h2 className="text-3xl font-bold text-foreground mb-4">
               See Our Residential Projects
