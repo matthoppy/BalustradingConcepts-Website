@@ -95,6 +95,7 @@ import poolFence14 from "@/assets/pool-fence-14.jpg";
 import poolFence15 from "@/assets/pool-fence-15.jpg";
 import poolFence16 from "@/assets/pool-fence-16.jpg";
 import poolFence17 from "@/assets/pool-fence-17.jpg";
+import poolFence18 from "@/assets/pool-fence-18.jpg";
 import {
   Dialog,
   DialogContent,
@@ -133,7 +134,7 @@ const Gallery = ({ filter }: { filter?: string }) => {
       style: "Mini Posts",
       category: "poolfence",
       mainImage: poolFence8,
-      images: [poolFence8, poolFence9, poolFence10, poolFence11, poolFence12],
+      images: [poolFence8, poolFence9, poolFence10, poolFence11, poolFence12, poolFence18],
       alt: "Mini Posts hidden pool fencing installation at Millwater",
     },
     {
