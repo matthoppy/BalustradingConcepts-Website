@@ -195,7 +195,7 @@ const Gallery = ({ filter }: { filter?: string }) => {
     {
       name: "Parnell Project",
       style: "finline",
-      category: "commercial",
+      category: "balustrade",
       mainImage: gallery1,
       images: [gallery1, gallery76, gallery93],
       alt: "Finline balustrading at Parnell project",
@@ -299,7 +299,7 @@ const Gallery = ({ filter }: { filter?: string }) => {
     {
       name: "Privacy Screen",
       style: "Extreme Etchlite glass",
-      category: "commercial",
+      category: "balustrade",
       mainImage: gallery49,
       images: [gallery49, gallery50, gallery51],
       alt: "Extreme Etchlite glass privacy screen installation",
@@ -347,7 +347,7 @@ const Gallery = ({ filter }: { filter?: string }) => {
     {
       name: "Stairway Handrail",
       style: "Ascot",
-      category: "commercial",
+      category: "balustrade",
       mainImage: gallery77,
       images: [gallery77, gallery78, gallery79],
       alt: "Ascot handrail installation on curved concrete stairs",
