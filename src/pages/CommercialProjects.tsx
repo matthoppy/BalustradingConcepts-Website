@@ -3,8 +3,6 @@ import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import FixedContactButtons from "@/components/FixedContactButtons";
-import Gallery from "@/components/Gallery";
-import commercialHero from "@/assets/commercial-hero.jpg";
 
 const CommercialProjects = () => {
   const features = [
@@ -21,35 +19,29 @@ const CommercialProjects = () => {
       <Navigation />
       <FixedContactButtons />
       
-      <main>
+      <main className="pt-24">
         {/* Hero Section */}
-        <section className="relative h-screen w-full overflow-hidden">
-          {/* Background Image */}
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${commercialHero})` }}
-          >
-            <div className="absolute inset-0 bg-overlay/50" />
-          </div>
-
-          {/* Hero Content */}
-          <div className="relative h-full flex items-center justify-center text-center px-6">
-            <div className="max-w-5xl">
-              <h1 className="text-5xl md:text-7xl font-black text-primary-foreground uppercase tracking-wider mb-6 animate-fade-in">
+        <section className="py-16 bg-secondary">
+          <div className="container mx-auto px-6">
+            <Button variant="ghost" asChild className="mb-6">
+              <a href="/#services" className="flex items-center gap-2">
+                <ArrowLeft className="w-4 h-4" />
+                Back to Services
+              </a>
+            </Button>
+            
+            <div className="flex items-center gap-4 mb-6">
+              <Building2 className="w-12 h-12 text-primary" />
+              <h1 className="text-4xl md:text-5xl font-bold text-foreground uppercase">
                 Commercial Projects
               </h1>
-              <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto font-light">
-                Partner with Auckland's trusted commercial balustrading specialists for large-scale installations
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="hero" asChild>
-                  <a href="#contact">Get A Free Quote</a>
-                </Button>
-                <Button variant="outline" size="lg" className="bg-white text-foreground hover:bg-white/90" asChild>
-                  <a href="#gallery">View Commercial Projects</a>
-                </Button>
-              </div>
             </div>
+            
+            <p className="text-xl text-muted-foreground max-w-3xl">
+              Partner with Auckland's trusted commercial balustrading specialists for large-scale 
+              installations. We deliver comprehensive solutions for offices, retail spaces, public 
+              buildings, and hospitality venues with professional project management from design to completion.
+            </p>
           </div>
         </section>
 
@@ -72,6 +64,17 @@ const CommercialProjects = () => {
                   schools, and hospitality venues. We provide durable, attractive solutions that withstand 
                   high traffic while maintaining safety standards and architectural integrity.
                 </p>
+                <div className="space-y-4">
+                  <div className="bg-card p-6 border border-border">
+                    <h3 className="font-bold text-card-foreground mb-2">Previous Projects Include:</h3>
+                    <ul className="text-muted-foreground text-sm space-y-1">
+                      <li>• Helensville Library - Ascot handrails</li>
+                      <li>• Commercial office buildings - Finline systems</li>
+                      <li>• Retail centers - Assure panel fencing</li>
+                      <li>• Public spaces - Privacy screens and balustrading</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
               
               <div className="bg-card p-8 border border-border">
@@ -97,9 +100,19 @@ const CommercialProjects = () => {
           </div>
         </section>
 
-        {/* Gallery Section */}
-        <section id="gallery">
-          <Gallery filter="commercial" />
+        {/* Gallery CTA */}
+        <section className="py-16 bg-secondary">
+          <div className="container mx-auto px-6 text-center">
+            <h2 className="text-3xl font-bold text-foreground mb-4">
+              See Our Commercial Projects
+            </h2>
+            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Browse our portfolio of commercial installations across Auckland
+            </p>
+            <Button variant="outline" size="lg" asChild>
+              <a href="/#gallery">View Gallery</a>
+            </Button>
+          </div>
         </section>
       </main>
       
