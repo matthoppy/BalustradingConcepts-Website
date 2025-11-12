@@ -25,6 +25,8 @@ import gallery23 from "@/assets/gallery-23.jpg";
 import gallery24 from "@/assets/gallery-24.jpg";
 import gallery25 from "@/assets/gallery-25.jpg";
 import gallery26 from "@/assets/gallery-26.jpg";
+import gallery27 from "@/assets/gallery-27.jpg";
+import gallery28 from "@/assets/gallery-28.jpg";
 import {
   Dialog,
   DialogContent,
@@ -113,6 +115,14 @@ const Gallery = () => {
       mainImage: gallery25,
       images: [gallery25, gallery26],
       alt: "Siena style glass balustrade installation",
+    },
+    {
+      name: "Glass Standoff Balustrade",
+      style: "Standoff",
+      category: "balustrade",
+      mainImage: gallery27,
+      images: [gallery27, gallery28],
+      alt: "Glass standoff style balustrade installation on timber deck",
     },
   ];
 
