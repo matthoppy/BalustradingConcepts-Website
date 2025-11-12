@@ -50,6 +50,10 @@ import gallery48 from "@/assets/gallery-48.jpg";
 import gallery49 from "@/assets/gallery-49.jpg";
 import gallery50 from "@/assets/gallery-50.jpg";
 import gallery51 from "@/assets/gallery-51.jpg";
+import gallery52 from "@/assets/gallery-52.jpg";
+import gallery53 from "@/assets/gallery-53.jpg";
+import gallery54 from "@/assets/gallery-54.jpg";
+import gallery55 from "@/assets/gallery-55.jpg";
 import {
   Dialog,
   DialogContent,
@@ -194,6 +198,14 @@ const Gallery = () => {
       mainImage: gallery49,
       images: [gallery49, gallery50, gallery51],
       alt: "Extreme Etchlite glass privacy screen installation",
+    },
+    {
+      name: "Commercial Handrail",
+      style: "Ascot with Handrail",
+      category: "commercial",
+      mainImage: gallery52,
+      images: [gallery52, gallery53, gallery54, gallery55],
+      alt: "Ascot commercial handrail installation on stairs and deck",
     },
   ];
 
