@@ -15,6 +15,10 @@ import gallery13 from "@/assets/gallery-13.jpg";
 import gallery14 from "@/assets/gallery-14.jpg";
 import gallery15 from "@/assets/gallery-15.jpg";
 import gallery16 from "@/assets/gallery-16.jpg";
+import gallery17 from "@/assets/gallery-17.jpg";
+import gallery18 from "@/assets/gallery-18.jpg";
+import gallery19 from "@/assets/gallery-19.jpg";
+import gallery20 from "@/assets/gallery-20.jpg";
 import {
   Dialog,
   DialogContent,
@@ -64,6 +68,14 @@ const Gallery = () => {
       mainImage: gallery10,
       images: [gallery10, gallery11],
       alt: "Finline balustrading at Birkenhead property",
+    },
+    {
+      name: "Fineline Safa Slat Balustrade",
+      style: "Fineline Safa",
+      category: "balustrade",
+      mainImage: gallery17,
+      images: [gallery17, gallery18, gallery19, gallery20],
+      alt: "Fineline Safa slat type balustrade installation",
     },
   ];
 
