@@ -96,6 +96,8 @@ import poolFence15 from "@/assets/pool-fence-15.jpg";
 import poolFence16 from "@/assets/pool-fence-16.jpg";
 import poolFence17 from "@/assets/pool-fence-17.jpg";
 import poolFence18 from "@/assets/pool-fence-18.jpg";
+import gallery80 from "@/assets/gallery-80.jpg";
+import gallery81 from "@/assets/gallery-81.jpg";
 import {
   Dialog,
   DialogContent,
@@ -312,6 +314,14 @@ const Gallery = ({ filter }: { filter?: string }) => {
       mainImage: gallery77,
       images: [gallery77, gallery78, gallery79],
       alt: "Ascot handrail installation on curved concrete stairs",
+    },
+    {
+      name: "Oranga School",
+      style: "Extreme Ascot",
+      category: "commercial",
+      mainImage: gallery80,
+      images: [gallery80, gallery81],
+      alt: "Extreme Ascot commercial balustrading installation at Oranga School",
     },
   ];
 
