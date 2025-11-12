@@ -18,7 +18,7 @@ const Navigation = () => {
   }, []);
 
   const menuItems = [
-    { label: "Home", href: "#home" },
+    { label: "Home", href: "/" },
     { label: "About", href: "#about" },
     { label: "Gallery", href: "#gallery" },
     { label: "Contact", href: "#contact" },
@@ -39,7 +39,7 @@ const Navigation = () => {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-24">
           {/* Logo */}
-          <a href="#home" className="flex items-center">
+          <a href="/" className="flex items-center">
             <img src={logo} alt="Balustrading Concepts NZ Ltd" className="h-16 w-auto" />
           </a>
 
