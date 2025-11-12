@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import FixedContactButtons from "@/components/FixedContactButtons";
-import poolHeroImage from "@/assets/gallery-23.jpg";
+import Gallery from "@/components/Gallery";
+import heroImage from "@/assets/pool-fencing-hero.jpg";
 
 const PoolFencing = () => {
   const features = [
@@ -26,7 +27,7 @@ const PoolFencing = () => {
           {/* Background Image */}
           <div
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${poolHeroImage})` }}
+            style={{ backgroundImage: `url(${heroImage})` }}
           >
             <div className="absolute inset-0 bg-overlay/50" />
           </div>
@@ -34,18 +35,15 @@ const PoolFencing = () => {
           {/* Hero Content */}
           <div className="relative h-full flex items-center justify-center text-center px-6">
             <div className="max-w-5xl">
-              <div className="flex items-center justify-center gap-4 mb-6">
-                <Waves className="w-16 h-16 text-primary-foreground" />
-              </div>
               <h1 className="text-5xl md:text-7xl font-black text-primary-foreground uppercase tracking-wider mb-6 animate-fade-in">
-                Pool Fencing
+                Pool Fencing Solutions
               </h1>
               <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto font-light">
-                Ensure safety and style around your pool with our compliant glass pool fencing solutions
+                Safety and style combined with compliant glass pool fencing for Auckland homes
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button variant="hero" asChild>
-                  <a href="/#contact">Get a Free Quote</a>
+                  <a href="#contact">Get A Free Quote</a>
                 </Button>
                 <Button variant="outline" size="lg" className="bg-white text-foreground hover:bg-white/90" asChild>
                   <a href="#gallery">View Pool Fencing Projects</a>
@@ -106,19 +104,9 @@ const PoolFencing = () => {
           </div>
         </section>
 
-        {/* Gallery CTA */}
-        <section id="gallery" className="py-16 bg-secondary">
-          <div className="container mx-auto px-6 text-center">
-            <h2 className="text-3xl font-bold text-foreground mb-4">
-              See Our Pool Fencing Projects
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Browse our portfolio of pool fencing installations across Auckland
-            </p>
-            <Button variant="outline" size="lg" asChild>
-              <a href="/#gallery">View Gallery</a>
-            </Button>
-          </div>
+        {/* Gallery Section */}
+        <section id="gallery">
+          <Gallery filter="poolfence" />
         </section>
       </main>
       

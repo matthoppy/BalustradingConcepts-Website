@@ -78,6 +78,63 @@ import gallery76 from "@/assets/gallery-76.jpg";
 import gallery77 from "@/assets/gallery-77.jpg";
 import gallery78 from "@/assets/gallery-78.jpg";
 import gallery79 from "@/assets/gallery-79.jpg";
+import poolFence1 from "@/assets/pool-fence-1.jpg";
+import poolFence2 from "@/assets/pool-fence-2.jpg";
+import poolFence3 from "@/assets/pool-fence-3.jpg";
+import poolFence4 from "@/assets/pool-fence-4.jpg";
+import poolFence5 from "@/assets/pool-fence-5.jpg";
+import poolFence6 from "@/assets/pool-fence-6.jpg";
+import poolFence7 from "@/assets/pool-fence-7.jpg";
+import poolFence8 from "@/assets/pool-fence-8.jpg";
+import poolFence9 from "@/assets/pool-fence-9.jpg";
+import poolFence10 from "@/assets/pool-fence-10.jpg";
+import poolFence11 from "@/assets/pool-fence-11.jpg";
+import poolFence12 from "@/assets/pool-fence-12.jpg";
+import poolFence13 from "@/assets/pool-fence-13.jpg";
+import poolFence14 from "@/assets/pool-fence-14.jpg";
+import poolFence15 from "@/assets/pool-fence-15.jpg";
+import poolFence16 from "@/assets/pool-fence-16.jpg";
+import poolFence17 from "@/assets/pool-fence-17.jpg";
+import poolFence18 from "@/assets/pool-fence-18.jpg";
+import gallery80 from "@/assets/gallery-80.jpg";
+import gallery81 from "@/assets/gallery-81.jpg";
+import gallery82 from "@/assets/gallery-82.jpg";
+import gallery83 from "@/assets/gallery-83.jpg";
+import gallery84 from "@/assets/gallery-84.jpg";
+import gallery85 from "@/assets/gallery-85.jpg";
+import gallery86 from "@/assets/gallery-86.jpg";
+import gallery87 from "@/assets/gallery-87.jpg";
+import gallery88 from "@/assets/gallery-88.jpg";
+import gallery89 from "@/assets/gallery-89.jpg";
+import gallery90 from "@/assets/gallery-90.jpg";
+import gallery91 from "@/assets/gallery-91.jpg";
+import gallery92 from "@/assets/gallery-92.jpg";
+import gallery93 from "@/assets/gallery-93.jpg";
+import gallery94 from "@/assets/gallery-94.jpg";
+import gallery95 from "@/assets/gallery-95.jpg";
+import gallery96 from "@/assets/gallery-96.jpg";
+import gallery97 from "@/assets/gallery-97.jpg";
+import gallery98 from "@/assets/gallery-98.jpg";
+import gallery99 from "@/assets/gallery-99.jpg";
+import gallery100 from "@/assets/gallery-100.jpg";
+import gallery101 from "@/assets/gallery-101.jpg";
+import gallery102 from "@/assets/gallery-102.jpg";
+import gallery103 from "@/assets/gallery-103.jpg";
+import gallery104 from "@/assets/gallery-104.jpg";
+import gallery105 from "@/assets/gallery-105.jpg";
+import gallery106 from "@/assets/gallery-106.jpg";
+import gallery107 from "@/assets/gallery-107.jpg";
+import gallery108 from "@/assets/gallery-108.jpg";
+import gallery109 from "@/assets/gallery-109.jpg";
+import gallery110 from "@/assets/gallery-110.jpg";
+import gallery111 from "@/assets/gallery-111.jpg";
+import gallery112 from "@/assets/gallery-112.jpg";
+import gallery113 from "@/assets/gallery-113.jpg";
+import gallery114 from "@/assets/gallery-114.jpg";
+import gallery115 from "@/assets/gallery-115.jpg";
+import gallery116 from "@/assets/gallery-116.jpg";
+import gallery117 from "@/assets/gallery-117.jpg";
+import gallery118 from "@/assets/gallery-118.jpg";
 import {
   Dialog,
   DialogContent,
@@ -93,7 +150,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 
-const Gallery = () => {
+const Gallery = ({ filter }: { filter?: string }) => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
@@ -112,11 +169,51 @@ const Gallery = () => {
 
   const projects = [
     {
+      name: "Millwater Pool Fence",
+      style: "Mini Posts",
+      category: "poolfence",
+      mainImage: poolFence8,
+      images: [poolFence8, poolFence9, poolFence10, poolFence11, poolFence12, poolFence18],
+      alt: "Mini Posts hidden pool fencing installation at Millwater",
+    },
+    {
+      name: "Grey Lynn Project",
+      style: "Finline",
+      category: "poolfence",
+      mainImage: poolFence13,
+      images: [poolFence13, poolFence14, poolFence15, poolFence16, poolFence17],
+      alt: "Finline hidden pool fencing at Grey Lynn residential property",
+    },
+    {
+      name: "Pool Fencing with Deck",
+      style: "Ascot and Spectra",
+      category: "poolfence",
+      mainImage: poolFence1,
+      images: [poolFence1, poolFence2, poolFence3, poolFence4, poolFence5, poolFence6, poolFence7],
+      alt: "Ascot and Spectra hidden pool fencing around elevated pool on timber deck",
+    },
+    {
+      name: "Evril Orr Retirement Home",
+      style: "Finline and Ascot Handrails",
+      category: "commercial",
+      mainImage: gallery102,
+      images: [gallery102, gallery99, gallery100, gallery101, gallery103, gallery104, gallery105, gallery106, gallery107, gallery108, gallery109, gallery110, gallery111, gallery112, gallery113, gallery114],
+      alt: "Finline and Ascot handrails at Evril Orr Retirement Home commercial project",
+    },
+    {
+      name: "Pukekohe Project",
+      style: "Finline",
+      category: "commercial",
+      mainImage: gallery115,
+      images: [gallery115, gallery116, gallery117, gallery118],
+      alt: "Finline commercial balustrading at Pukekohe Project",
+    },
+    {
       name: "Parnell Project",
       style: "finline",
-      category: "commercial",
+      category: "balustrade",
       mainImage: gallery1,
-      images: [gallery1, gallery76],
+      images: [gallery1, gallery76, gallery93],
       alt: "Finline balustrading at Parnell project",
     },
     {
@@ -218,7 +315,7 @@ const Gallery = () => {
     {
       name: "Privacy Screen",
       style: "Extreme Etchlite glass",
-      category: "commercial",
+      category: "balustrade",
       mainImage: gallery49,
       images: [gallery49, gallery50, gallery51],
       alt: "Extreme Etchlite glass privacy screen installation",
@@ -266,12 +363,65 @@ const Gallery = () => {
     {
       name: "Stairway Handrail",
       style: "Ascot",
-      category: "commercial",
+      category: "balustrade",
       mainImage: gallery77,
       images: [gallery77, gallery78, gallery79],
       alt: "Ascot handrail installation on curved concrete stairs",
     },
+    {
+      name: "Oranga School",
+      style: "Extreme Ascot",
+      category: "commercial",
+      mainImage: gallery80,
+      images: [gallery80, gallery81],
+      alt: "Extreme Ascot commercial balustrading installation at Oranga School",
+    },
+    {
+      name: "Glen Eden Apartments",
+      style: "Hampton",
+      category: "commercial",
+      mainImage: gallery82,
+      images: [gallery82, gallery83, gallery84],
+      alt: "Hampton style commercial balustrading at Glen Eden Apartments",
+    },
+    {
+      name: "Accessibility Walkway",
+      style: "Handrail",
+      category: "commercial",
+      mainImage: gallery85,
+      images: [gallery85, gallery86, gallery87],
+      alt: "Commercial handrail installation for accessibility walkway",
+    },
+    {
+      name: "Dealership Project",
+      style: "Ascot",
+      category: "commercial",
+      mainImage: gallery88,
+      images: [gallery88, gallery89],
+      alt: "Ascot style commercial balustrading at dealership",
+    },
+    {
+      name: "Lincoln Project",
+      style: "Windsor",
+      category: "commercial",
+      mainImage: gallery90,
+      images: [gallery90, gallery91, gallery92],
+      alt: "Windsor style commercial balustrading at Lincoln Project",
+    },
+    {
+      name: "Diocesan School Project",
+      style: "Windsor",
+      category: "commercial",
+      mainImage: gallery94,
+      images: [gallery94, gallery95, gallery96, gallery97, gallery98],
+      alt: "Windsor style commercial balustrading at Diocesan School",
+    },
   ];
+
+  // Filter projects if filter prop is provided
+  const filteredProjects = filter 
+    ? projects.filter(project => project.category === filter)
+    : projects;
 
   return (
     <section id="gallery" className="py-24 bg-secondary">
@@ -288,11 +438,14 @@ const Gallery = () => {
 
         {/* Gallery Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2">
-          {projects.map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <div
               key={index}
               className="relative aspect-[4/3] overflow-hidden group cursor-pointer"
-              onClick={() => setSelectedProject(index)}
+              onClick={() => {
+                const originalIndex = projects.findIndex(p => p === project);
+                setSelectedProject(originalIndex);
+              }}
             >
               <img
                 src={project.mainImage}

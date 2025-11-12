@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import FixedContactButtons from "@/components/FixedContactButtons";
-import commercialHeroImage from "@/assets/gallery-52.jpg";
+import Gallery from "@/components/Gallery";
+import commercialHero from "@/assets/commercial-hero.jpg";
 
 const CommercialProjects = () => {
   const features = [
@@ -26,7 +27,7 @@ const CommercialProjects = () => {
           {/* Background Image */}
           <div
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${commercialHeroImage})` }}
+            style={{ backgroundImage: `url(${commercialHero})` }}
           >
             <div className="absolute inset-0 bg-overlay/50" />
           </div>
@@ -34,9 +35,6 @@ const CommercialProjects = () => {
           {/* Hero Content */}
           <div className="relative h-full flex items-center justify-center text-center px-6">
             <div className="max-w-5xl">
-              <div className="flex items-center justify-center gap-4 mb-6">
-                <Building2 className="w-16 h-16 text-primary-foreground" />
-              </div>
               <h1 className="text-5xl md:text-7xl font-black text-primary-foreground uppercase tracking-wider mb-6 animate-fade-in">
                 Commercial Projects
               </h1>
@@ -45,7 +43,7 @@ const CommercialProjects = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button variant="hero" asChild>
-                  <a href="/#contact">Get a Free Quote</a>
+                  <a href="#contact">Get A Free Quote</a>
                 </Button>
                 <Button variant="outline" size="lg" className="bg-white text-foreground hover:bg-white/90" asChild>
                   <a href="#gallery">View Commercial Projects</a>
@@ -74,17 +72,6 @@ const CommercialProjects = () => {
                   schools, and hospitality venues. We provide durable, attractive solutions that withstand 
                   high traffic while maintaining safety standards and architectural integrity.
                 </p>
-                <div className="space-y-4">
-                  <div className="bg-card p-6 border border-border">
-                    <h3 className="font-bold text-card-foreground mb-2">Previous Projects Include:</h3>
-                    <ul className="text-muted-foreground text-sm space-y-1">
-                      <li>• Helensville Library - Ascot handrails</li>
-                      <li>• Commercial office buildings - Finline systems</li>
-                      <li>• Retail centers - Assure panel fencing</li>
-                      <li>• Public spaces - Privacy screens and balustrading</li>
-                    </ul>
-                  </div>
-                </div>
               </div>
               
               <div className="bg-card p-8 border border-border">
@@ -110,19 +97,9 @@ const CommercialProjects = () => {
           </div>
         </section>
 
-        {/* Gallery CTA */}
-        <section id="gallery" className="py-16 bg-secondary">
-          <div className="container mx-auto px-6 text-center">
-            <h2 className="text-3xl font-bold text-foreground mb-4">
-              See Our Commercial Projects
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Browse our portfolio of commercial installations across Auckland
-            </p>
-            <Button variant="outline" size="lg" asChild>
-              <a href="/#gallery">View Gallery</a>
-            </Button>
-          </div>
+        {/* Gallery Section */}
+        <section id="gallery">
+          <Gallery filter="commercial" />
         </section>
       </main>
       
