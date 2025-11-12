@@ -19,9 +19,9 @@ const Navigation = () => {
 
   const menuItems = [
     { label: "Home", href: "/" },
-    { label: "About", href: "#about" },
-    { label: "Gallery", href: "#gallery" },
-    { label: "Contact", href: "#contact" },
+    { label: "About", href: "/#about" },
+    { label: "Gallery", href: "/#gallery" },
+    { label: "Contact", href: "/#contact" },
   ];
 
   const serviceItems = [
@@ -99,7 +99,7 @@ const Navigation = () => {
           {/* Get Quote Button */}
           <div className="hidden md:flex items-center gap-4">
             <Button asChild>
-              <a href="#contact">Get a Free Quote</a>
+              <a href="/#contact">Get a Free Quote</a>
             </Button>
           </div>
 
@@ -149,7 +149,7 @@ const Navigation = () => {
             </div>
             
             <Button asChild className="mt-3">
-              <a href="#contact">Get a Free Quote</a>
+              <a href="/#contact">Get a Free Quote</a>
             </Button>
           </nav>
         )}
