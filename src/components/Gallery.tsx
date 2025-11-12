@@ -23,6 +23,8 @@ import gallery21 from "@/assets/gallery-21.jpg";
 import gallery22 from "@/assets/gallery-22.jpg";
 import gallery23 from "@/assets/gallery-23.jpg";
 import gallery24 from "@/assets/gallery-24.jpg";
+import gallery25 from "@/assets/gallery-25.jpg";
+import gallery26 from "@/assets/gallery-26.jpg";
 import {
   Dialog,
   DialogContent,
@@ -103,6 +105,14 @@ const Gallery = () => {
       mainImage: gallery21,
       images: [gallery21, gallery22, gallery23, gallery24],
       alt: "Mini Post glass balustrade at Titirangi property",
+    },
+    {
+      name: "Siena Glass Balustrade",
+      style: "Siena",
+      category: "balustrade",
+      mainImage: gallery25,
+      images: [gallery25, gallery26],
+      alt: "Siena style glass balustrade installation",
     },
   ];
 
