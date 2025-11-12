@@ -27,6 +27,10 @@ import gallery25 from "@/assets/gallery-25.jpg";
 import gallery26 from "@/assets/gallery-26.jpg";
 import gallery27 from "@/assets/gallery-27.jpg";
 import gallery28 from "@/assets/gallery-28.jpg";
+import gallery29 from "@/assets/gallery-29.jpg";
+import gallery30 from "@/assets/gallery-30.jpg";
+import gallery31 from "@/assets/gallery-31.jpg";
+import gallery32 from "@/assets/gallery-32.jpg";
 import {
   Dialog,
   DialogContent,
@@ -123,6 +127,14 @@ const Gallery = () => {
       mainImage: gallery27,
       images: [gallery27, gallery28],
       alt: "Glass standoff style balustrade installation on timber deck",
+    },
+    {
+      name: "Glass Channel Balustrade",
+      style: "Panorama with Etchlite",
+      category: "balustrade",
+      mainImage: gallery29,
+      images: [gallery29, gallery30, gallery31, gallery32],
+      alt: "Panorama glass channel balustrade with Etchlite frosted glass",
     },
   ];
 
