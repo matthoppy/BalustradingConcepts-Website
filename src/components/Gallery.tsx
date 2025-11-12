@@ -31,6 +31,14 @@ import gallery29 from "@/assets/gallery-29.jpg";
 import gallery30 from "@/assets/gallery-30.jpg";
 import gallery31 from "@/assets/gallery-31.jpg";
 import gallery32 from "@/assets/gallery-32.jpg";
+import gallery33 from "@/assets/gallery-33.jpg";
+import gallery34 from "@/assets/gallery-34.jpg";
+import gallery35 from "@/assets/gallery-35.jpg";
+import gallery36 from "@/assets/gallery-36.jpg";
+import gallery37 from "@/assets/gallery-37.jpg";
+import gallery38 from "@/assets/gallery-38.jpg";
+import gallery39 from "@/assets/gallery-39.jpg";
+import gallery40 from "@/assets/gallery-40.jpg";
 import {
   Dialog,
   DialogContent,
@@ -135,6 +143,22 @@ const Gallery = () => {
       mainImage: gallery29,
       images: [gallery29, gallery30, gallery31, gallery32],
       alt: "Panorama glass channel balustrade with Etchlite frosted glass",
+    },
+    {
+      name: "Helensville Library",
+      style: "Ascot with Handrail",
+      category: "commercial",
+      mainImage: gallery33,
+      images: [gallery33, gallery34, gallery35, gallery36, gallery37],
+      alt: "Ascot commercial balustrade with handrail at Helensville Library",
+    },
+    {
+      name: "Commercial Fencing",
+      style: "Assure Panels",
+      category: "commercial",
+      mainImage: gallery38,
+      images: [gallery38, gallery39, gallery40],
+      alt: "Assure panel commercial fencing installation",
     },
   ];
 
