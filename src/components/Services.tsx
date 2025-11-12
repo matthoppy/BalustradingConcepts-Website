@@ -1,4 +1,4 @@
-import { Building2, Home, Wrench, Shield, Ruler, Sparkles } from "lucide-react";
+import { Building2, Home, Wrench, Shield, Ruler, Waves } from "lucide-react";
 
 const Services = () => {
   const services = [
@@ -6,6 +6,11 @@ const Services = () => {
       icon: Home,
       title: "Residential Balustrading",
       description: "Custom glass balustrading solutions for homes, balconies, and staircases.",
+    },
+    {
+      icon: Waves,
+      title: "Pool Fencing",
+      description: "Safety-compliant pool fencing solutions for residential and commercial properties.",
     },
     {
       icon: Building2,
@@ -26,11 +31,6 @@ const Services = () => {
       icon: Shield,
       title: "Safety Compliance",
       description: "All installations meet New Zealand building codes and safety standards.",
-    },
-    {
-      icon: Sparkles,
-      title: "Maintenance & Repair",
-      description: "Comprehensive maintenance services to keep your systems looking pristine.",
     },
   ];
 
