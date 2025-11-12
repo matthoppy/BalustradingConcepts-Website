@@ -10,6 +10,11 @@ import gallery8 from "@/assets/gallery-8.jpg";
 import gallery9 from "@/assets/gallery-9.jpg";
 import gallery10 from "@/assets/gallery-10.jpg";
 import gallery11 from "@/assets/gallery-11.jpg";
+import gallery12 from "@/assets/gallery-12.jpg";
+import gallery13 from "@/assets/gallery-13.jpg";
+import gallery14 from "@/assets/gallery-14.jpg";
+import gallery15 from "@/assets/gallery-15.jpg";
+import gallery16 from "@/assets/gallery-16.jpg";
 import {
   Dialog,
   DialogContent,
@@ -35,6 +40,14 @@ const Gallery = () => {
       mainImage: gallery1,
       images: [gallery1],
       alt: "Commercial glass balustrading on modern building",
+    },
+    {
+      name: "Framed Glass Balustrade",
+      style: "Avon",
+      category: "balustrade",
+      mainImage: gallery13,
+      images: [gallery13, gallery14, gallery15, gallery16, gallery12],
+      alt: "Avon framed glass balustrade installation",
     },
     {
       name: "Arney Crestent Job",
