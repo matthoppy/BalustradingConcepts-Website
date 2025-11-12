@@ -109,6 +109,12 @@ import gallery89 from "@/assets/gallery-89.jpg";
 import gallery90 from "@/assets/gallery-90.jpg";
 import gallery91 from "@/assets/gallery-91.jpg";
 import gallery92 from "@/assets/gallery-92.jpg";
+import gallery93 from "@/assets/gallery-93.jpg";
+import gallery94 from "@/assets/gallery-94.jpg";
+import gallery95 from "@/assets/gallery-95.jpg";
+import gallery96 from "@/assets/gallery-96.jpg";
+import gallery97 from "@/assets/gallery-97.jpg";
+import gallery98 from "@/assets/gallery-98.jpg";
 import {
   Dialog,
   DialogContent,
@@ -171,7 +177,7 @@ const Gallery = ({ filter }: { filter?: string }) => {
       style: "finline",
       category: "commercial",
       mainImage: gallery1,
-      images: [gallery1, gallery76],
+      images: [gallery1, gallery76, gallery93],
       alt: "Finline balustrading at Parnell project",
     },
     {
@@ -365,6 +371,14 @@ const Gallery = ({ filter }: { filter?: string }) => {
       mainImage: gallery90,
       images: [gallery90, gallery91, gallery92],
       alt: "Windsor style commercial balustrading at Lincoln Project",
+    },
+    {
+      name: "Diocesan School Project",
+      style: "Windsor",
+      category: "commercial",
+      mainImage: gallery94,
+      images: [gallery94, gallery95, gallery96, gallery97, gallery98],
+      alt: "Windsor style commercial balustrading at Diocesan School",
     },
   ];
 
