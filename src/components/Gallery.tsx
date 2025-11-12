@@ -78,6 +78,13 @@ import gallery76 from "@/assets/gallery-76.jpg";
 import gallery77 from "@/assets/gallery-77.jpg";
 import gallery78 from "@/assets/gallery-78.jpg";
 import gallery79 from "@/assets/gallery-79.jpg";
+import poolFence1 from "@/assets/pool-fence-1.jpg";
+import poolFence2 from "@/assets/pool-fence-2.jpg";
+import poolFence3 from "@/assets/pool-fence-3.jpg";
+import poolFence4 from "@/assets/pool-fence-4.jpg";
+import poolFence5 from "@/assets/pool-fence-5.jpg";
+import poolFence6 from "@/assets/pool-fence-6.jpg";
+import poolFence7 from "@/assets/pool-fence-7.jpg";
 import {
   Dialog,
   DialogContent,
@@ -111,6 +118,14 @@ const Gallery = ({ filter }: { filter?: string }) => {
   }, [carouselApi]);
 
   const projects = [
+    {
+      name: "Pool Fencing with Deck",
+      style: "Ascot and Spectra",
+      category: "poolfence",
+      mainImage: poolFence1,
+      images: [poolFence1, poolFence2, poolFence3, poolFence4, poolFence5, poolFence6, poolFence7],
+      alt: "Ascot and Spectra hidden pool fencing around elevated pool on timber deck",
+    },
     {
       name: "Parnell Project",
       style: "finline",
