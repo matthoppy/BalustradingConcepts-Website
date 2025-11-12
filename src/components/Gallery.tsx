@@ -85,6 +85,16 @@ import poolFence4 from "@/assets/pool-fence-4.jpg";
 import poolFence5 from "@/assets/pool-fence-5.jpg";
 import poolFence6 from "@/assets/pool-fence-6.jpg";
 import poolFence7 from "@/assets/pool-fence-7.jpg";
+import poolFence8 from "@/assets/pool-fence-8.jpg";
+import poolFence9 from "@/assets/pool-fence-9.jpg";
+import poolFence10 from "@/assets/pool-fence-10.jpg";
+import poolFence11 from "@/assets/pool-fence-11.jpg";
+import poolFence12 from "@/assets/pool-fence-12.jpg";
+import poolFence13 from "@/assets/pool-fence-13.jpg";
+import poolFence14 from "@/assets/pool-fence-14.jpg";
+import poolFence15 from "@/assets/pool-fence-15.jpg";
+import poolFence16 from "@/assets/pool-fence-16.jpg";
+import poolFence17 from "@/assets/pool-fence-17.jpg";
 import {
   Dialog,
   DialogContent,
@@ -118,6 +128,22 @@ const Gallery = ({ filter }: { filter?: string }) => {
   }, [carouselApi]);
 
   const projects = [
+    {
+      name: "Millwater Pool Fence",
+      style: "Mini Posts",
+      category: "poolfence",
+      mainImage: poolFence8,
+      images: [poolFence8, poolFence9, poolFence10, poolFence11, poolFence12],
+      alt: "Mini Posts hidden pool fencing installation at Millwater",
+    },
+    {
+      name: "Grey Lynn Project",
+      style: "Finline",
+      category: "poolfence",
+      mainImage: poolFence13,
+      images: [poolFence13, poolFence14, poolFence15, poolFence16, poolFence17],
+      alt: "Finline hidden pool fencing at Grey Lynn residential property",
+    },
     {
       name: "Pool Fencing with Deck",
       style: "Ascot and Spectra",
