@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
 import logo from "@/assets/logo.png";
+import { Link } from "react-router-dom";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,9 +20,14 @@ const Navigation = () => {
   const menuItems = [
     { label: "Home", href: "#home" },
     { label: "About", href: "#about" },
-    { label: "Services", href: "#services" },
     { label: "Gallery", href: "#gallery" },
     { label: "Contact", href: "#contact" },
+  ];
+
+  const serviceItems = [
+    { label: "Residential Balustrading", href: "/residential-balustrading" },
+    { label: "Pool Fencing", href: "/pool-fencing" },
+    { label: "Commercial Projects", href: "/commercial-projects" },
   ];
 
   return (
@@ -47,6 +54,38 @@ const Navigation = () => {
                 {item.label}
               </a>
             ))}
+            
+            {/* Services Dropdown */}
+            <div 
+              className="relative"
+              onMouseEnter={() => setIsServicesOpen(true)}
+              onMouseLeave={() => setIsServicesOpen(false)}
+            >
+              <button className="flex items-center gap-1 text-foreground hover:text-primary transition-colors duration-300 font-medium">
+                Services
+                <ChevronDown className="w-4 h-4" />
+              </button>
+              
+              {isServicesOpen && (
+                <div className="absolute top-full left-0 mt-2 w-64 bg-background border border-border shadow-lg rounded-md overflow-hidden z-50">
+                  {serviceItems.map((service) => (
+                    <Link
+                      key={service.label}
+                      to={service.href}
+                      className="block px-6 py-3 text-foreground hover:bg-secondary hover:text-primary transition-colors duration-200"
+                    >
+                      {service.label}
+                    </Link>
+                  ))}
+                  <a
+                    href="/#services"
+                    className="block px-6 py-3 text-foreground hover:bg-secondary hover:text-primary transition-colors duration-200 border-t border-border"
+                  >
+                    View All Services
+                  </a>
+                </div>
+              )}
+            </div>
           </nav>
 
           {/* Get Quote Button */}
@@ -83,6 +122,31 @@ const Navigation = () => {
                 {item.label}
               </a>
             ))}
+            
+            {/* Services Submenu */}
+            <div className="py-3">
+              <div className="font-medium text-foreground mb-2">Services</div>
+              <div className="pl-4 space-y-2">
+                {serviceItems.map((service) => (
+                  <Link
+                    key={service.label}
+                    to={service.href}
+                    className="block py-2 text-muted-foreground hover:text-primary transition-colors duration-300"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {service.label}
+                  </Link>
+                ))}
+                <a
+                  href="/#services"
+                  className="block py-2 text-muted-foreground hover:text-primary transition-colors duration-300"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  View All Services
+                </a>
+              </div>
+            </div>
+            
             <Button asChild className="mt-3">
               <a href="#contact">Get a Free Quote</a>
             </Button>

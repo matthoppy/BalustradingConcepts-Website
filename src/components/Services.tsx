@@ -1,4 +1,5 @@
 import { Building2, Home, Wrench, Shield, Ruler, Waves } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Services = () => {
   const services = [
@@ -6,16 +7,19 @@ const Services = () => {
       icon: Home,
       title: "Residential Balustrading",
       description: "Custom glass balustrading solutions for homes, balconies, and staircases.",
+      link: "/residential-balustrading",
     },
     {
       icon: Waves,
       title: "Pool Fencing",
       description: "Safety-compliant pool fencing solutions for residential and commercial properties.",
+      link: "/pool-fencing",
     },
     {
       icon: Building2,
       title: "Commercial Projects",
       description: "Large-scale installations for offices, shopping centers, and public spaces.",
+      link: "/commercial-projects",
     },
     {
       icon: Ruler,
@@ -51,21 +55,35 @@ const Services = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => {
             const Icon = service.icon;
-            return (
+            const ServiceCard = (
               <div
-                key={index}
-                className="bg-card p-8 transition-all duration-300 hover:shadow-xl border border-border"
+                className={`bg-card p-8 transition-all duration-300 hover:shadow-xl border border-border ${
+                  service.link ? "cursor-pointer group" : ""
+                }`}
               >
                 <div className="mb-6">
-                  <Icon className="w-14 h-14 text-primary" />
+                  <Icon className={`w-14 h-14 text-primary ${service.link ? "group-hover:scale-110 transition-transform" : ""}`} />
                 </div>
-                <h3 className="text-2xl font-bold text-card-foreground mb-4">
+                <h3 className={`text-2xl font-bold text-card-foreground mb-4 ${service.link ? "group-hover:text-primary transition-colors" : ""}`}>
                   {service.title}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
                   {service.description}
                 </p>
+                {service.link && (
+                  <div className="mt-4 text-primary font-medium group-hover:underline">
+                    Learn more →
+                  </div>
+                )}
               </div>
+            );
+
+            return service.link ? (
+              <Link key={index} to={service.link}>
+                {ServiceCard}
+              </Link>
+            ) : (
+              <div key={index}>{ServiceCard}</div>
             );
           })}
         </div>
