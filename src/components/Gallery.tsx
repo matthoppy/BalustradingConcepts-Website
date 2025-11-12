@@ -54,6 +54,10 @@ import gallery52 from "@/assets/gallery-52.jpg";
 import gallery53 from "@/assets/gallery-53.jpg";
 import gallery54 from "@/assets/gallery-54.jpg";
 import gallery55 from "@/assets/gallery-55.jpg";
+import gallery56 from "@/assets/gallery-56.jpg";
+import gallery57 from "@/assets/gallery-57.jpg";
+import gallery58 from "@/assets/gallery-58.jpg";
+import gallery59 from "@/assets/gallery-59.jpg";
 import {
   Dialog,
   DialogContent,
@@ -206,6 +210,14 @@ const Gallery = () => {
       mainImage: gallery52,
       images: [gallery52, gallery53, gallery54, gallery55],
       alt: "Ascot commercial handrail installation on stairs and deck",
+    },
+    {
+      name: "Balustrade and Privacy Screen",
+      style: "Avon and Safa Slat",
+      category: "balustrade",
+      mainImage: gallery56,
+      images: [gallery56, gallery57, gallery58, gallery59],
+      alt: "Avon balustrade and Safa Slat privacy screen installation on timber deck",
     },
   ];
 
