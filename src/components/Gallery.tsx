@@ -69,6 +69,12 @@ import gallery67 from "@/assets/gallery-67.jpg";
 import gallery68 from "@/assets/gallery-68.jpg";
 import gallery69 from "@/assets/gallery-69.jpg";
 import gallery70 from "@/assets/gallery-70.jpg";
+import gallery71 from "@/assets/gallery-71.jpg";
+import gallery72 from "@/assets/gallery-72.jpg";
+import gallery73 from "@/assets/gallery-73.jpg";
+import gallery74 from "@/assets/gallery-74.jpg";
+import gallery75 from "@/assets/gallery-75.jpg";
+import gallery76 from "@/assets/gallery-76.jpg";
 import {
   Dialog,
   DialogContent,
@@ -103,12 +109,12 @@ const Gallery = () => {
 
   const projects = [
     {
-      name: "Commercial Glass Balustrading",
-      style: "Frameless Glass",
+      name: "Parnell Project",
+      style: "finline",
       category: "commercial",
       mainImage: gallery1,
-      images: [gallery1],
-      alt: "Commercial glass balustrading on modern building",
+      images: [gallery1, gallery76],
+      alt: "Finline balustrading at Parnell project",
     },
     {
       name: "Framed Glass Balustrade",
@@ -245,6 +251,14 @@ const Gallery = () => {
       mainImage: gallery65,
       images: [gallery65, gallery66, gallery67, gallery68, gallery69, gallery70],
       alt: "Spectra glass balustrade with Safa Slat privacy screen on elevated deck",
+    },
+    {
+      name: "Glass Balustrade",
+      style: "Panorama",
+      category: "balustrade",
+      mainImage: gallery71,
+      images: [gallery71, gallery72, gallery73, gallery74, gallery75],
+      alt: "Panorama glass balustrade installation",
     },
   ];
 
