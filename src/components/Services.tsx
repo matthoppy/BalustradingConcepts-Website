@@ -57,7 +57,7 @@ const Services = () => {
             const Icon = service.icon;
             const ServiceCard = (
               <div
-                className={`bg-card p-8 transition-all duration-300 hover:shadow-xl border border-border ${
+                className={`bg-card p-8 transition-all duration-300 hover:shadow-xl border border-border h-full flex flex-col ${
                   service.link ? "cursor-pointer group" : ""
                 }`}
               >
@@ -67,7 +67,7 @@ const Services = () => {
                 <h3 className={`text-2xl font-bold text-card-foreground mb-4 ${service.link ? "group-hover:text-primary transition-colors" : ""}`}>
                   {service.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed flex-grow">
                   {service.description}
                 </p>
                 {service.link && (
@@ -79,11 +79,11 @@ const Services = () => {
             );
 
             return service.link ? (
-              <Link key={index} to={service.link}>
+              <Link key={index} to={service.link} className="h-full">
                 {ServiceCard}
               </Link>
             ) : (
-              <div key={index}>{ServiceCard}</div>
+              <div key={index} className="h-full">{ServiceCard}</div>
             );
           })}
         </div>

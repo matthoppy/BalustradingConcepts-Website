@@ -69,8 +69,6 @@ const Navigation = () => {
               {isServicesOpen && (
                 <div 
                   className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-background border border-border shadow-xl rounded-md z-50"
-                  onMouseEnter={() => setIsServicesOpen(true)}
-                  onMouseLeave={() => setIsServicesOpen(false)}
                 >
                   <div className="flex gap-4 p-6">
                     {serviceItems.map((service) => {
