@@ -4,6 +4,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import FixedContactButtons from "@/components/FixedContactButtons";
 import Gallery from "@/components/Gallery";
+import commercialHero from "@/assets/commercial-hero.jpg";
 
 const CommercialProjects = () => {
   const features = [
@@ -22,8 +23,12 @@ const CommercialProjects = () => {
       
       <main className="pt-24">
         {/* Hero Section */}
-        <section className="py-16 bg-secondary">
-          <div className="container mx-auto px-6">
+        <section className="relative py-16 bg-secondary">
+          <div 
+            className="absolute inset-0 bg-cover bg-center opacity-20"
+            style={{ backgroundImage: `url(${commercialHero})` }}
+          />
+          <div className="container mx-auto px-6 relative z-10">
             <Button variant="ghost" asChild className="mb-6">
               <a href="/#services" className="flex items-center gap-2">
                 <ArrowLeft className="w-4 h-4" />
@@ -65,17 +70,6 @@ const CommercialProjects = () => {
                   schools, and hospitality venues. We provide durable, attractive solutions that withstand 
                   high traffic while maintaining safety standards and architectural integrity.
                 </p>
-                <div className="space-y-4">
-                  <div className="bg-card p-6 border border-border">
-                    <h3 className="font-bold text-card-foreground mb-2">Previous Projects Include:</h3>
-                    <ul className="text-muted-foreground text-sm space-y-1">
-                      <li>• Helensville Library - Ascot handrails</li>
-                      <li>• Commercial office buildings - Finline systems</li>
-                      <li>• Retail centers - Assure panel fencing</li>
-                      <li>• Public spaces - Privacy screens and balustrading</li>
-                    </ul>
-                  </div>
-                </div>
               </div>
               
               <div className="bg-card p-8 border border-border">
