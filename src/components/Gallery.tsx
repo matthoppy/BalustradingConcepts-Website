@@ -19,6 +19,10 @@ import gallery17 from "@/assets/gallery-17.jpg";
 import gallery18 from "@/assets/gallery-18.jpg";
 import gallery19 from "@/assets/gallery-19.jpg";
 import gallery20 from "@/assets/gallery-20.jpg";
+import gallery21 from "@/assets/gallery-21.jpg";
+import gallery22 from "@/assets/gallery-22.jpg";
+import gallery23 from "@/assets/gallery-23.jpg";
+import gallery24 from "@/assets/gallery-24.jpg";
 import {
   Dialog,
   DialogContent,
@@ -76,6 +80,14 @@ const Gallery = () => {
       mainImage: gallery17,
       images: [gallery17, gallery18, gallery19, gallery20],
       alt: "Fineline Safa slat type balustrade installation",
+    },
+    {
+      name: "Titirangi Glass Balustrade",
+      style: "Mini Post",
+      category: "balustrade",
+      mainImage: gallery21,
+      images: [gallery21, gallery22, gallery23, gallery24],
+      alt: "Mini Post glass balustrade at Titirangi property",
     },
   ];
 
