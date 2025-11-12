@@ -93,7 +93,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 
-const Gallery = () => {
+const Gallery = ({ filter }: { filter?: string }) => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
@@ -273,6 +273,11 @@ const Gallery = () => {
     },
   ];
 
+  // Filter projects if filter prop is provided
+  const filteredProjects = filter 
+    ? projects.filter(project => project.category === filter)
+    : projects;
+
   return (
     <section id="gallery" className="py-24 bg-secondary">
       <div className="container mx-auto px-6">
@@ -288,11 +293,14 @@ const Gallery = () => {
 
         {/* Gallery Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2">
-          {projects.map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <div
               key={index}
               className="relative aspect-[4/3] overflow-hidden group cursor-pointer"
-              onClick={() => setSelectedProject(index)}
+              onClick={() => {
+                const originalIndex = projects.findIndex(p => p === project);
+                setSelectedProject(originalIndex);
+              }}
             >
               <img
                 src={project.mainImage}

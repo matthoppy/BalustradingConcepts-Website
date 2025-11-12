@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import FixedContactButtons from "@/components/FixedContactButtons";
+import Gallery from "@/components/Gallery";
 
 const PoolFencing = () => {
   const features = [
@@ -96,20 +97,8 @@ const PoolFencing = () => {
           </div>
         </section>
 
-        {/* Gallery CTA */}
-        <section className="py-16 bg-secondary">
-          <div className="container mx-auto px-6 text-center">
-            <h2 className="text-3xl font-bold text-foreground mb-4">
-              See Our Pool Fencing Projects
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Browse our portfolio of pool fencing installations across Auckland
-            </p>
-            <Button variant="outline" size="lg" asChild>
-              <a href="/#gallery">View Gallery</a>
-            </Button>
-          </div>
-        </section>
+        {/* Gallery Section */}
+        <Gallery filter="poolfence" />
       </main>
       
       <Footer />
