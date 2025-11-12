@@ -404,8 +404,8 @@ const Gallery = ({ filter }: { filter?: string }) => {
       name: "Evril Orr Retirement Home",
       style: "Finline and Ascot Handrails",
       category: "commercial",
-      mainImage: gallery99,
-      images: [gallery99, gallery100, gallery101, gallery102, gallery103, gallery104, gallery105, gallery106, gallery107, gallery108, gallery109, gallery110, gallery111, gallery112, gallery113, gallery114],
+      mainImage: gallery102,
+      images: [gallery102, gallery99, gallery100, gallery101, gallery103, gallery104, gallery105, gallery106, gallery107, gallery108, gallery109, gallery110, gallery111, gallery112, gallery113, gallery114],
       alt: "Finline and Ascot handrails at Evril Orr Retirement Home commercial project",
     },
     {
