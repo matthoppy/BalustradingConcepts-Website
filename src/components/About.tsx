@@ -43,17 +43,19 @@ const About = () => {
           </div>
 
           {/* Images */}
-          <div className="relative space-y-6">
-            <img
-              src={aboutImage}
-              alt="Quality glass balustrading craftsmanship"
-              className="w-full h-[600px] object-cover shadow-2xl"
-            />
-            <img
-              src={aboutImage2}
-              alt="Aluminium deck balustrading installation example"
-              className="w-full h-[600px] object-cover shadow-2xl"
-            />
+          <div className="relative">
+            <div className="grid grid-cols-2 gap-4">
+              <img
+                src={aboutImage}
+                alt="Quality glass balustrading craftsmanship"
+                className="w-full h-[400px] object-cover shadow-xl rounded-lg"
+              />
+              <img
+                src={aboutImage2}
+                alt="Aluminium deck balustrading installation example"
+                className="w-full h-[400px] object-cover shadow-xl rounded-lg mt-12"
+              />
+            </div>
           </div>
         </div>
       </div>
