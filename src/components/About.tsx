@@ -1,6 +1,7 @@
 import { CheckCircle } from "lucide-react";
 import aboutImage from "@/assets/about-image.jpg";
 import aboutImage2 from "@/assets/about-image-2.jpg";
+import aboutImage3 from "@/assets/about-image-3.jpg";
 
 const About = () => {
   const features = [
@@ -15,7 +16,7 @@ const About = () => {
   return (
     <section id="about" className="py-24 bg-secondary">
       <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
           {/* Text Content */}
           <div>
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6 uppercase">
@@ -43,16 +44,21 @@ const About = () => {
           </div>
 
           {/* Images */}
-          <div className="relative h-[500px]">
+          <div className="grid grid-cols-1 gap-4">
             <img
               src={aboutImage}
               alt="Quality glass balustrading craftsmanship"
-              className="absolute top-0 left-0 w-[70%] h-[320px] object-cover shadow-xl rounded-lg z-10"
+              className="w-full h-[280px] object-cover shadow-lg rounded-lg"
+            />
+            <img
+              src={aboutImage3}
+              alt="Modern glass balustrading installation"
+              className="w-full h-[280px] object-cover shadow-lg rounded-lg"
             />
             <img
               src={aboutImage2}
               alt="Aluminium deck balustrading installation example"
-              className="absolute bottom-0 right-0 w-[70%] h-[320px] object-cover shadow-xl rounded-lg"
+              className="w-full h-[280px] object-cover shadow-lg rounded-lg"
             />
           </div>
         </div>
