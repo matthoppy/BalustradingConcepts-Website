@@ -135,6 +135,9 @@ import gallery115 from "@/assets/gallery-115.jpg";
 import gallery116 from "@/assets/gallery-116.jpg";
 import gallery117 from "@/assets/gallery-117.jpg";
 import gallery118 from "@/assets/gallery-118.jpg";
+import gallery119 from "@/assets/gallery-119.jpg";
+import gallery120 from "@/assets/gallery-120.jpg";
+import gallery121 from "@/assets/gallery-121.jpg";
 import {
   Dialog,
   DialogContent,
@@ -207,6 +210,14 @@ const Gallery = ({ filter }: { filter?: string }) => {
       mainImage: gallery115,
       images: [gallery115, gallery116, gallery117, gallery118],
       alt: "Finline commercial balustrading at Pukekohe Project",
+    },
+    {
+      name: "Glass Balustrade",
+      style: "Standoff",
+      category: "commercial",
+      mainImage: gallery119,
+      images: [gallery119, gallery120, gallery121],
+      alt: "Standoff glass balustrade commercial installation",
     },
     {
       name: "Parnell Project",
