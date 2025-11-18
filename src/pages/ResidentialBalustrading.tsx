@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { ArrowLeft, Home, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
@@ -7,6 +8,9 @@ import Gallery from "@/components/Gallery";
 import residentialHero from "@/assets/residential-hero.jpg";
 
 const ResidentialBalustrading = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const features = [
     "Custom glass and aluminium balustrades for homes",
     "Deck and balcony balustrading solutions",

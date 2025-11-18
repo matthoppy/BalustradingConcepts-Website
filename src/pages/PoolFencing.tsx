@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { ArrowLeft, Waves, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
@@ -7,6 +8,9 @@ import Gallery from "@/components/Gallery";
 import heroImage from "@/assets/pool-fencing-hero.jpg";
 
 const PoolFencing = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const features = [
     "Compliant with NZ pool fencing regulations (NZBC F9)",
     "Frameless and semi-frameless glass options",

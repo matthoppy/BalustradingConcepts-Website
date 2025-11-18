@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { ArrowLeft, Building2, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
@@ -7,6 +8,9 @@ import Gallery from "@/components/Gallery";
 import commercialHero from "@/assets/commercial-hero.jpg";
 
 const CommercialProjects = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const features = [
     "Large-scale installations for offices and retail",
     "Public building handrails and balustrading",
