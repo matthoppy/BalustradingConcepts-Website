@@ -57,8 +57,8 @@ const Services = () => {
             const Icon = service.icon;
             const ServiceCard = (
               <div
-                className={`bg-card p-8 transition-all duration-300 hover:shadow-xl border border-border h-full flex flex-col ${
-                  service.link ? "cursor-pointer group" : ""
+                className={`bg-card p-8 transition-all duration-300 border border-border h-full flex flex-col ${
+                  service.link ? "cursor-pointer group hover:shadow-xl" : ""
                 }`}
               >
                 <div className="mb-6">

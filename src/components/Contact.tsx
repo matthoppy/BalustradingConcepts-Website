@@ -113,7 +113,7 @@ const Contact = () => {
             </div>
 
             <div className="bg-secondary p-8">
-              <h4 className="text-xl font-bold text-foreground mb-4">Business Hours</h4>
+              <h4 className="text-xl font-bold text-foreground mb-4">Office Hours</h4>
               <div className="space-y-2 text-muted-foreground">
                 <p><span className="font-semibold text-foreground">Monday - Friday:</span> 7:00 AM - 1:00 PM</p>
                 <p><span className="font-semibold text-foreground">Weekends:</span> Closed</p>
