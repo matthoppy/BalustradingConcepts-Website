@@ -35,7 +35,7 @@ const Contact = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
     if (!captchaValue) {
@@ -47,11 +47,51 @@ const Contact = () => {
       return;
     }
 
-    // Form submission logic here
-    toast({
-      title: "Message sent!",
-      description: "We'll get back to you soon.",
-    });
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name') as string,
+      phone: formData.get('phone') as string,
+      email: formData.get('email') as string,
+      message: formData.get('message') as string,
+      captchaToken: captchaValue,
+    };
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/submit-contact-form`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to submit form');
+      }
+
+      toast({
+        title: "Message sent!",
+        description: "We'll get back to you soon.",
+      });
+
+      // Reset form and CAPTCHA
+      e.currentTarget.reset();
+      setSelectedFile(null);
+      setCaptchaValue(null);
+      recaptchaRef.current?.reset();
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
   return (
     <section id="contact" className="py-24 bg-background">
@@ -134,6 +174,7 @@ const Contact = () => {
                     type="text"
                     id="name"
                     name="name"
+                    required
                     className="w-full px-4 py-3 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300"
                     placeholder="Your name"
                   />
@@ -146,6 +187,7 @@ const Contact = () => {
                     type="tel"
                     id="phone"
                     name="phone"
+                    required
                     className="w-full px-4 py-3 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300"
                     placeholder="Your phone"
                   />
@@ -160,6 +202,7 @@ const Contact = () => {
                   type="email"
                   id="email"
                   name="email"
+                  required
                   className="w-full px-4 py-3 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300"
                   placeholder="your@email.com"
                 />
@@ -173,6 +216,7 @@ const Contact = () => {
                   id="message"
                   name="message"
                   rows={5}
+                  required
                   className="w-full px-4 py-3 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300 resize-none"
                   placeholder="Tell us about your project..."
                 ></textarea>
