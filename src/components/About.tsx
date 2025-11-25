@@ -14,30 +14,30 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-24 bg-secondary">
-      <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-8 items-start">
+    <section id="about" className="py-16 sm:py-24 bg-secondary">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           {/* Text Content */}
           <div>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6 uppercase">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4 sm:mb-6 uppercase">
               About Balustrading Concepts NZ
             </h2>
-            <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+            <p className="text-base sm:text-lg text-muted-foreground mb-4 sm:mb-6 leading-relaxed">
               At Balustrading Concepts NZ, we specialise in the design, manufacture, and installation of premium glass and aluminium balustrades, fencing, and gates throughout Auckland.
             </p>
-            <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+            <p className="text-base sm:text-lg text-muted-foreground mb-4 sm:mb-6 leading-relaxed">
               With over a decade of experience, our expert team has worked with hundreds of residential and commercial clients, delivering solutions that combine style, strength, and safety. Whether you need a modern glass balustrade for your balcony, a custom pedestrian gate, or a compliant pool fence, we provide tailored products that suit your exact needs and meet all NZ building standards.
             </p>
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+            <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
               Our commitment to quality craftsmanship, innovative design, and reliable installation has made us one of Auckland's most trusted balustrading companies. Every project – from a private home to a large commercial development – is handled with precision and care, ensuring a result that looks exceptional and lasts for years to come.
             </p>
             
             {/* Features List */}
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               {features.map((feature, index) => (
-                <div key={index} className="flex items-center gap-3">
-                  <CheckCircle className="w-6 h-6 text-primary flex-shrink-0" />
-                  <span className="text-foreground font-medium">{feature}</span>
+                <div key={index} className="flex items-center gap-2 sm:gap-3">
+                  <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-primary flex-shrink-0" />
+                  <span className="text-sm sm:text-base text-foreground font-medium">{feature}</span>
                 </div>
               ))}
             </div>

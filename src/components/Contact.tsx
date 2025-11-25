@@ -125,20 +125,20 @@ const Contact = () => {
     }
   };
   return (
-    <section id="contact" className="py-24 bg-background">
-      <div className="container mx-auto px-6">
+    <section id="contact" className="py-16 sm:py-24 bg-background">
+      <div className="container mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 uppercase">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4 uppercase">
             Get In Touch
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
             Ready to transform your space? Contact us for a free consultation and quote
           </p>
         </div>
 
         {/* Contact Content */}
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 max-w-6xl mx-auto">
           {/* Contact Info */}
           <div className="space-y-8">
             <div>
@@ -193,8 +193,8 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-secondary p-8">
-            <h3 className="text-2xl font-bold text-foreground mb-6">Request A Quote</h3>
+          <div className="bg-secondary p-6 sm:p-8">
+            <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-6">Request A Quote</h3>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>

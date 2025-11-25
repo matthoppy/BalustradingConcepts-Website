@@ -158,6 +158,8 @@ const Gallery = ({ filter }: { filter?: string }) => {
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(4);
+  const [randomizedProjects, setRandomizedProjects] = useState<typeof projects>([]);
 
   useEffect(() => {
     if (!carouselApi) return;
@@ -169,6 +171,12 @@ const Gallery = ({ filter }: { filter?: string }) => {
       setCurrent(carouselApi.selectedScrollSnap() + 1);
     });
   }, [carouselApi]);
+
+  // Randomize projects on mount
+  useEffect(() => {
+    const shuffled = [...projects].sort(() => Math.random() - 0.5);
+    setRandomizedProjects(shuffled);
+  }, []);
 
   const projects = [
     {
@@ -431,25 +439,33 @@ const Gallery = ({ filter }: { filter?: string }) => {
 
   // Filter projects if filter prop is provided
   const filteredProjects = filter 
-    ? projects.filter(project => project.category === filter)
-    : projects;
+    ? randomizedProjects.filter(project => project.category === filter)
+    : randomizedProjects;
+
+  // Slice to show only visible projects
+  const visibleProjects = filteredProjects.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredProjects.length;
+
+  const loadMore = () => {
+    setVisibleCount(prev => prev + 4);
+  };
 
   return (
-    <section id="gallery" className="py-24 bg-secondary">
-      <div className="container mx-auto px-6">
+    <section id="gallery" className="py-16 sm:py-24 bg-secondary">
+      <div className="container mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 uppercase">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4 uppercase">
             Our Projects
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
             Explore our portfolio of completed installations
           </p>
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2">
-          {filteredProjects.map((project, index) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {visibleProjects.map((project, index) => (
             <div
               key={index}
               className="relative aspect-[4/3] overflow-hidden group cursor-pointer"
@@ -471,6 +487,18 @@ const Gallery = ({ filter }: { filter?: string }) => {
             </div>
           ))}
         </div>
+
+        {/* Load More Button */}
+        {hasMore && (
+          <div className="flex justify-center mt-12">
+            <button
+              onClick={loadMore}
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-3 rounded-lg transition-colors duration-300"
+            >
+              Load More Projects
+            </button>
+          </div>
+        )}
 
         {/* Project Dialog */}
         <Dialog open={selectedProject !== null} onOpenChange={() => setSelectedProject(null)}>
