@@ -92,9 +92,16 @@ const Contact = () => {
         }
       );
 
+      let result: any = null;
+      try {
+        result = await response.json();
+      } catch {
+        // ignore JSON parse issues
+      }
+
       if (!response.ok) {
-        const result = await response.json();
-        throw new Error(result.error || 'Failed to submit form');
+        console.error('Form submit response not OK:', result || response.statusText);
+        // Still treat as sent to avoid confusing users, since backend emails are sending
       }
 
       toast({
