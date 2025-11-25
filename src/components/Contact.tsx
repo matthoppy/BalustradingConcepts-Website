@@ -91,6 +91,10 @@ const Contact = () => {
         description: "Failed to send message. Please try again.",
         variant: "destructive",
       });
+      
+      // Reset CAPTCHA on error so user can try again
+      setCaptchaValue(null);
+      recaptchaRef.current?.reset();
     }
   };
   return (
