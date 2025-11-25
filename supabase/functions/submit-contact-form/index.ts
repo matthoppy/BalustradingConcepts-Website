@@ -63,7 +63,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Prepare email payload
     const emailPayload: any = {
-      from: "Balustrading Concepts NZ <onboarding@resend.dev>",
+      from: "Balustrading Concepts NZ <noreply@balustrading.co.nz>",
       to: ["admin@balustrading.co.nz"],
       subject: `New Quote Request from ${name}`,
       html: `
