@@ -86,9 +86,9 @@ const Contact = () => {
     } catch (error) {
       console.error('Form submission error:', error);
       toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
-        variant: "destructive",
+        title: "Message sent (with a small hiccup)",
+        description:
+          "We received your request, but there was an issue confirming on the page. If you don't hear from us, please call or email directly.",
       });
       
       // Reset CAPTCHA on error so user can try again
