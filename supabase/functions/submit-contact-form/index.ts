@@ -57,9 +57,11 @@ const handler = async (req: Request): Promise<Response> => {
     console.log('reCAPTCHA verification successful');
 
     // Send email via Resend
+    // Note: Temporarily sending to matthew_hopkinson@ymail.com for testing
+    // Change to admin@balustrading.co.nz after verifying domain in Resend
     const emailResponse = await resend.emails.send({
       from: "Balustrading Concepts NZ <onboarding@resend.dev>",
-      to: ["admin@balustrading.co.nz"],
+      to: ["matthew_hopkinson@ymail.com"],
       subject: `New Quote Request from ${name}`,
       html: `
         <h2>New Quote Request</h2>
