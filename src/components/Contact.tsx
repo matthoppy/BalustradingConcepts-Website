@@ -257,6 +257,9 @@ const Contact = () => {
                 <label htmlFor="photo" className="block text-sm font-medium text-foreground mb-2">
                   Photo (Optional)
                 </label>
+                <p className="text-xs text-muted-foreground mb-2">
+                  Accepted formats: JPG, PNG, WEBP, GIF • Max 5MB
+                </p>
                 <div className="relative">
                   <input
                     type="file"
