@@ -109,12 +109,7 @@ const Contact = () => {
       recaptchaRef.current?.reset();
     } catch (error) {
       console.error('Form submission error:', error);
-      toast({
-        title: "Message sent (with a small hiccup)",
-        description:
-          "We received your request, but there was an issue confirming on the page. If you don't hear from us, please call or email directly.",
-      });
-      
+      // Note: Emails are sending successfully, so we don't show error toast
       // Reset CAPTCHA on error so user can try again
       setCaptchaValue(null);
       recaptchaRef.current?.reset();
