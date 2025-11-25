@@ -109,11 +109,13 @@ const Contact = () => {
         description: "We'll get back to you soon.",
       });
 
-      // Reset form and CAPTCHA
-      e.currentTarget.reset();
-      setSelectedFile(null);
-      setCaptchaValue(null);
-      recaptchaRef.current?.reset();
+      // Reset form and CAPTCHA with a small delay
+      setTimeout(() => {
+        e.currentTarget.reset();
+        setSelectedFile(null);
+        setCaptchaValue(null);
+        recaptchaRef.current?.reset();
+      }, 100);
     } catch (error) {
       console.error('Form submission error:', error);
       // Note: Emails are sending successfully, so we don't show error toast
