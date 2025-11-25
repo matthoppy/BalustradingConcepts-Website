@@ -1,4 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { Resend } from "https://esm.sh/resend@4.0.0";
+
+const resend = new Resend(Deno.env.get('RESEND_API_KEY'));
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -53,19 +56,10 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log('reCAPTCHA verification successful');
 
-    // Send email via Mailtrap API
-    const mailtrapToken = Deno.env.get('MAILTRAP_API_KEY');
-    
-    const emailPayload = {
-      from: {
-        email: "hello@demoatmailtrap.com",
-        name: "Balustrading Concepts NZ",
-      },
-      to: [
-        {
-          email: "admin@balustrading.co.nz",
-        },
-      ],
+    // Send email via Resend
+    const emailResponse = await resend.emails.send({
+      from: "Balustrading Concepts NZ <onboarding@resend.dev>",
+      to: ["admin@balustrading.co.nz"],
       subject: `New Quote Request from ${name}`,
       html: `
         <h2>New Quote Request</h2>
@@ -77,38 +71,14 @@ const handler = async (req: Request): Promise<Response> => {
         <hr>
         <p style="color: #666; font-size: 12px;">This message was sent from the contact form at balustrading.co.nz</p>
       `,
-      text: `
-New Quote Request
-
-Name: ${name}
-Phone: ${phone}
-Email: ${email}
-
-Message:
-${message}
-
----
-This message was sent from the contact form at balustrading.co.nz
-      `,
-    };
-
-    const mailtrapResponse = await fetch('https://send.api.mailtrap.io/api/send', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${mailtrapToken}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(emailPayload),
     });
 
-    if (!mailtrapResponse.ok) {
-      const errorData = await mailtrapResponse.text();
-      console.error('Mailtrap API error:', errorData);
-      throw new Error(`Failed to send email: ${mailtrapResponse.status}`);
+    if (emailResponse.error) {
+      console.error('Resend API error:', emailResponse.error);
+      throw new Error(`Failed to send email: ${emailResponse.error.message}`);
     }
 
-    const emailResult = await mailtrapResponse.json();
-    console.log('Email sent successfully via Mailtrap:', emailResult);
+    console.log('Email sent successfully via Resend:', emailResponse);
 
     return new Response(
       JSON.stringify({ success: true, message: 'Form submitted successfully' }),
