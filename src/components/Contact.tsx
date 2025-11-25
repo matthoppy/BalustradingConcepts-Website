@@ -48,12 +48,36 @@ const Contact = () => {
     }
 
     const formData = new FormData(e.currentTarget);
+    
+    // Convert image to base64 if present
+    let photoBase64 = null;
+    let photoName = null;
+    let photoType = null;
+    
+    if (selectedFile) {
+      const reader = new FileReader();
+      photoBase64 = await new Promise<string>((resolve) => {
+        reader.onloadend = () => {
+          const base64String = reader.result as string;
+          resolve(base64String.split(',')[1]); // Remove data:image/...;base64, prefix
+        };
+        reader.readAsDataURL(selectedFile);
+      });
+      photoName = selectedFile.name;
+      photoType = selectedFile.type;
+    }
+    
     const data = {
       name: formData.get('name') as string,
       phone: formData.get('phone') as string,
       email: formData.get('email') as string,
       message: formData.get('message') as string,
       captchaToken: captchaValue,
+      photo: photoBase64 ? {
+        content: photoBase64,
+        filename: photoName,
+        type: photoType,
+      } : null,
     };
 
     try {

@@ -14,6 +14,11 @@ interface ContactFormData {
   email: string;
   message: string;
   captchaToken: string;
+  photo?: {
+    content: string;
+    filename: string;
+    type: string;
+  } | null;
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -24,7 +29,7 @@ const handler = async (req: Request): Promise<Response> => {
 
   try {
     const formData: ContactFormData = await req.json();
-    const { name, phone, email, message, captchaToken } = formData;
+    const { name, phone, email, message, captchaToken, photo } = formData;
 
     console.log('Received contact form submission from:', email);
 
@@ -56,10 +61,8 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log('reCAPTCHA verification successful');
 
-    // Send email via Resend
-    // Note: Temporarily sending to matthew_hopkinson@ymail.com for testing
-    // Change to admin@balustrading.co.nz after verifying domain in Resend
-    const emailResponse = await resend.emails.send({
+    // Prepare email payload
+    const emailPayload: any = {
       from: "Balustrading Concepts NZ <onboarding@resend.dev>",
       to: ["matthew_hopkinson@ymail.com"],
       subject: `New Quote Request from ${name}`,
@@ -70,10 +73,22 @@ const handler = async (req: Request): Promise<Response> => {
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Message:</strong></p>
         <p>${message.replace(/\n/g, '<br>')}</p>
+        ${photo ? '<p><em>Photo attached</em></p>' : ''}
         <hr>
         <p style="color: #666; font-size: 12px;">This message was sent from the contact form at balustrading.co.nz</p>
       `,
-    });
+    };
+
+    // Add attachment if photo exists
+    if (photo) {
+      emailPayload.attachments = [{
+        filename: photo.filename,
+        content: photo.content,
+      }];
+    }
+
+    // Send email via Resend
+    const emailResponse = await resend.emails.send(emailPayload);
 
     if (emailResponse.error) {
       console.error('Resend API error:', emailResponse.error);
