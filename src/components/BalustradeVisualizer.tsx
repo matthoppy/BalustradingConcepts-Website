@@ -1,38 +1,21 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import ascotBlack from "@/assets/balustrade-ascot-black.jpg";
-import ascotSilver from "@/assets/balustrade-ascot-silver.jpg";
-import ascotCharcoal from "@/assets/balustrade-ascot-charcoal.jpg";
-import hamptonBlack from "@/assets/balustrade-hampton-black.jpg";
-import hamptonSilver from "@/assets/balustrade-hampton-silver.jpg";
-import hamptonCharcoal from "@/assets/balustrade-hampton-charcoal.jpg";
-import spectraBlack from "@/assets/balustrade-spectra-black.jpg";
-import spectraSilver from "@/assets/balustrade-spectra-silver.jpg";
-import spectraCharcoal from "@/assets/balustrade-spectra-charcoal.jpg";
-import finlineBlack from "@/assets/balustrade-finline-black.jpg";
-import finlineSilver from "@/assets/balustrade-finline-silver.jpg";
-import finlineCharcoal from "@/assets/balustrade-finline-charcoal.jpg";
-import arenaBlack from "@/assets/balustrade-arena-black.jpg";
-import arenaSilver from "@/assets/balustrade-arena-silver.jpg";
-import arenaCharcoal from "@/assets/balustrade-arena-charcoal.jpg";
+import visualizerAscot from "@/assets/visualizer-ascot.jpg";
+import visualizerHampton from "@/assets/visualizer-hampton.jpg";
+import visualizerSpectra from "@/assets/visualizer-spectra.jpg";
+import visualizerFinline from "@/assets/visualizer-finline.jpg";
+import visualizerArena from "@/assets/visualizer-arena.jpg";
 
 const styles = [
-  { id: "ascot", name: "Ascot", description: "Horizontal slat design", images: { black: ascotBlack, silver: ascotSilver, charcoal: ascotCharcoal } },
-  { id: "hampton", name: "Hampton", description: "Vertical fin design", images: { black: hamptonBlack, silver: hamptonSilver, charcoal: hamptonCharcoal } },
-  { id: "spectra", name: "Spectra", description: "Framed glass panels", images: { black: spectraBlack, silver: spectraSilver, charcoal: spectraCharcoal } },
-  { id: "finline", name: "Finline", description: "Postless vertical fins", images: { black: finlineBlack, silver: finlineSilver, charcoal: finlineCharcoal } },
-  { id: "arena", name: "Arena", description: "Frameless glass standoffs", images: { black: arenaBlack, silver: arenaSilver, charcoal: arenaCharcoal } },
-];
-
-const colors = [
-  { id: "black", name: "Black Matt", hex: "#1a1a1a" },
-  { id: "silver", name: "Silver", hex: "#a8a8a8" },
-  { id: "charcoal", name: "Charcoal", hex: "#4a4a4a" },
+  { id: "ascot", name: "Ascot", description: "Horizontal slat rails", image: visualizerAscot },
+  { id: "hampton", name: "Hampton", description: "Vertical fins between posts", image: visualizerHampton },
+  { id: "spectra", name: "Spectra", description: "Framed glass panels", image: visualizerSpectra },
+  { id: "finline", name: "Finline", description: "Postless vertical fins", image: visualizerFinline },
+  { id: "arena", name: "Arena", description: "Frameless glass standoffs", image: visualizerArena },
 ];
 
 const BalustradeVisualizer = () => {
   const [selectedStyle, setSelectedStyle] = useState(styles[0]);
-  const [selectedColor, setSelectedColor] = useState(colors[0]);
 
   return (
     <section id="visualizer" className="py-24 bg-background">
@@ -42,7 +25,7 @@ const BalustradeVisualizer = () => {
             Visualize Your Balustrade
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            See how different styles and colors look on your deck. Choose a style and powder coat finish to preview your perfect balustrade.
+            See how different styles look on your deck. Choose a style to preview your perfect balustrade in matte black finish.
           </p>
         </div>
 
@@ -50,13 +33,13 @@ const BalustradeVisualizer = () => {
           {/* Image Display */}
           <div className="relative mb-8 rounded-lg overflow-hidden shadow-2xl">
             <img
-              src={selectedStyle.images[selectedColor.id]}
-              alt={`${selectedStyle.name} balustrade in ${selectedColor.name}`}
+              src={selectedStyle.image}
+              alt={`${selectedStyle.name} balustrade in matte black`}
               className="w-full h-auto transition-all duration-500"
             />
             <div className="absolute bottom-4 left-4 bg-background/90 backdrop-blur-sm px-4 py-2 rounded-sm">
               <p className="font-semibold text-foreground">{selectedStyle.name}</p>
-              <p className="text-sm text-muted-foreground">{selectedColor.name} Finish</p>
+              <p className="text-sm text-muted-foreground">Matte Black Finish</p>
             </div>
           </div>
 
@@ -76,30 +59,6 @@ const BalustradeVisualizer = () => {
                 >
                   <p className="font-semibold text-foreground">{style.name}</p>
                   <p className="text-xs text-muted-foreground mt-1">{style.description}</p>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Color Selection */}
-          <div className="mb-8">
-            <h3 className="text-xl font-semibold mb-4 text-foreground">Select Powder Coat Finish</h3>
-            <div className="grid grid-cols-3 gap-3">
-              {colors.map((color) => (
-                <button
-                  key={color.id}
-                  onClick={() => setSelectedColor(color)}
-                  className={`p-4 rounded-sm border-2 transition-all duration-300 ${
-                    selectedColor.id === color.id
-                      ? "border-primary bg-primary/10"
-                      : "border-border hover:border-primary/50 bg-card"
-                  }`}
-                >
-                  <div
-                    className="w-full h-12 rounded-sm mb-2 border border-border"
-                    style={{ background: color.hex }}
-                  />
-                  <p className="font-semibold text-sm text-foreground text-center">{color.name}</p>
                 </button>
               ))}
             </div>
