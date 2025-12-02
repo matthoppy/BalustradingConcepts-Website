@@ -1,17 +1,29 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import visualizerAscot from "@/assets/visualizer-ascot.jpg";
-import visualizerHampton from "@/assets/visualizer-hampton.jpg";
-import visualizerSpectra from "@/assets/visualizer-spectra.jpg";
-import visualizerFinline from "@/assets/visualizer-finline.jpg";
-import visualizerArena from "@/assets/visualizer-arena.jpg";
+
+// Thumbnails (Unex product photos)
+import thumbAscot from "@/assets/thumb-ascot.jpg";
+import thumbWindsor from "@/assets/thumb-windsor.jpg";
+import thumbKeston from "@/assets/thumb-keston.jpg";
+import thumbSafaSlat from "@/assets/thumb-safa-slat.jpg";
+import thumbHampton from "@/assets/thumb-hampton.jpg";
+import thumbHenley from "@/assets/thumb-henley.jpg";
+
+// Full deck images with each style
+import visualizerAscot from "@/assets/visualizer-ascot-new.jpg";
+import visualizerWindsor from "@/assets/visualizer-windsor.jpg";
+import visualizerKeston from "@/assets/visualizer-keston.jpg";
+import visualizerSafaSlat from "@/assets/visualizer-safa-slat.jpg";
+import visualizerHampton from "@/assets/visualizer-hampton-new.jpg";
+import visualizerHenley from "@/assets/visualizer-henley.jpg";
 
 const styles = [
-  { id: "ascot", name: "Ascot", description: "Horizontal slat rails", image: visualizerAscot },
-  { id: "hampton", name: "Hampton", description: "Vertical fins between posts", image: visualizerHampton },
-  { id: "spectra", name: "Spectra", description: "Framed glass panels", image: visualizerSpectra },
-  { id: "finline", name: "Finline", description: "Postless vertical fins", image: visualizerFinline },
-  { id: "arena", name: "Arena", description: "Frameless glass standoffs", image: visualizerArena },
+  { id: "ascot", name: "Ascot", description: "Vertical square balusters", thumb: thumbAscot, fullImage: visualizerAscot },
+  { id: "windsor", name: "Windsor", description: "Double-top rail design", thumb: thumbWindsor, fullImage: visualizerWindsor },
+  { id: "keston", name: "Keston", description: "Modern minimalist frame", thumb: thumbKeston, fullImage: visualizerKeston },
+  { id: "safa-slat", name: "Safa-Slat", description: "Horizontal privacy slats", thumb: thumbSafaSlat, fullImage: visualizerSafaSlat },
+  { id: "hampton", name: "Hampton", description: "Vertical flat fins", thumb: thumbHampton, fullImage: visualizerHampton },
+  { id: "henley", name: "Henley", description: "Classic baluster design", thumb: thumbHenley, fullImage: visualizerHenley },
 ];
 
 const BalustradeVisualizer = () => {
@@ -25,15 +37,15 @@ const BalustradeVisualizer = () => {
             Visualize Your Balustrade
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            See how different styles look on your deck. Choose a style to preview your perfect balustrade in matte black finish.
+            See how different Framed Balustrade styles look on your deck. Choose a style to preview your perfect balustrade in matte black finish.
           </p>
         </div>
 
         <div className="max-w-5xl mx-auto">
-          {/* Image Display */}
+          {/* Main Image Display */}
           <div className="relative mb-8 rounded-lg overflow-hidden shadow-2xl">
             <img
-              src={selectedStyle.image}
+              src={selectedStyle.fullImage}
               alt={`${selectedStyle.name} balustrade in matte black`}
               className="w-full h-auto transition-all duration-500"
             />
@@ -43,22 +55,31 @@ const BalustradeVisualizer = () => {
             </div>
           </div>
 
-          {/* Style Selection */}
+          {/* Style Selection with Thumbnails */}
           <div className="mb-8">
             <h3 className="text-xl font-semibold mb-4 text-foreground">Select Style</h3>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               {styles.map((style) => (
                 <button
                   key={style.id}
                   onClick={() => setSelectedStyle(style)}
-                  className={`p-4 rounded-sm border-2 transition-all duration-300 text-left ${
+                  className={`group rounded-lg overflow-hidden border-2 transition-all duration-300 ${
                     selectedStyle.id === style.id
-                      ? "border-primary bg-primary/10"
-                      : "border-border hover:border-primary/50 bg-card"
+                      ? "border-primary ring-2 ring-primary/30"
+                      : "border-border hover:border-primary/50"
                   }`}
                 >
-                  <p className="font-semibold text-foreground">{style.name}</p>
-                  <p className="text-xs text-muted-foreground mt-1">{style.description}</p>
+                  <div className="aspect-square overflow-hidden">
+                    <img
+                      src={style.thumb}
+                      alt={`${style.name} style preview`}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="p-2 bg-card">
+                    <p className="font-semibold text-sm text-foreground">{style.name}</p>
+                    <p className="text-xs text-muted-foreground">{style.description}</p>
+                  </div>
                 </button>
               ))}
             </div>
