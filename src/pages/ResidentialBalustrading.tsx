@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { ArrowLeft, Home, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
@@ -7,6 +8,9 @@ import Gallery from "@/components/Gallery";
 import residentialHero from "@/assets/residential-hero.jpg";
 
 const ResidentialBalustrading = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const features = [
     "Custom glass and aluminium balustrades for homes",
     "Deck and balcony balustrading solutions",
@@ -43,7 +47,7 @@ const ResidentialBalustrading = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button variant="hero" asChild>
-                  <a href="#contact">Get A Free Quote</a>
+                  <a href="/#contact">Get A Free Quote</a>
                 </Button>
                 <Button variant="outline" size="lg" className="bg-white text-foreground hover:bg-white/90" asChild>
                   <a href="#gallery">View Residential Projects</a>
