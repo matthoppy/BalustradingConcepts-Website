@@ -39,26 +39,26 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" className="py-16 sm:py-24 bg-background">
-      <div className="container mx-auto px-4 sm:px-6">
+    <section id="services" className="py-24 bg-background">
+      <div className="container mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4 uppercase">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 uppercase">
             Our Services
           </h2>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Comprehensive glass balustrading solutions for every need
           </p>
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => {
             const Icon = service.icon;
             const ServiceCard = (
               <div
-                className={`bg-card p-8 transition-all duration-300 border border-border h-full flex flex-col ${
-                  service.link ? "cursor-pointer group hover:shadow-xl" : ""
+                className={`bg-card p-8 transition-all duration-300 hover:shadow-xl border border-border h-full flex flex-col ${
+                  service.link ? "cursor-pointer group" : ""
                 }`}
               >
                 <div className="mb-6">

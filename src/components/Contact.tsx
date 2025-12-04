@@ -35,7 +35,7 @@ const Contact = () => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!captchaValue) {
@@ -47,98 +47,27 @@ const Contact = () => {
       return;
     }
 
-    const formData = new FormData(e.currentTarget);
-    
-    // Convert image to base64 if present
-    let photoBase64 = null;
-    let photoName = null;
-    let photoType = null;
-    
-    if (selectedFile) {
-      const reader = new FileReader();
-      photoBase64 = await new Promise<string>((resolve) => {
-        reader.onloadend = () => {
-          const base64String = reader.result as string;
-          resolve(base64String.split(',')[1]); // Remove data:image/...;base64, prefix
-        };
-        reader.readAsDataURL(selectedFile);
-      });
-      photoName = selectedFile.name;
-      photoType = selectedFile.type;
-    }
-    
-    const data = {
-      name: formData.get('name') as string,
-      phone: formData.get('phone') as string,
-      email: formData.get('email') as string,
-      message: formData.get('message') as string,
-      captchaToken: captchaValue,
-      photo: photoBase64 ? {
-        content: photoBase64,
-        filename: photoName,
-        type: photoType,
-      } : null,
-    };
-
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/submit-contact-form`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        }
-      );
-
-      let result: any = null;
-      try {
-        result = await response.json();
-      } catch {
-        // ignore JSON parse issues
-      }
-
-      if (!response.ok) {
-        console.error('Form submit response not OK:', result || response.statusText);
-        // Still treat as sent to avoid confusing users, since backend emails are sending
-      }
-
-      toast({
-        title: "Message sent!",
-        description: "We'll get back to you soon.",
-      });
-
-      // Reset form and CAPTCHA with a small delay
-      setTimeout(() => {
-        e.currentTarget.reset();
-        setSelectedFile(null);
-        setCaptchaValue(null);
-        recaptchaRef.current?.reset();
-      }, 100);
-    } catch (error) {
-      console.error('Form submission error:', error);
-      // Note: Emails are sending successfully, so we don't show error toast
-      // Reset CAPTCHA on error so user can try again
-      setCaptchaValue(null);
-      recaptchaRef.current?.reset();
-    }
+    // Form submission logic here
+    toast({
+      title: "Message sent!",
+      description: "We'll get back to you soon.",
+    });
   };
   return (
-    <section id="contact" className="py-16 sm:py-24 bg-background">
-      <div className="container mx-auto px-4 sm:px-6">
+    <section id="contact" className="py-24 bg-background">
+      <div className="container mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4 uppercase">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 uppercase">
             Get In Touch
           </h2>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Ready to transform your space? Contact us for a free consultation and quote
           </p>
         </div>
 
         {/* Contact Content */}
-        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Contact Info */}
           <div className="space-y-8">
             <div>
@@ -184,7 +113,7 @@ const Contact = () => {
             </div>
 
             <div className="bg-secondary p-8">
-              <h4 className="text-xl font-bold text-foreground mb-4">Office Hours</h4>
+              <h4 className="text-xl font-bold text-foreground mb-4">Business Hours</h4>
               <div className="space-y-2 text-muted-foreground">
                 <p><span className="font-semibold text-foreground">Monday - Friday:</span> 7:00 AM - 1:00 PM</p>
                 <p><span className="font-semibold text-foreground">Weekends:</span> Closed</p>
@@ -193,8 +122,8 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-secondary p-6 sm:p-8">
-            <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-6">Request A Quote</h3>
+          <div className="bg-secondary p-8">
+            <h3 className="text-2xl font-bold text-foreground mb-6">Request A Quote</h3>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
@@ -205,7 +134,6 @@ const Contact = () => {
                     type="text"
                     id="name"
                     name="name"
-                    required
                     className="w-full px-4 py-3 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300"
                     placeholder="Your name"
                   />
@@ -218,7 +146,6 @@ const Contact = () => {
                     type="tel"
                     id="phone"
                     name="phone"
-                    required
                     className="w-full px-4 py-3 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300"
                     placeholder="Your phone"
                   />
@@ -233,7 +160,6 @@ const Contact = () => {
                   type="email"
                   id="email"
                   name="email"
-                  required
                   className="w-full px-4 py-3 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300"
                   placeholder="your@email.com"
                 />
@@ -247,7 +173,6 @@ const Contact = () => {
                   id="message"
                   name="message"
                   rows={5}
-                  required
                   className="w-full px-4 py-3 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300 resize-none"
                   placeholder="Tell us about your project..."
                 ></textarea>
@@ -257,9 +182,6 @@ const Contact = () => {
                 <label htmlFor="photo" className="block text-sm font-medium text-foreground mb-2">
                   Photo (Optional)
                 </label>
-                <p className="text-xs text-muted-foreground mb-2">
-                  Accepted formats: JPG, PNG, WEBP, GIF • Max 5MB
-                </p>
                 <div className="relative">
                   <input
                     type="file"
@@ -289,7 +211,7 @@ const Contact = () => {
               <div className="flex justify-center">
                 <ReCAPTCHA
                   ref={recaptchaRef}
-                  sitekey="6LeUNBgsAAAAACpEykq296IxdhZPgjl1gNAP1scs"
+                  sitekey="6LecmgksAAAAAMDxK27h3GMp69-6GxE0JMt5wo72"
                   onChange={setCaptchaValue}
                 />
               </div>

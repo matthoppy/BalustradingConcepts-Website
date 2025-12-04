@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { ArrowLeft, Building2, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
@@ -8,9 +7,6 @@ import Gallery from "@/components/Gallery";
 import commercialHero from "@/assets/commercial-hero.jpg";
 
 const CommercialProjects = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   const features = [
     "Large-scale installations for offices and retail",
     "Public building handrails and balustrading",
@@ -47,7 +43,7 @@ const CommercialProjects = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button variant="hero" asChild>
-                  <a href="/#contact">Get A Free Quote</a>
+                  <a href="#contact">Get A Free Quote</a>
                 </Button>
                 <Button variant="outline" size="lg" className="bg-white text-foreground hover:bg-white/90" asChild>
                   <a href="#gallery">View Commercial Projects</a>
