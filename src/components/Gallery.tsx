@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import gallery1 from "@/assets/gallery-1.jpg";
 import gallery2 from "@/assets/gallery-2.jpg";
 import gallery3 from "@/assets/gallery-3.jpg";
@@ -413,12 +414,18 @@ const projects = [
 ];
 
 const Gallery = ({ filter }: { filter?: string }) => {
+  const isMobile = useIsMobile();
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
-  const [visibleCount, setVisibleCount] = useState(4);
+  const [visibleCount, setVisibleCount] = useState(12);
   const [randomizedProjects, setRandomizedProjects] = useState<typeof projects>([]);
+
+  // Set initial visible count based on screen size
+  useEffect(() => {
+    setVisibleCount(isMobile ? 3 : 12);
+  }, [isMobile]);
 
   useEffect(() => {
     if (!carouselApi) return;
