@@ -153,32 +153,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 
-const Gallery = ({ filter }: { filter?: string }) => {
-  const [selectedProject, setSelectedProject] = useState<number | null>(null);
-  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
-  const [current, setCurrent] = useState(0);
-  const [count, setCount] = useState(0);
-  const [visibleCount, setVisibleCount] = useState(4);
-  const [randomizedProjects, setRandomizedProjects] = useState<typeof projects>([]);
-
-  useEffect(() => {
-    if (!carouselApi) return;
-
-    setCount(carouselApi.scrollSnapList().length);
-    setCurrent(carouselApi.selectedScrollSnap() + 1);
-
-    carouselApi.on("select", () => {
-      setCurrent(carouselApi.selectedScrollSnap() + 1);
-    });
-  }, [carouselApi]);
-
-  // Randomize projects on mount
-  useEffect(() => {
-    const shuffled = [...projects].sort(() => Math.random() - 0.5);
-    setRandomizedProjects(shuffled);
-  }, []);
-
-  const projects = [
+const projects = [
     {
       name: "Millwater Pool Fence",
       style: "Mini Posts",
@@ -435,7 +410,32 @@ const Gallery = ({ filter }: { filter?: string }) => {
       images: [gallery94, gallery95, gallery96, gallery97, gallery98],
       alt: "Windsor style commercial balustrading at Diocesan School",
     },
-  ];
+];
+
+const Gallery = ({ filter }: { filter?: string }) => {
+  const [selectedProject, setSelectedProject] = useState<number | null>(null);
+  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(4);
+  const [randomizedProjects, setRandomizedProjects] = useState<typeof projects>([]);
+
+  useEffect(() => {
+    if (!carouselApi) return;
+
+    setCount(carouselApi.scrollSnapList().length);
+    setCurrent(carouselApi.selectedScrollSnap() + 1);
+
+    carouselApi.on("select", () => {
+      setCurrent(carouselApi.selectedScrollSnap() + 1);
+    });
+  }, [carouselApi]);
+
+  // Randomize projects on mount
+  useEffect(() => {
+    const shuffled = [...projects].sort(() => Math.random() - 0.5);
+    setRandomizedProjects(shuffled);
+  }, []);
 
   // Filter projects if filter prop is provided
   const filteredProjects = filter 
