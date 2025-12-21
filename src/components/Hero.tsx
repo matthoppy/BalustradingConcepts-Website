@@ -3,7 +3,7 @@ import heroImage from "@/assets/hero-balustrading.jpg";
 
 const Hero = () => {
   return (
-    <section id="home" className="relative h-screen w-full overflow-hidden pt-12">
+    <section id="home" className="relative h-screen w-full overflow-hidden pt-8 md:pt-12">
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center"
