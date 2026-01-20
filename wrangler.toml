@@ -1,0 +1,9 @@
+name = "balustrading-concepts-website"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "dist"
+
+[env.production]
+name = "balustrading-concepts-website"
+
+[env.preview]
+name = "balustrading-concepts-website-preview"

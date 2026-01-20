@@ -1,13 +1,3 @@
-import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { Resend } from "https://esm.sh/resend@4.0.0";
-
-const resend = new Resend(Deno.env.get('RESEND_API_KEY'));
-
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-};
-
 interface ContactFormData {
   name: string;
   phone: string;
@@ -21,22 +11,28 @@ interface ContactFormData {
   } | null;
 }
 
-const handler = async (req: Request): Promise<Response> => {
-  // Handle CORS preflight requests
-  if (req.method === 'OPTIONS') {
-    return new Response(null, { headers: corsHeaders });
-  }
+interface Env {
+  RESEND_API_KEY: string;
+  RECAPTCHA_SECRET_KEY: string;
+}
+
+export const onRequestPost: PagesFunction<Env> = async (context) => {
+  const corsHeaders = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+    'Content-Type': 'application/json',
+  };
 
   try {
-    const formData: ContactFormData = await req.json();
+    const formData: ContactFormData = await context.request.json();
     const { name, phone, email, message, captchaToken, photo } = formData;
 
     console.log('Received contact form submission from:', email);
 
     // Verify reCAPTCHA
-    const recaptchaSecret = Deno.env.get('RECAPTCHA_SECRET_KEY');
+    const recaptchaSecret = context.env.RECAPTCHA_SECRET_KEY;
     const recaptchaResponse = await fetch(
-      `https://www.google.com/recaptcha/api/siteverify`,
+      'https://www.google.com/recaptcha/api/siteverify',
       {
         method: 'POST',
         headers: {
@@ -46,22 +42,22 @@ const handler = async (req: Request): Promise<Response> => {
       }
     );
 
-    const recaptchaData = await recaptchaResponse.json();
-    
+    const recaptchaData: any = await recaptchaResponse.json();
+
     if (!recaptchaData.success) {
       console.error('reCAPTCHA verification failed:', recaptchaData);
       return new Response(
         JSON.stringify({ error: 'CAPTCHA verification failed' }),
         {
           status: 400,
-          headers: { 'Content-Type': 'application/json', ...corsHeaders },
+          headers: corsHeaders,
         }
       );
     }
 
     console.log('reCAPTCHA verification successful');
 
-    // Prepare email payload
+    // Prepare email payload for Resend API
     const emailPayload: any = {
       from: "Balustrading Concepts NZ <noreply@balustrading.co.nz>",
       to: ["admin@balustrading.co.nz"],
@@ -87,24 +83,30 @@ const handler = async (req: Request): Promise<Response> => {
       }];
     }
 
-    // Send email via Resend
-    const emailResponse = await resend.emails.send(emailPayload);
+    // Send email via Resend API
+    const resendResponse = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${context.env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(emailPayload),
+    });
 
-    if (emailResponse.error) {
-      console.error('Resend API error:', emailResponse.error);
-      throw new Error(`Failed to send email: ${emailResponse.error.message}`);
+    const resendData: any = await resendResponse.json();
+
+    if (!resendResponse.ok) {
+      console.error('Resend API error:', resendData);
+      throw new Error(`Failed to send email: ${resendData.message || 'Unknown error'}`);
     }
 
-    console.log('Email sent successfully via Resend:', emailResponse);
+    console.log('Email sent successfully via Resend:', resendData);
 
     return new Response(
       JSON.stringify({ success: true, message: 'Form submitted successfully' }),
       {
         status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-          ...corsHeaders,
-        },
+        headers: corsHeaders,
       }
     );
   } catch (error: any) {
@@ -113,10 +115,19 @@ const handler = async (req: Request): Promise<Response> => {
       JSON.stringify({ error: error.message || 'Internal server error' }),
       {
         status: 500,
-        headers: { 'Content-Type': 'application/json', ...corsHeaders },
+        headers: corsHeaders,
       }
     );
   }
 };
 
-serve(handler);
+export const onRequestOptions: PagesFunction = async () => {
+  return new Response(null, {
+    status: 204,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    },
+  });
+};
