@@ -15,7 +15,7 @@ const PrivacyPolicy = () => {
       <main className="bg-background text-foreground">
         <div className="container mx-auto px-6 py-20 max-w-3xl">
           <h1 className="text-3xl font-bold mb-2">Privacy Policy</h1>
-          <p className="text-muted-foreground mb-10">Balustrading Concepts Limited &mdash; Last updated: [insert date]</p>
+          <p className="text-muted-foreground mb-10">Balustrading Concepts Limited &mdash; Last updated: 24th February 2026</p>
 
           <section className="mb-8">
             <h2 className="text-xl font-semibold mb-3">1. Introduction</h2>
@@ -98,8 +98,8 @@ const PrivacyPolicy = () => {
           <section className="mb-8">
             <h2 className="text-xl font-semibold mb-3">8. Contact</h2>
             <p className="text-muted-foreground font-medium">Balustrading Concepts Limited</p>
-            <p className="text-muted-foreground">Email: [insert email]</p>
-            <p className="text-muted-foreground">Phone: [insert phone]</p>
+            <p className="text-muted-foreground">Email: admin@balustrading.co.nz</p>
+            <p className="text-muted-foreground">Phone: 09 828 8858</p>
           </section>
         </div>
       </main>
