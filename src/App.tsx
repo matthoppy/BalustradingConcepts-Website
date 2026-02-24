@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import ResidentialBalustrading from "./pages/ResidentialBalustrading";
 import PoolFencing from "./pages/PoolFencing";
 import CommercialProjects from "./pages/CommercialProjects";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/residential-balustrading" element={<ResidentialBalustrading />} />
           <Route path="/pool-fencing" element={<PoolFencing />} />
           <Route path="/commercial-projects" element={<CommercialProjects />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
