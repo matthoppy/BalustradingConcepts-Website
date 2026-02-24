@@ -13,7 +13,7 @@ const PrivacyPolicy = () => {
       <Navigation />
       <FixedContactButtons />
       <main className="bg-background text-foreground">
-        <div className="container mx-auto px-6 py-20 max-w-3xl">
+        <div className="container mx-auto px-6 pt-32 pb-20 max-w-3xl">
           <h1 className="text-3xl font-bold mb-2">Privacy Policy</h1>
           <p className="text-muted-foreground mb-10">Balustrading Concepts Limited &mdash; Last updated: 24th February 2026</p>
 
