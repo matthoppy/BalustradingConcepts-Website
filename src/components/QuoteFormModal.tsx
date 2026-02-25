@@ -42,7 +42,7 @@ const QuoteFormModal = ({ open, onOpenChange }: QuoteFormModalProps) => {
       email: formData.get('email') as string,
       siteAddress: formData.get('siteAddress') as string,
       siteSuburb: formData.get('siteSuburb') as string,
-      siteTownCity: formData.get('siteTownCity') as string,
+      sitePostcode: formData.get('sitePostcode') as string,
       balustradeHeight: formData.get('balustradeHeight') as string,
       buildingType: formData.get('buildingType') as string,
       location: formData.get('location') as string,
@@ -61,7 +61,7 @@ Phone: ${data.phone}
 Email: ${data.email}
 Site Address: ${data.siteAddress}
 Site Suburb: ${data.siteSuburb}
-Site Town/City: ${data.siteTownCity}
+Postcode: ${data.sitePostcode}
 Balustrade Height: ${data.balustradeHeight || 'N/A'}
 Building Type: ${data.buildingType}
 Location: ${data.location}
@@ -215,16 +215,16 @@ Other Notes: ${data.otherNotes || 'N/A'}
               />
             </div>
             <div>
-              <label htmlFor="siteTownCity" className="block text-sm font-medium text-foreground mb-1">
-                Site Town/City <span className="text-red-500">*</span>
+              <label htmlFor="sitePostcode" className="block text-sm font-medium text-foreground mb-1">
+                Postcode <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
-                id="siteTownCity"
-                name="siteTownCity"
+                id="sitePostcode"
+                name="sitePostcode"
                 required
                 className="w-full px-4 py-2 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300"
-                placeholder="Town/City"
+                placeholder="Postcode"
               />
             </div>
           </div>
