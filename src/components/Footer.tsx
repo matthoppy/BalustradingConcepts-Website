@@ -1,38 +1,53 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import sitewiseBadge from "@/assets/sitewise-green-2026.jpg";
+import PrivacyPolicyModal from "./PrivacyPolicyModal";
+import TermsOfTradeModal from "./TermsOfTradeModal";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const [privacyOpen, setPrivacyOpen] = useState(false);
+  const [termsOpen, setTermsOpen] = useState(false);
 
   return (
-    <footer className="bg-footer-bg text-footer-text">
-      {/* SiteWise Badge */}
-      <div className="container mx-auto px-6 py-8">
-        <div className="flex justify-center">
-          <img 
-            src={sitewiseBadge} 
-            alt="SiteWise Green 2026/27 - Powered by Site Safe" 
-            className="h-20 md:h-24 w-auto"
-          />
+    <>
+      <footer className="bg-footer-bg text-footer-text">
+        {/* SiteWise Badge */}
+        <div className="container mx-auto px-6 py-8">
+          <div className="flex justify-center">
+            <img
+              src={sitewiseBadge}
+              alt="SiteWise Green 2026/27 - Powered by Site Safe"
+              className="h-20 md:h-24 w-auto"
+            />
+          </div>
         </div>
-      </div>
-      {/* Bottom Bar */}
-      <div className="border-t border-footer-text/20">
-        <div className="container mx-auto px-6 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-footer-text/60">
-            <p>&copy; {currentYear} Balustrading Concepts. All rights reserved.</p>
-            <div className="flex gap-6">
-              <Link to="/privacy-policy" className="hover:text-primary transition-colors duration-300">
-                Privacy Policy
-              </Link>
-              <Link to="/terms-of-trade" className="hover:text-primary transition-colors duration-300">
-                Terms of Trade
-              </Link>
+        {/* Bottom Bar */}
+        <div className="border-t border-footer-text/20">
+          <div className="container mx-auto px-6 py-6">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-footer-text/60">
+              <p>&copy; {currentYear} Balustrading Concepts. All rights reserved.</p>
+              <div className="flex gap-6">
+                <button
+                  onClick={() => setPrivacyOpen(true)}
+                  className="hover:text-primary transition-colors duration-300"
+                >
+                  Privacy Policy
+                </button>
+                <button
+                  onClick={() => setTermsOpen(true)}
+                  className="hover:text-primary transition-colors duration-300"
+                >
+                  Terms of Trade
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+
+      <PrivacyPolicyModal open={privacyOpen} onOpenChange={setPrivacyOpen} />
+      <TermsOfTradeModal open={termsOpen} onOpenChange={setTermsOpen} />
+    </>
   );
 };
 
