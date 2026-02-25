@@ -47,6 +47,7 @@ const QuoteFormModal = ({ open, onOpenChange }: QuoteFormModalProps) => {
       buildingType: formData.get('buildingType') as string,
       location: formData.get('location') as string,
       protectingFall: formData.get('protectingFall') as string,
+      totalLinealMetres: formData.get('totalLinealMetres') as string,
       requiredDate: formData.get('requiredDate') as string,
       otherNotes: formData.get('otherNotes') as string,
       captchaToken: captchaValue,
@@ -65,6 +66,7 @@ Balustrade Height: ${data.balustradeHeight || 'N/A'}
 Building Type: ${data.buildingType}
 Location: ${data.location}
 Protecting Fall: ${data.protectingFall}
+Total Lineal Metres: ${data.totalLinealMetres || 'N/A'}
 Required Date: ${data.requiredDate || 'N/A'}
 Other Notes: ${data.otherNotes || 'N/A'}
     `.trim();
@@ -292,6 +294,20 @@ Other Notes: ${data.otherNotes || 'N/A'}
               <option value="Yes, balustrading IS preventing a fall">Yes, balustrading IS preventing a fall</option>
               <option value="No, balustrading is NOT preventing a fall">No, balustrading is NOT preventing a fall</option>
             </select>
+          </div>
+
+          {/* Total Lineal Metres */}
+          <div>
+            <label htmlFor="totalLinealMetres" className="block text-sm font-medium text-foreground mb-1">
+              Total Lineal Metres
+            </label>
+            <input
+              type="text"
+              id="totalLinealMetres"
+              name="totalLinealMetres"
+              className="w-full px-4 py-2 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300"
+              placeholder="e.g. 10m, 15m..."
+            />
           </div>
 
           {/* Required Date */}
