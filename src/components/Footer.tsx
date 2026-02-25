@@ -18,7 +18,7 @@ const Footer = () => {
             <img
               src={unexBadge}
               alt="UNEX Authorised Fabricator"
-              className="h-16 md:h-20 w-auto"
+              className="h-20 md:h-24 w-auto"
             />
             <img
               src={sitewiseBadge}
