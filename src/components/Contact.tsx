@@ -1,43 +1,18 @@
-import { Phone, Mail, MapPin, Upload } from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
 import { Button } from "./ui/button";
 import { useState, useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useToast } from "./ui/use-toast";
 
 const Contact = () => {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [captchaValue, setCaptchaValue] = useState<string | null>(null);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const { toast } = useToast();
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      // Validate file size (max 5MB)
-      if (file.size > 5 * 1024 * 1024) {
-        toast({
-          title: "File too large",
-          description: "Please select an image under 5MB",
-          variant: "destructive",
-        });
-        return;
-      }
-      // Validate file type
-      if (!file.type.startsWith('image/')) {
-        toast({
-          title: "Invalid file type",
-          description: "Please select an image file",
-          variant: "destructive",
-        });
-        return;
-      }
-      setSelectedFile(file);
-    }
-  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     if (!captchaValue) {
       toast({
         title: "Verification required",
@@ -48,37 +23,40 @@ const Contact = () => {
     }
 
     const formData = new FormData(e.currentTarget);
-    
-    // Convert image to base64 if present
-    let photoBase64 = null;
-    let photoName = null;
-    let photoType = null;
-    
-    if (selectedFile) {
-      const reader = new FileReader();
-      photoBase64 = await new Promise<string>((resolve) => {
-        reader.onloadend = () => {
-          const base64String = reader.result as string;
-          resolve(base64String.split(',')[1]); // Remove data:image/...;base64, prefix
-        };
-        reader.readAsDataURL(selectedFile);
-      });
-      photoName = selectedFile.name;
-      photoType = selectedFile.type;
-    }
-    
+
     const data = {
+      companyName: formData.get('companyName') as string,
       name: formData.get('name') as string,
       phone: formData.get('phone') as string,
       email: formData.get('email') as string,
-      message: formData.get('message') as string,
+      siteAddress: formData.get('siteAddress') as string,
+      siteSuburb: formData.get('siteSuburb') as string,
+      siteTownCity: formData.get('siteTownCity') as string,
+      balustradeHeight: formData.get('balustradeHeight') as string,
+      buildingType: formData.get('buildingType') as string,
+      location: formData.get('location') as string,
+      protectingFall: formData.get('protectingFall') as string,
+      requiredDate: formData.get('requiredDate') as string,
+      otherNotes: formData.get('otherNotes') as string,
       captchaToken: captchaValue,
-      photo: photoBase64 ? {
-        content: photoBase64,
-        filename: photoName,
-        type: photoType,
-      } : null,
     };
+
+    // Build message string for the email
+    const message = `
+Company Name: ${data.companyName || 'N/A'}
+Name: ${data.name}
+Phone: ${data.phone}
+Email: ${data.email}
+Site Address: ${data.siteAddress}
+Site Suburb: ${data.siteSuburb}
+Site Town/City: ${data.siteTownCity}
+Balustrade Height: ${data.balustradeHeight || 'N/A'}
+Building Type: ${data.buildingType}
+Location: ${data.location}
+Protecting Fall: ${data.protectingFall}
+Required Date: ${data.requiredDate || 'N/A'}
+Other Notes: ${data.otherNotes || 'N/A'}
+    `.trim();
 
     try {
       const response = await fetch(
@@ -88,11 +66,17 @@ const Contact = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify({
+            name: data.name,
+            phone: data.phone,
+            email: data.email,
+            message: message,
+            captchaToken: captchaValue,
+          }),
         }
       );
 
-      let result: any = null;
+      let result: unknown = null;
       try {
         result = await response.json();
       } catch {
@@ -101,29 +85,24 @@ const Contact = () => {
 
       if (!response.ok) {
         console.error('Form submit response not OK:', result || response.statusText);
-        // Still treat as sent to avoid confusing users, since backend emails are sending
       }
 
       toast({
-        title: "Message sent!",
+        title: "Quote request sent!",
         description: "We'll get back to you soon.",
       });
 
-      // Reset form and CAPTCHA with a small delay
-      setTimeout(() => {
-        e.currentTarget.reset();
-        setSelectedFile(null);
-        setCaptchaValue(null);
-        recaptchaRef.current?.reset();
-      }, 100);
+      // Reset form and CAPTCHA
+      formRef.current?.reset();
+      setCaptchaValue(null);
+      recaptchaRef.current?.reset();
     } catch (error) {
       console.error('Form submission error:', error);
-      // Note: Emails are sending successfully, so we don't show error toast
-      // Reset CAPTCHA on error so user can try again
       setCaptchaValue(null);
       recaptchaRef.current?.reset();
     }
   };
+
   return (
     <section id="contact" className="py-16 sm:py-24 bg-background">
       <div className="container mx-auto px-4 sm:px-6">
@@ -156,7 +135,7 @@ const Contact = () => {
                     </a>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start gap-4">
                   <Mail className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
                   <div>
@@ -169,7 +148,7 @@ const Contact = () => {
                     </a>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start gap-4">
                   <MapPin className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
                   <div>
@@ -195,97 +174,207 @@ const Contact = () => {
           {/* Contact Form */}
           <div className="bg-secondary p-6 sm:p-8">
             <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-6">Request A Quote</h3>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+              {/* Company Name */}
+              <div>
+                <label htmlFor="companyName" className="block text-sm font-medium text-foreground mb-1">
+                  Company Name
+                </label>
+                <input
+                  type="text"
+                  id="companyName"
+                  name="companyName"
+                  className="w-full px-4 py-2 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300"
+                  placeholder="Company name (if applicable)"
+                />
+              </div>
+
+              {/* Name and Phone */}
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                    Name
+                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1">
+                    Your Name <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
                     id="name"
                     name="name"
                     required
-                    className="w-full px-4 py-3 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300"
-                    placeholder="Your name"
+                    className="w-full px-4 py-2 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300"
+                    placeholder="Your full name"
                   />
                 </div>
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
-                    Phone
+                  <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-1">
+                    Phone <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="tel"
                     id="phone"
                     name="phone"
                     required
-                    className="w-full px-4 py-3 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300"
-                    placeholder="Your phone"
+                    className="w-full px-4 py-2 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300"
+                    placeholder="Your phone number"
                   />
                 </div>
               </div>
-              
+
+              {/* Email */}
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                  Email
+                <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1">
+                  Email <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   required
-                  className="w-full px-4 py-3 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300"
+                  className="w-full px-4 py-2 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300"
                   placeholder="your@email.com"
                 />
               </div>
-              
+
+              {/* Site Address */}
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                  Message
+                <label htmlFor="siteAddress" className="block text-sm font-medium text-foreground mb-1">
+                  Site Address <span className="text-red-500">*</span>
                 </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={5}
+                <input
+                  type="text"
+                  id="siteAddress"
+                  name="siteAddress"
                   required
-                  className="w-full px-4 py-3 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300 resize-none"
-                  placeholder="Tell us about your project..."
-                ></textarea>
+                  className="w-full px-4 py-2 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300"
+                  placeholder="Number & Street Name"
+                />
               </div>
-              
-              <div>
-                <label htmlFor="photo" className="block text-sm font-medium text-foreground mb-2">
-                  Photo (Optional)
-                </label>
-                <p className="text-xs text-muted-foreground mb-2">
-                  Accepted formats: JPG, PNG, WEBP, GIF • Max 5MB
-                </p>
-                <div className="relative">
-                  <input
-                    type="file"
-                    id="photo"
-                    name="photo"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                    className="hidden"
-                  />
-                  <label
-                    htmlFor="photo"
-                    className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-background border border-input hover:border-primary cursor-pointer transition-colors duration-300"
-                  >
-                    <Upload className="w-5 h-5 text-muted-foreground" />
-                    <span className="text-muted-foreground">
-                      {selectedFile ? selectedFile.name : "Upload a photo of your project"}
-                    </span>
+
+              {/* Site Suburb and Town/City */}
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="siteSuburb" className="block text-sm font-medium text-foreground mb-1">
+                    Site Suburb <span className="text-red-500">*</span>
                   </label>
-                  {selectedFile && (
-                    <p className="text-xs text-muted-foreground mt-1">
-                      Max file size: 5MB
-                    </p>
-                  )}
+                  <input
+                    type="text"
+                    id="siteSuburb"
+                    name="siteSuburb"
+                    required
+                    className="w-full px-4 py-2 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300"
+                    placeholder="Suburb"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="siteTownCity" className="block text-sm font-medium text-foreground mb-1">
+                    Site Town/City <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="siteTownCity"
+                    name="siteTownCity"
+                    required
+                    className="w-full px-4 py-2 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300"
+                    placeholder="Town/City"
+                  />
                 </div>
               </div>
 
+              {/* Balustrade Height */}
+              <div>
+                <label htmlFor="balustradeHeight" className="block text-sm font-medium text-foreground mb-1">
+                  Balustrade Height
+                </label>
+                <input
+                  type="text"
+                  id="balustradeHeight"
+                  name="balustradeHeight"
+                  className="w-full px-4 py-2 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300"
+                  placeholder="e.g. 1m, 1.1m, 1.2m..."
+                />
+              </div>
+
+              {/* Building Type and Location */}
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="buildingType" className="block text-sm font-medium text-foreground mb-1">
+                    Building Type <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    id="buildingType"
+                    name="buildingType"
+                    required
+                    className="w-full px-4 py-2 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300"
+                  >
+                    <option value="">Select type</option>
+                    <option value="Residential">Residential</option>
+                    <option value="Commercial">Commercial</option>
+                    <option value="Pool Fence">Pool Fence</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div>
+                  <label htmlFor="location" className="block text-sm font-medium text-foreground mb-1">
+                    Location <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    id="location"
+                    name="location"
+                    required
+                    className="w-full px-4 py-2 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300"
+                  >
+                    <option value="">Select location</option>
+                    <option value="Exterior">Exterior</option>
+                    <option value="Internal">Internal</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Protecting Fall */}
+              <div>
+                <label htmlFor="protectingFall" className="block text-sm font-medium text-foreground mb-1">
+                  Protecting Fall <span className="text-red-500">*</span>
+                </label>
+                <select
+                  id="protectingFall"
+                  name="protectingFall"
+                  required
+                  className="w-full px-4 py-2 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300"
+                >
+                  <option value="">Select option</option>
+                  <option value="Yes, balustrading IS preventing a fall">Yes, balustrading IS preventing a fall</option>
+                  <option value="No, balustrading is NOT preventing a fall">No, balustrading is NOT preventing a fall</option>
+                </select>
+              </div>
+
+              {/* Required Date */}
+              <div>
+                <label htmlFor="requiredDate" className="block text-sm font-medium text-foreground mb-1">
+                  When do you expect the balustrade to be required?
+                </label>
+                <input
+                  type="text"
+                  id="requiredDate"
+                  name="requiredDate"
+                  className="w-full px-4 py-2 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300"
+                  placeholder="Enter the month and year"
+                />
+              </div>
+
+              {/* Other Notes */}
+              <div>
+                <label htmlFor="otherNotes" className="block text-sm font-medium text-foreground mb-1">
+                  Other Notes
+                </label>
+                <textarea
+                  id="otherNotes"
+                  name="otherNotes"
+                  rows={3}
+                  className="w-full px-4 py-2 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors duration-300 resize-none"
+                  placeholder="Any additional information..."
+                ></textarea>
+              </div>
+
+              {/* ReCAPTCHA */}
               <div className="flex justify-center">
                 <ReCAPTCHA
                   ref={recaptchaRef}
@@ -293,9 +382,9 @@ const Contact = () => {
                   onChange={setCaptchaValue}
                 />
               </div>
-              
+
               <Button type="submit" className="w-full">
-                Send Message
+                Submit Quote Request
               </Button>
             </form>
           </div>

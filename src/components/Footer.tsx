@@ -1,5 +1,6 @@
 import { useState } from "react";
 import sitewiseBadge from "@/assets/sitewise-green-2026.jpg";
+import unexBadge from "@/assets/unex-authorised-fabricator.jpg";
 import PrivacyPolicyModal from "./PrivacyPolicyModal";
 import TermsOfTradeModal from "./TermsOfTradeModal";
 
@@ -11,9 +12,14 @@ const Footer = () => {
   return (
     <>
       <footer className="bg-footer-bg text-footer-text">
-        {/* SiteWise Badge */}
+        {/* Certification Badges */}
         <div className="container mx-auto px-6 py-8">
-          <div className="flex justify-center">
+          <div className="flex justify-center items-center gap-6 md:gap-10">
+            <img
+              src={unexBadge}
+              alt="UNEX Authorised Fabricator"
+              className="h-16 md:h-20 w-auto"
+            />
             <img
               src={sitewiseBadge}
               alt="SiteWise Green 2026/27 - Powered by Site Safe"
