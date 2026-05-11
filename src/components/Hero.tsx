@@ -23,7 +23,7 @@ const Hero = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
             <Button variant="hero" size="lg" asChild className="w-full sm:w-auto">
-              <a href="#contact">Get A Free Quote</a>
+              <a href="#contact">Request A Quote</a>
             </Button>
             <Button variant="outline" size="lg" className="bg-white text-foreground hover:bg-white/90 w-full sm:w-auto" asChild>
               <a href="#gallery">View Our Work</a>

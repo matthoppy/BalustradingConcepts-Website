@@ -102,7 +102,7 @@ const Navigation = () => {
             {/* Get Quote Button */}
             <div className="hidden md:flex items-center gap-4">
               <Button onClick={() => setQuoteModalOpen(true)}>
-                Get a Free Quote
+                Request a Quote
               </Button>
             </div>
 
@@ -158,7 +158,7 @@ const Navigation = () => {
                   setQuoteModalOpen(true);
                 }}
               >
-                Get a Free Quote
+                Request a Quote
               </Button>
             </nav>
           )}
