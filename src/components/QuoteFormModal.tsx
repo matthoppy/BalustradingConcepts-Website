@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { X } from "lucide-react";
 import { Button } from "./ui/button";
-import ReCAPTCHA from "react-google-recaptcha";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { useToast } from "./ui/use-toast";
 import {
   Dialog,
@@ -10,6 +10,8 @@ import {
   DialogTitle,
 } from "./ui/dialog";
 
+const TURNSTILE_SITE_KEY = "1x00000000000000000000AA";
+
 interface QuoteFormModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -17,7 +19,7 @@ interface QuoteFormModalProps {
 
 const QuoteFormModal = ({ open, onOpenChange }: QuoteFormModalProps) => {
   const [captchaValue, setCaptchaValue] = useState<string | null>(null);
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const recaptchaRef = useRef<TurnstileInstance>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const { toast } = useToast();
 
@@ -72,24 +74,21 @@ Other Notes: ${data.otherNotes || 'N/A'}
     `.trim();
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/submit-contact-form`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: data.name,
-            phone: data.phone,
-            email: data.email,
-            message: message,
-            captchaToken: captchaValue,
-          }),
-        }
-      );
+      const response = await fetch('/api/submit-contact-form', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: data.name,
+          phone: data.phone,
+          email: data.email,
+          message: message,
+          captchaToken: captchaValue,
+        }),
+      });
 
-      let result: unknown = null;
+      let result: { error?: string } | null = null;
       try {
         result = await response.json();
       } catch {
@@ -98,6 +97,14 @@ Other Notes: ${data.otherNotes || 'N/A'}
 
       if (!response.ok) {
         console.error('Form submit response not OK:', result || response.statusText);
+        toast({
+          title: "Couldn't send your request",
+          description: result?.error || "Please try again, or call us directly.",
+          variant: "destructive",
+        });
+        setCaptchaValue(null);
+        recaptchaRef.current?.reset();
+        return;
       }
 
       toast({
@@ -105,13 +112,17 @@ Other Notes: ${data.otherNotes || 'N/A'}
         description: "We'll get back to you soon.",
       });
 
-      // Reset form and close modal
       formRef.current?.reset();
       setCaptchaValue(null);
       recaptchaRef.current?.reset();
       onOpenChange(false);
     } catch (error) {
       console.error('Form submission error:', error);
+      toast({
+        title: "Couldn't send your request",
+        description: "Please check your connection and try again.",
+        variant: "destructive",
+      });
       setCaptchaValue(null);
       recaptchaRef.current?.reset();
     }
@@ -338,12 +349,14 @@ Other Notes: ${data.otherNotes || 'N/A'}
             ></textarea>
           </div>
 
-          {/* ReCAPTCHA */}
+          {/* Cloudflare Turnstile */}
           <div className="flex justify-center">
-            <ReCAPTCHA
+            <Turnstile
               ref={recaptchaRef}
-              sitekey="6LeUNBgsAAAAACpEykq296IxdhZPgjl1gNAP1scs"
-              onChange={setCaptchaValue}
+              siteKey={TURNSTILE_SITE_KEY}
+              onSuccess={setCaptchaValue}
+              onError={() => setCaptchaValue(null)}
+              onExpire={() => setCaptchaValue(null)}
             />
           </div>
 
