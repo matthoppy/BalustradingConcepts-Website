@@ -47,7 +47,7 @@ const ResidentialBalustrading = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button variant="hero" asChild>
-                  <a href="/#contact">Get A Free Quote</a>
+                  <a href="/#contact">Request A Quote</a>
                 </Button>
                 <Button variant="outline" size="lg" className="bg-white text-foreground hover:bg-white/90" asChild>
                   <a href="#gallery">View Residential Projects</a>
@@ -93,7 +93,7 @@ const ResidentialBalustrading = () => {
                 
                 <div className="mt-8">
                   <Button asChild className="w-full">
-                    <a href="/#contact">Get a Free Quote</a>
+                    <a href="/#contact">Request a Quote</a>
                   </Button>
                 </div>
               </div>
