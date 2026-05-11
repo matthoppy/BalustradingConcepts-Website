@@ -1,12 +1,14 @@
 import { Phone, Mail, MapPin } from "lucide-react";
 import { Button } from "./ui/button";
 import { useState, useRef } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { useToast } from "./ui/use-toast";
+
+const TURNSTILE_SITE_KEY = "1x00000000000000000000AA";
 
 const Contact = () => {
   const [captchaValue, setCaptchaValue] = useState<string | null>(null);
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const recaptchaRef = useRef<TurnstileInstance>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const { toast } = useToast();
 
@@ -399,12 +401,14 @@ Other Notes: ${data.otherNotes || 'N/A'}
                 ></textarea>
               </div>
 
-              {/* ReCAPTCHA */}
+              {/* Cloudflare Turnstile */}
               <div className="flex justify-center">
-                <ReCAPTCHA
+                <Turnstile
                   ref={recaptchaRef}
-                  sitekey="6LeUNBgsAAAAACpEykq296IxdhZPgjl1gNAP1scs"
-                  onChange={setCaptchaValue}
+                  siteKey={TURNSTILE_SITE_KEY}
+                  onSuccess={setCaptchaValue}
+                  onError={() => setCaptchaValue(null)}
+                  onExpire={() => setCaptchaValue(null)}
                 />
               </div>
 

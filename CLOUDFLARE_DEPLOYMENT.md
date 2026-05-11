@@ -9,7 +9,8 @@ This project runs entirely on Cloudflare Pages:
 
 1. A Cloudflare account with Pages enabled
 2. A Resend account with `balustrading.co.nz` verified as a sending domain
-3. A Google reCAPTCHA v2 site/secret key pair, with the production domain whitelisted
+3. A Cloudflare Turnstile widget configured for your production hostname
+   (Dashboard → Turnstile → Add site)
 
 ## Architecture Overview
 
@@ -23,7 +24,7 @@ This project runs entirely on Cloudflare Pages:
            ▼
 ┌─────────────────────┐
 │ Cloudflare Pages    │  <- functions/api/submit-contact-form.ts
-│     Function        │     (verifies reCAPTCHA, calls Resend)
+│     Function        │     (verifies Turnstile, calls Resend)
 └──────────┬──────────┘
            │
            │ POST https://api.resend.com/emails
@@ -59,18 +60,22 @@ Production and Preview** environments:
 | Variable | Type | Value |
 |---|---|---|
 | `RESEND_API_KEY` | Secret | Your Resend API key (`re_...`) |
-| `RECAPTCHA_SECRET_KEY` | Secret | Your Google reCAPTCHA v2 secret key |
+| `TURNSTILE_SECRET_KEY` | Secret | Your Cloudflare Turnstile secret key (`0x...`) |
 
 These are server-only — they are bound to the Pages Function at request time
 and are never exposed to the browser bundle. No `VITE_*` env vars are required
 because the frontend posts to a same-origin path (`/api/submit-contact-form`).
 
-### 3. reCAPTCHA Site Key
+### 3. Turnstile Site Key
 
-The reCAPTCHA **site key** is hard-coded in `src/components/Contact.tsx` and
-`src/components/QuoteFormModal.tsx`. If you rotate keys, update those files
-and ensure your production domain is whitelisted in the
-[reCAPTCHA admin console](https://www.google.com/recaptcha/admin).
+The Turnstile **site key** is hard-coded as `TURNSTILE_SITE_KEY` in
+`src/components/Contact.tsx` and `src/components/QuoteFormModal.tsx`. By
+default it is set to Cloudflare's "always passes" test key
+(`1x00000000000000000000AA`) so local development works out of the box.
+
+**Before going to production**, replace it in both files with the real site
+key from your Turnstile widget, and set the matching `TURNSTILE_SECRET_KEY`
+in Cloudflare Pages. Site keys are public — safe to commit.
 
 ### 4. Deploy
 
@@ -120,7 +125,7 @@ Handles contact form submissions:
   "phone": "09 123 4567",
   "email": "john@example.com",
   "message": "I'd like a quote...",
-  "captchaToken": "03...",
+  "captchaToken": "<turnstile token>",
   "photo": {
     "content": "base64-encoded-image",
     "filename": "project.jpg",
@@ -131,7 +136,7 @@ Handles contact form submissions:
 
 **Responses:**
 - `200 { success: true }` — email queued with Resend
-- `400 { error: "..." }` — invalid body or CAPTCHA failed
+- `400 { error: "..." }` — invalid body or Turnstile verification failed
 - `502 { error: "Failed to send email" }` — Resend rejected the request
 
 ## Local Development
@@ -151,7 +156,7 @@ Then set the secrets locally:
 
 ```bash
 npx wrangler pages secret put RESEND_API_KEY
-npx wrangler pages secret put RECAPTCHA_SECRET_KEY
+npx wrangler pages secret put TURNSTILE_SECRET_KEY
 ```
 
 ## Email Configuration
@@ -168,15 +173,17 @@ push — Cloudflare Pages will redeploy automatically.
 
 ### Contact form not working
 - Check the browser network tab — `/api/submit-contact-form` should return 200
-- Confirm `RESEND_API_KEY` and `RECAPTCHA_SECRET_KEY` are set in Cloudflare Pages
+- Confirm `RESEND_API_KEY` and `TURNSTILE_SECRET_KEY` are set in Cloudflare Pages
 - Check **Workers & Pages → your project → Functions → Logs** in Cloudflare for
   runtime errors
 - Verify `balustrading.co.nz` is a verified sending domain in Resend
 
 ### CAPTCHA verification failed
-- The reCAPTCHA site key in `Contact.tsx` / `QuoteFormModal.tsx` must match the
-  secret in `RECAPTCHA_SECRET_KEY`
-- The production domain must be whitelisted in the reCAPTCHA admin console
+- The Turnstile site key (`TURNSTILE_SITE_KEY` in `Contact.tsx` and
+  `QuoteFormModal.tsx`) must match the secret set as `TURNSTILE_SECRET_KEY`
+  in Cloudflare Pages
+- The production hostname must be listed on the Turnstile widget in the
+  Cloudflare dashboard
 
 ### Build failures
 - Check build logs in the Cloudflare Pages dashboard

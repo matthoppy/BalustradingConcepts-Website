@@ -3,10 +3,10 @@ import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import QuoteFormModal from "./QuoteFormModal";
 
-// Mock ReCAPTCHA
-vi.mock("react-google-recaptcha", () => ({
-  default: vi.fn(({ onChange }: { onChange: (token: string) => void }) => (
-    <button data-testid="mock-recaptcha" onClick={() => onChange("test-token")}>
+// Mock Cloudflare Turnstile
+vi.mock("@marsidev/react-turnstile", () => ({
+  Turnstile: vi.fn(({ onSuccess }: { onSuccess: (token: string) => void }) => (
+    <button data-testid="mock-turnstile" onClick={() => onSuccess("test-token")}>
       Complete CAPTCHA
     </button>
   )),
@@ -133,9 +133,9 @@ describe("QuoteFormModal", () => {
       expect(options[2]).toHaveTextContent("No, balustrading is NOT preventing a fall");
     });
 
-    it("renders ReCAPTCHA", () => {
+    it("renders Turnstile", () => {
       renderModal();
-      expect(screen.getByTestId("mock-recaptcha")).toBeInTheDocument();
+      expect(screen.getByTestId("mock-turnstile")).toBeInTheDocument();
     });
 
     it("renders submit button", () => {
@@ -177,7 +177,7 @@ describe("QuoteFormModal", () => {
       const user = userEvent.setup();
 
       // Complete CAPTCHA first
-      await user.click(screen.getByTestId("mock-recaptcha"));
+      await user.click(screen.getByTestId("mock-turnstile"));
 
       // Fill all fields
       await user.type(screen.getByLabelText(/company name/i), "Test Co");
@@ -231,7 +231,7 @@ describe("QuoteFormModal", () => {
       const user = userEvent.setup();
 
       // Complete CAPTCHA
-      await user.click(screen.getByTestId("mock-recaptcha"));
+      await user.click(screen.getByTestId("mock-turnstile"));
 
       // Fill only required fields
       await user.type(screen.getByLabelText(/your name/i), "Jane Doe");

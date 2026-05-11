@@ -1,6 +1,6 @@
 interface Env {
   RESEND_API_KEY: string;
-  RECAPTCHA_SECRET_KEY: string;
+  TURNSTILE_SECRET_KEY: string;
 }
 
 interface EventContext<E> {
@@ -50,16 +50,16 @@ export const onRequestPost = async ({ request, env }: EventContext<Env>) => {
     return jsonResponse(400, { error: "Missing required fields" });
   }
 
-  const recaptchaResponse = await fetch(
-    "https://www.google.com/recaptcha/api/siteverify",
+  const turnstileResponse = await fetch(
+    "https://challenges.cloudflare.com/turnstile/v0/siteverify",
     {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: `secret=${encodeURIComponent(env.RECAPTCHA_SECRET_KEY)}&response=${encodeURIComponent(captchaToken)}`,
+      body: `secret=${encodeURIComponent(env.TURNSTILE_SECRET_KEY)}&response=${encodeURIComponent(captchaToken)}`,
     },
   );
-  const recaptchaData = (await recaptchaResponse.json()) as { success: boolean };
-  if (!recaptchaData.success) {
+  const turnstileData = (await turnstileResponse.json()) as { success: boolean };
+  if (!turnstileData.success) {
     return jsonResponse(400, { error: "CAPTCHA verification failed" });
   }
 

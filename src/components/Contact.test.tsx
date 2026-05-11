@@ -3,10 +3,10 @@ import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import Contact from "./Contact";
 
-// Mock ReCAPTCHA
-vi.mock("react-google-recaptcha", () => ({
-  default: vi.fn(({ onChange }: { onChange: (token: string) => void }) => (
-    <button data-testid="mock-recaptcha" onClick={() => onChange("test-token")}>
+// Mock Cloudflare Turnstile
+vi.mock("@marsidev/react-turnstile", () => ({
+  Turnstile: vi.fn(({ onSuccess }: { onSuccess: (token: string) => void }) => (
+    <button data-testid="mock-turnstile" onClick={() => onSuccess("test-token")}>
       Complete CAPTCHA
     </button>
   )),
@@ -126,7 +126,7 @@ describe("Contact (Quote Form)", () => {
       render(<Contact />);
       const user = userEvent.setup();
 
-      await user.click(screen.getByTestId("mock-recaptcha"));
+      await user.click(screen.getByTestId("mock-turnstile"));
 
       await user.type(screen.getByLabelText(/company name/i), "Test Co");
       await user.type(screen.getByLabelText(/your name/i), "John Doe");
