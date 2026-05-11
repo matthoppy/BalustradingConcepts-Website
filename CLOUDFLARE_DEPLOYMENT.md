@@ -1,16 +1,15 @@
 # Cloudflare Pages Deployment Guide
 
-This project uses a hybrid architecture:
-- **Frontend**: Hosted on Cloudflare Pages (static React app)
-- **Backend API**: Supabase Edge Functions
-- **Email**: Resend
+This project runs entirely on Cloudflare Pages:
+- **Frontend**: Static React app served from Cloudflare Pages
+- **Backend API**: Cloudflare Pages Function at `functions/api/submit-contact-form.ts`
+- **Email**: Resend (called server-side from the Pages Function)
 
 ## Prerequisites
 
-1. A Cloudflare account for hosting the frontend
-2. An existing Supabase project (already configured)
-3. Resend API key configured in Supabase Edge Function secrets
-4. Google reCAPTCHA v3 configured in Supabase Edge Function secrets
+1. A Cloudflare account with Pages enabled
+2. A Resend account with `balustrading.co.nz` verified as a sending domain
+3. A Google reCAPTCHA v2 site/secret key pair, with the production domain whitelisted
 
 ## Architecture Overview
 
@@ -20,19 +19,17 @@ This project uses a hybrid architecture:
 │   (Frontend Host)   │
 └──────────┬──────────┘
            │
-           │ API calls to
-           │ /functions/v1/submit-contact-form
+           │ POST /api/submit-contact-form
            ▼
 ┌─────────────────────┐
-│ Supabase Edge Func  │  <- Backend API
-│   (Deno Runtime)    │
+│ Cloudflare Pages    │  <- functions/api/submit-contact-form.ts
+│     Function        │     (verifies reCAPTCHA, calls Resend)
 └──────────┬──────────┘
            │
-           │ Sends emails via
+           │ POST https://api.resend.com/emails
            ▼
 ┌─────────────────────┐
-│      Resend         │  <- Email service
-│   (Email Delivery)  │
+│      Resend         │  <- Email delivery
 └─────────────────────┘
 ```
 
@@ -42,94 +39,81 @@ This project uses a hybrid architecture:
 
 1. Log in to your [Cloudflare Dashboard](https://dash.cloudflare.com)
 2. Navigate to **Pages**
-3. Click **Create a project**
-4. Select **Connect to Git**
-5. Choose your repository (matthoppy/BalustradingConcepts-Website)
-6. Configure the build settings:
+3. Click **Create a project** → **Connect to Git**
+4. Choose your repository (`matthoppy/BalustradingConcepts-Website`)
+5. Configure the build settings:
    - **Framework preset**: Vite
    - **Build command**: `npm run build`
    - **Build output directory**: `dist`
    - **Root directory**: `/` (leave default)
    - **Node.js version**: 18 or later
 
-### 2. Configure Environment Variables in Cloudflare Pages
+Cloudflare Pages automatically detects and deploys the `functions/` directory
+alongside the static build — no separate configuration is needed.
 
-In the Cloudflare Pages project settings, add the following environment variables for **both Production and Preview**:
+### 2. Configure Secrets in Cloudflare Pages
 
-```
-VITE_SUPABASE_PROJECT_ID=zbvlkuhpxpbyafpbkaxt
-VITE_SUPABASE_PUBLISHABLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpidmxrdWhweHBieWFmcGJrYXh0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM2Nzk2MzQsImV4cCI6MjA3OTI1NTYzNH0.raL8581wh4qPqP0GYcK7C_4tBSqAsWGXaVrB11SBuvk
-VITE_SUPABASE_URL=https://zbvlkuhpxpbyafpbkaxt.supabase.co
-```
+In **Settings → Environment variables / Secrets**, add the following for **both
+Production and Preview** environments:
 
-**Note:** These are public keys and are safe to expose in the frontend. The actual secrets (RESEND_API_KEY, RECAPTCHA_SECRET_KEY) are configured in Supabase, not in Cloudflare Pages.
+| Variable | Type | Value |
+|---|---|---|
+| `RESEND_API_KEY` | Secret | Your Resend API key (`re_...`) |
+| `RECAPTCHA_SECRET_KEY` | Secret | Your Google reCAPTCHA v2 secret key |
 
-### 3. Verify Supabase Edge Function Configuration
+These are server-only — they are bound to the Pages Function at request time
+and are never exposed to the browser bundle. No `VITE_*` env vars are required
+because the frontend posts to a same-origin path (`/api/submit-contact-form`).
 
-Your Supabase Edge Function should already be deployed. Verify it's working:
+### 3. reCAPTCHA Site Key
 
-1. Go to your [Supabase Dashboard](https://supabase.com/dashboard/project/zbvlkuhpxpbyafpbkaxt)
-2. Navigate to **Edge Functions**
-3. Verify `submit-contact-form` is deployed
-4. Check that the following secrets are configured:
-   - `RESEND_API_KEY`: Your Resend API key
-   - `RECAPTCHA_SECRET_KEY`: Your Google reCAPTCHA v3 secret key
-
-If you need to update secrets:
-```bash
-supabase secrets set RESEND_API_KEY=re_xxxxx
-supabase secrets set RECAPTCHA_SECRET_KEY=6LeXXXXXXXXXX
-```
+The reCAPTCHA **site key** is hard-coded in `src/components/Contact.tsx` and
+`src/components/QuoteFormModal.tsx`. If you rotate keys, update those files
+and ensure your production domain is whitelisted in the
+[reCAPTCHA admin console](https://www.google.com/recaptcha/admin).
 
 ### 4. Deploy
 
-Once configured, Cloudflare Pages will automatically:
-- Build your project on every push to your main branch
-- Deploy the static frontend to a Cloudflare Pages URL
+Cloudflare Pages will automatically:
+- Build the project on every push
+- Deploy the static frontend
+- Deploy the Pages Function under `/api/*`
 - Create preview deployments for pull requests
-
-The frontend will make API calls to your existing Supabase Edge Function endpoint.
 
 ### 5. Configure Custom Domain (Optional)
 
 1. In your Cloudflare Pages project, go to **Custom domains**
-2. Add your custom domain (e.g., `balustrading.co.nz`)
-3. Follow the instructions to update your DNS records
-4. Ensure HTTPS is enabled (automatic with Cloudflare)
+2. Add your custom domain (e.g. `balustrading.co.nz`)
+3. Follow the DNS instructions
+4. HTTPS is enabled automatically
 
 ## Project Structure
 
 ```
 /
-├── supabase/               # Supabase configuration
-│   ├── functions/          # Edge Functions (backend API)
-│   │   └── submit-contact-form/
-│   │       └── index.ts    # Contact form handler with Resend
-│   └── config.toml         # Supabase project config
-├── src/                    # React application (frontend)
-│   ├── components/         # React components
-│   │   └── Contact.tsx     # Contact form (calls Supabase function)
-│   ├── integrations/
-│   │   └── supabase/       # Supabase client setup
-│   └── pages/              # Route pages
-├── dist/                   # Build output (generated)
-├── wrangler.toml          # Cloudflare Pages configuration
-├── .env                   # Local environment variables
-└── package.json           # Dependencies and scripts
+├── functions/
+│   └── api/
+│       └── submit-contact-form.ts   # Pages Function: reCAPTCHA + Resend
+├── src/                              # React application (frontend)
+│   ├── components/
+│   │   ├── Contact.tsx               # Inline contact form
+│   │   └── QuoteFormModal.tsx        # Modal version of the same form
+│   └── pages/                        # Route pages
+├── dist/                             # Build output (generated)
+├── wrangler.toml                     # Cloudflare Pages config
+└── package.json
 ```
 
-## API Endpoints
+## API Endpoint
 
-The frontend calls the Supabase Edge Function:
+### POST /api/submit-contact-form
 
-### POST {VITE_SUPABASE_URL}/functions/v1/submit-contact-form
+Handles contact form submissions:
+- Server-side reCAPTCHA verification against Google
+- Email delivery via the Resend REST API
+- Optional photo attachment (base64-encoded)
 
-Handles contact form submissions with:
-- reCAPTCHA verification (server-side)
-- Email sending via Resend
-- File attachment support (up to 5MB images)
-
-**Request Body:**
+**Request body:**
 ```json
 {
   "name": "John Doe",
@@ -145,101 +129,56 @@ Handles contact form submissions with:
 }
 ```
 
+**Responses:**
+- `200 { success: true }` — email queued with Resend
+- `400 { error: "..." }` — invalid body or CAPTCHA failed
+- `502 { error: "Failed to send email" }` — Resend rejected the request
+
 ## Local Development
 
-### Frontend Development
+1. Install dependencies: `npm install`
+2. Start the dev server: `npm run dev` → http://localhost:8080
 
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
+`npm run dev` serves only the static frontend. To test the Pages Function
+locally, run the frontend behind Wrangler:
 
-2. Start the development server:
-   ```bash
-   npm run dev
-   ```
+```bash
+npm run build
+npx wrangler pages dev dist --compatibility-date=2024-01-01
+```
 
-3. Open http://localhost:8080
+Then set the secrets locally:
 
-The local frontend will connect to your live Supabase Edge Function.
-
-### Testing Supabase Edge Functions Locally
-
-If you need to test the Edge Function locally:
-
-1. Install Supabase CLI:
-   ```bash
-   brew install supabase/tap/supabase  # macOS
-   # or download from https://github.com/supabase/cli
-   ```
-
-2. Start Supabase locally:
-   ```bash
-   supabase start
-   supabase functions serve
-   ```
-
-3. Update your `.env` to point to local Supabase:
-   ```
-   VITE_SUPABASE_URL=http://localhost:54321
-   ```
+```bash
+npx wrangler pages secret put RESEND_API_KEY
+npx wrangler pages secret put RECAPTCHA_SECRET_KEY
+```
 
 ## Email Configuration
 
-Emails are sent via Resend from the Supabase Edge Function:
+Emails are sent via Resend from the Pages Function:
 - **From**: `Balustrading Concepts NZ <noreply@balustrading.co.nz>`
 - **To**: `admin@balustrading.co.nz`
 - **Subject**: `New Quote Request from [Name]`
 
-To change these settings, edit `supabase/functions/submit-contact-form/index.ts` and redeploy:
-```bash
-supabase functions deploy submit-contact-form
-```
-
-## Benefits of This Architecture
-
-1. **Fast Static Hosting**: Cloudflare Pages provides global CDN distribution for fast page loads
-2. **Serverless Backend**: Supabase Edge Functions handle API logic without managing servers
-3. **Cost Effective**: Both services have generous free tiers
-4. **Easy Updates**: Push to Git → Cloudflare auto-deploys frontend
-5. **Secure**: Secrets stored in Supabase, not exposed in frontend
-6. **Reliable Emails**: Resend provides high deliverability
+To change these settings, edit `functions/api/submit-contact-form.ts` and
+push — Cloudflare Pages will redeploy automatically.
 
 ## Troubleshooting
 
 ### Contact form not working
-- Check that Supabase Edge Function is deployed and running
-- Verify environment variables in Cloudflare Pages dashboard
-- Check Supabase Edge Function logs for errors
-- Ensure RESEND_API_KEY and RECAPTCHA_SECRET_KEY are set in Supabase secrets
+- Check the browser network tab — `/api/submit-contact-form` should return 200
+- Confirm `RESEND_API_KEY` and `RECAPTCHA_SECRET_KEY` are set in Cloudflare Pages
+- Check **Workers & Pages → your project → Functions → Logs** in Cloudflare for
+  runtime errors
+- Verify `balustrading.co.nz` is a verified sending domain in Resend
 
-### CORS errors
-- Verify the Edge Function has proper CORS headers (it should already)
-- Check that VITE_SUPABASE_URL is correctly set in Cloudflare Pages
-
-### reCAPTCHA errors
-- Verify the reCAPTCHA site key in `Contact.tsx` (line 292) matches your domain
-- Check that RECAPTCHA_SECRET_KEY is set in Supabase Edge Function secrets
-- Ensure your domain is registered in the reCAPTCHA admin console
+### CAPTCHA verification failed
+- The reCAPTCHA site key in `Contact.tsx` / `QuoteFormModal.tsx` must match the
+  secret in `RECAPTCHA_SECRET_KEY`
+- The production domain must be whitelisted in the reCAPTCHA admin console
 
 ### Build failures
-- Check build logs in Cloudflare Pages dashboard
-- Ensure all dependencies are listed in `package.json`
-- Verify Node.js version is 18 or later
-
-## Migration from Lovable
-
-This project has been migrated from Lovable to be self-hosted on Cloudflare Pages:
-- ✅ Removed Lovable-specific dependencies (`lovable-tagger`)
-- ✅ Static frontend now deploys to Cloudflare Pages
-- ✅ Backend API remains on Supabase Edge Functions
-- ✅ Resend integration unchanged
-- ✅ Full Git-based deployment workflow
-
-## Support
-
-For issues with:
-- **Cloudflare Pages**: https://developers.cloudflare.com/pages/
-- **Supabase**: https://supabase.com/docs
-- **Resend**: https://resend.com/docs
-- **reCAPTCHA**: https://developers.google.com/recaptcha/docs/v3
+- Check build logs in the Cloudflare Pages dashboard
+- Ensure Node.js version is 18 or later
+- Confirm `package.json` and `package-lock.json` are in sync

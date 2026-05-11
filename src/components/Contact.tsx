@@ -61,24 +61,21 @@ Other Notes: ${data.otherNotes || 'N/A'}
     `.trim();
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/submit-contact-form`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: data.name,
-            phone: data.phone,
-            email: data.email,
-            message: message,
-            captchaToken: captchaValue,
-          }),
-        }
-      );
+      const response = await fetch('/api/submit-contact-form', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: data.name,
+          phone: data.phone,
+          email: data.email,
+          message: message,
+          captchaToken: captchaValue,
+        }),
+      });
 
-      let result: unknown = null;
+      let result: { error?: string } | null = null;
       try {
         result = await response.json();
       } catch {
@@ -87,6 +84,14 @@ Other Notes: ${data.otherNotes || 'N/A'}
 
       if (!response.ok) {
         console.error('Form submit response not OK:', result || response.statusText);
+        toast({
+          title: "Couldn't send your request",
+          description: result?.error || "Please try again, or call us directly.",
+          variant: "destructive",
+        });
+        setCaptchaValue(null);
+        recaptchaRef.current?.reset();
+        return;
       }
 
       toast({
@@ -94,12 +99,16 @@ Other Notes: ${data.otherNotes || 'N/A'}
         description: "We'll get back to you soon.",
       });
 
-      // Reset form and CAPTCHA
       formRef.current?.reset();
       setCaptchaValue(null);
       recaptchaRef.current?.reset();
     } catch (error) {
       console.error('Form submission error:', error);
+      toast({
+        title: "Couldn't send your request",
+        description: "Please check your connection and try again.",
+        variant: "destructive",
+      });
       setCaptchaValue(null);
       recaptchaRef.current?.reset();
     }
