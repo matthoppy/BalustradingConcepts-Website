@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { useToast } from "./ui/use-toast";
 
-const TURNSTILE_SITE_KEY = "1x00000000000000000000AA";
+const TURNSTILE_SITE_KEY = "0x4AAAAAADOAJJhmHWvuf7PX";
 
 const Contact = () => {
   const [captchaValue, setCaptchaValue] = useState<string | null>(null);
