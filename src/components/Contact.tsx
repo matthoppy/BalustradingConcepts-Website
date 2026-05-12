@@ -172,13 +172,21 @@ Other Notes: ${data.otherNotes || 'N/A'}
                     </p>
                   </div>
                 </div>
+
+                <iframe
+                  title="Map of 661a Rosebank Road, Auckland"
+                  src="https://www.google.com/maps?q=661a+Rosebank+Road,+Avondale,+Auckland,+New+Zealand&output=embed"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="hidden md:block w-full h-64 border-0"
+                />
               </div>
             </div>
 
             <div className="bg-secondary p-8">
               <h4 className="text-xl font-bold text-foreground mb-4">Office Hours</h4>
               <div className="space-y-2 text-muted-foreground">
-                <p><span className="font-semibold text-foreground">Monday - Friday:</span> 7:00 AM - 1:00 PM</p>
+                <p><span className="font-semibold text-foreground">Monday - Friday:</span> 7:00 AM - 1:30 PM</p>
                 <p><span className="font-semibold text-foreground">Weekends:</span> Closed</p>
               </div>
             </div>
