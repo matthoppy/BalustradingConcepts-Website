@@ -172,6 +172,14 @@ Other Notes: ${data.otherNotes || 'N/A'}
                     </p>
                   </div>
                 </div>
+
+                <iframe
+                  title="Map of 661a Rosebank Road, Auckland"
+                  src="https://www.google.com/maps?q=661a+Rosebank+Road,+Avondale,+Auckland,+New+Zealand&output=embed"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="w-full h-64 border-0"
+                />
               </div>
             </div>
 
