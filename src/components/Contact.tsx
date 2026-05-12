@@ -178,7 +178,7 @@ Other Notes: ${data.otherNotes || 'N/A'}
                   src="https://www.google.com/maps?q=661a+Rosebank+Road,+Avondale,+Auckland,+New+Zealand&output=embed"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  className="w-full h-64 border-0"
+                  className="hidden md:block w-full h-64 border-0"
                 />
               </div>
             </div>
