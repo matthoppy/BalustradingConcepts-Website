@@ -7,7 +7,7 @@ import FixedContactButtons from "@/components/FixedContactButtons";
 import HeatPumpQuoteForm from "@/components/HeatPumpQuoteForm";
 import HeatPumpCoverConfigurator from "@/components/HeatPumpCoverConfigurator";
 import { sizesByStyle, sizeLabel } from "@/data/heatPumpCovers";
-import heroImage from "@/assets/heatpump-cover-hero.png";
+import heroImage from "@/assets/heatpump-cover-hero.jpg";
 
 const HeatPumpCovers = () => {
   useEffect(() => {
