@@ -192,9 +192,7 @@ const HeatPumpCoverConfigurator = ({
             including pipework and mounting blocks
           </p>
           <p className="text-muted-foreground text-xs">
-            {style.sizesConfirmed
-              ? "Custom sizes also available on request."
-              : `Indicative sizes for ${style.name} — exact dimensions confirmed at quote stage. Custom sizes available.`}
+            Custom sizes also available on request.
           </p>
         </div>
         <div className="mt-6">
