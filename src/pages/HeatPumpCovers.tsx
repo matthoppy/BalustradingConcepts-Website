@@ -7,7 +7,7 @@ import FixedContactButtons from "@/components/FixedContactButtons";
 import HeatPumpQuoteForm from "@/components/HeatPumpQuoteForm";
 import HeatPumpCoverConfigurator from "@/components/HeatPumpCoverConfigurator";
 import { sizesByStyle, sizeLabel } from "@/data/heatPumpCovers";
-import heroImage from "@/assets/hero-balustrading.jpg";
+import heroImage from "@/assets/heatpump-cover-hero.png";
 
 const HeatPumpCovers = () => {
   useEffect(() => {
@@ -20,7 +20,6 @@ const HeatPumpCovers = () => {
   const sizes = sizesByStyle[selectedStyle];
   const selectedSize = sizes[Math.min(selectedSizeIndex, sizes.length - 1)];
 
-  // TODO: swap the placeholder hero/style imagery for real heat pump cover photos.
   const features = [
     "Architectural-grade aluminium — strong, durable and non-rusting",
     "Designed and manufactured in New Zealand",
