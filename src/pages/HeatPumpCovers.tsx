@@ -1,16 +1,24 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import FixedContactButtons from "@/components/FixedContactButtons";
 import HeatPumpQuoteForm from "@/components/HeatPumpQuoteForm";
+import HeatPumpCoverConfigurator from "@/components/HeatPumpCoverConfigurator";
+import { sizesByStyle, sizeLabel } from "@/data/heatPumpCovers";
 import heroImage from "@/assets/hero-balustrading.jpg";
 
 const HeatPumpCovers = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const [selectedStyle, setSelectedStyle] = useState("Asko");
+  const [selectedSizeIndex, setSelectedSizeIndex] = useState(0);
+
+  const sizes = sizesByStyle[selectedStyle];
+  const selectedSize = sizes[Math.min(selectedSizeIndex, sizes.length - 1)];
 
   // TODO: swap the placeholder hero/style imagery for real heat pump cover photos.
   const features = [
@@ -22,27 +30,6 @@ const HeatPumpCovers = () => {
     "Flat-packed for easy on-site assembly and installation",
     "Conceals your unit while allowing the airflow it needs to run efficiently",
     "Suitable for residential, commercial and educational settings",
-  ];
-
-  const styles = [
-    {
-      name: "Asko",
-      tagline: "Great value",
-      description:
-        "A high-functioning aluminium cover offering excellent value — ideal for those wanting tidy, effective concealment without compromising on quality.",
-    },
-    {
-      name: "Chatham",
-      tagline: "Premium & minimal",
-      description:
-        "A premium look with minimal visibility, ideal for modern spaces where sleek, understated design matters. Selected non-standard sizes available.",
-    },
-    {
-      name: "Futuna",
-      tagline: "Maximum security",
-      description:
-        "Maximum security with a no-toehold design, ideal for balconies or areas with children where safety is the priority. Selected non-standard sizes available.",
-    },
   ];
 
   return (
@@ -129,27 +116,28 @@ const HeatPumpCovers = () => {
           </div>
         </section>
 
-        {/* Styles Section */}
+        {/* Interactive Configurator Section */}
         <section id="styles" className="py-16 bg-secondary">
           <div className="container mx-auto px-6">
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 uppercase">
-                Choose Your Style
+                Build Your Cover
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Three contemporary designs to suit your home, your space and your needs
+                Pick a style and size to see your cover and its dimensions — your selection carries through
+                to the quote form below
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-              {styles.map((style) => (
-                <div key={style.name} className="bg-card p-8 border border-border h-full flex flex-col">
-                  <h3 className="text-2xl font-bold text-card-foreground mb-1">{style.name}</h3>
-                  <p className="text-primary font-medium mb-4">{style.tagline}</p>
-                  <p className="text-muted-foreground leading-relaxed flex-grow">{style.description}</p>
-                </div>
-              ))}
-            </div>
+            <HeatPumpCoverConfigurator
+              selectedStyle={selectedStyle}
+              selectedSizeIndex={selectedSizeIndex}
+              onStyleChange={(style) => {
+                setSelectedStyle(style);
+                setSelectedSizeIndex((i) => Math.min(i, sizesByStyle[style].length - 1));
+              }}
+              onSizeChange={setSelectedSizeIndex}
+            />
           </div>
         </section>
 
@@ -224,7 +212,10 @@ const HeatPumpCovers = () => {
                 </p>
               </div>
               <div className="bg-card p-6 sm:p-8 border border-border">
-                <HeatPumpQuoteForm />
+                <HeatPumpQuoteForm
+                  selectedStyle={selectedStyle}
+                  selectedSizeLabel={sizeLabel(selectedStyle, selectedSize)}
+                />
               </div>
             </div>
           </div>

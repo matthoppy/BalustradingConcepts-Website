@@ -1,12 +1,27 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { useToast } from "./ui/use-toast";
 
 const TURNSTILE_SITE_KEY = "0x4AAAAAADOAJJhmHWvuf7PX";
 
-const HeatPumpQuoteForm = () => {
+interface HeatPumpQuoteFormProps {
+  selectedStyle?: string;
+  selectedSizeLabel?: string;
+}
+
+const HeatPumpQuoteForm = ({ selectedStyle, selectedSizeLabel }: HeatPumpQuoteFormProps) => {
   const [captchaValue, setCaptchaValue] = useState<string | null>(null);
+  const [style, setStyle] = useState(selectedStyle ?? "");
+  const [knownSize, setKnownSize] = useState(selectedSizeLabel ?? "");
+
+  // Keep the form in sync with the configurator selection above
+  useEffect(() => {
+    if (selectedStyle) setStyle(selectedStyle);
+  }, [selectedStyle]);
+  useEffect(() => {
+    if (selectedSizeLabel) setKnownSize(selectedSizeLabel);
+  }, [selectedSizeLabel]);
   const turnstileRef = useRef<TurnstileInstance>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const { toast } = useToast();
@@ -151,7 +166,14 @@ Other Notes: ${data.otherNotes || "N/A"}
           <label htmlFor="hp-style" className="block text-sm font-medium text-foreground mb-1">
             Cover Style <span className="text-red-500">*</span>
           </label>
-          <select id="hp-style" name="style" required className={inputClass} defaultValue="">
+          <select
+            id="hp-style"
+            name="style"
+            required
+            className={inputClass}
+            value={style}
+            onChange={(e) => setStyle(e.target.value)}
+          >
             <option value="" disabled>
               Select a style
             </option>
@@ -221,14 +243,16 @@ Other Notes: ${data.otherNotes || "N/A"}
 
       <div>
         <label htmlFor="hp-known-size" className="block text-sm font-medium text-foreground mb-1">
-          Known cover size (optional)
+          Selected cover size
         </label>
         <input
           type="text"
           id="hp-known-size"
           name="knownSize"
           className={inputClass}
-          placeholder="If you already know the standard/custom size you need"
+          value={knownSize}
+          onChange={(e) => setKnownSize(e.target.value)}
+          placeholder="Pick a style and size above, or type the size you need"
         />
       </div>
 
