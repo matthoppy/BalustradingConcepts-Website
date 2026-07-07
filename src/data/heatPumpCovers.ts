@@ -125,3 +125,25 @@ export const sizesByStyle: Record<string, CoverSize[]> = {
 
 export const sizeLabel = (styleName: string, size: CoverSize) =>
   `${styleName} ${size.name} (${size.code}) — ${size.width} x ${size.depth} x ${size.height} mm`;
+
+// Representative Dulux powdercoat colours (hex values indicative only —
+// final colour confirmed from physical swatches at quote stage).
+export interface PowdercoatColour {
+  name: string;
+  hex: string;
+}
+
+export const powdercoatColours: PowdercoatColour[] = [
+  { name: "Black", hex: "#1a1a1a" },
+  { name: "Ironsand", hex: "#3e3c38" },
+  { name: "Grey Friars", hex: "#4a4e54" },
+  { name: "Karaka", hex: "#2e352c" },
+  { name: "Lignite", hex: "#4d453a" },
+  { name: "Scoria", hex: "#5a3c38" },
+  { name: "New Denim Blue", hex: "#34455e" },
+  { name: "Sandstone Grey", hex: "#7d7365" },
+  { name: "Windsor Grey", hex: "#9a9a94" },
+  { name: "Desert Sand", hex: "#c5b8a0" },
+  { name: "Titania", hex: "#e8e3d5" },
+  { name: "White", hex: "#f5f5f0" },
+];

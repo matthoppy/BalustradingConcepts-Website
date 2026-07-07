@@ -8,12 +8,14 @@ const TURNSTILE_SITE_KEY = "0x4AAAAAADOAJJhmHWvuf7PX";
 interface HeatPumpQuoteFormProps {
   selectedStyle?: string;
   selectedSizeLabel?: string;
+  selectedColour?: string;
 }
 
-const HeatPumpQuoteForm = ({ selectedStyle, selectedSizeLabel }: HeatPumpQuoteFormProps) => {
+const HeatPumpQuoteForm = ({ selectedStyle, selectedSizeLabel, selectedColour }: HeatPumpQuoteFormProps) => {
   const [captchaValue, setCaptchaValue] = useState<string | null>(null);
   const [style, setStyle] = useState(selectedStyle ?? "");
   const [knownSize, setKnownSize] = useState(selectedSizeLabel ?? "");
+  const [colour, setColour] = useState(selectedColour ?? "");
 
   // Keep the form in sync with the configurator selection above
   useEffect(() => {
@@ -22,6 +24,9 @@ const HeatPumpQuoteForm = ({ selectedStyle, selectedSizeLabel }: HeatPumpQuoteFo
   useEffect(() => {
     if (selectedSizeLabel) setKnownSize(selectedSizeLabel);
   }, [selectedSizeLabel]);
+  useEffect(() => {
+    if (selectedColour) setColour(selectedColour);
+  }, [selectedColour]);
   const turnstileRef = useRef<TurnstileInstance>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const { toast } = useToast();
@@ -45,6 +50,7 @@ const HeatPumpQuoteForm = ({ selectedStyle, selectedSizeLabel }: HeatPumpQuoteFo
       email: formData.get("email") as string,
       style: formData.get("style") as string,
       colour: formData.get("colour") as string,
+      requirement: formData.get("requirement") as string,
       quantity: formData.get("quantity") as string,
       unitWidth: formData.get("unitWidth") as string,
       unitDepth: formData.get("unitDepth") as string,
@@ -65,6 +71,7 @@ Email: ${data.email}
 
 Style: ${data.style}
 Powdercoat Colour: ${data.colour || "N/A"}
+Requirement: ${data.requirement || "Standard size cover"}
 Quantity: ${data.quantity || "1"}
 
 Heat Pump Unit Dimensions (W x D x H):
@@ -192,17 +199,32 @@ Other Notes: ${data.otherNotes || "N/A"}
             id="hp-colour"
             name="colour"
             className={inputClass}
+            value={colour}
+            onChange={(e) => setColour(e.target.value)}
             placeholder="Dulux colour (25 standard options)"
           />
         </div>
       </div>
 
-      {/* Quantity */}
-      <div>
-        <label htmlFor="hp-quantity" className="block text-sm font-medium text-foreground mb-1">
-          Quantity
-        </label>
-        <input type="number" min="1" id="hp-quantity" name="quantity" className={inputClass} placeholder="1" />
+      {/* Requirement and Quantity */}
+      <div className="grid sm:grid-cols-2 gap-4">
+        <div>
+          <label htmlFor="hp-requirement" className="block text-sm font-medium text-foreground mb-1">
+            What do you need?
+          </label>
+          <select id="hp-requirement" name="requirement" className={inputClass} defaultValue="Standard size cover">
+            <option value="Standard size cover">Standard size cover</option>
+            <option value="Custom size or shape">Custom size or shape</option>
+            <option value="Multiple units / bank enclosure">Multiple units / bank enclosure</option>
+            <option value="Not sure">Not sure — please advise</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="hp-quantity" className="block text-sm font-medium text-foreground mb-1">
+            Quantity
+          </label>
+          <input type="number" min="1" id="hp-quantity" name="quantity" className={inputClass} placeholder="1" />
+        </div>
       </div>
 
       {/* Sizing */}
