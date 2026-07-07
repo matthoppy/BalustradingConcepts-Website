@@ -75,6 +75,17 @@ const CoverVisual = ({
   const dimLine = "stroke-muted-foreground";
   const dimText = "fill-muted-foreground text-[13px] font-medium";
 
+  // Depth dimension runs along the bottom angled edge of the side face,
+  // offset perpendicular (down-right) so it sits just outside the cover.
+  const edgeLen = Math.hypot(dx, dy);
+  const offX = (dy / edgeLen) * 14;
+  const offY = (dx / edgeLen) * 14;
+  const d1 = { x: baseX + w + offX, y: baseY + offY };
+  const d2 = { x: baseX + w + dx + offX, y: baseY - dy + offY };
+  const depthAngle = (-Math.atan2(dy, dx) * 180) / Math.PI;
+  const depthTextX = (d1.x + d2.x) / 2 + offX * 1.4;
+  const depthTextY = (d1.y + d2.y) / 2 + offY * 1.4 + 4;
+
   return (
     <svg
       viewBox="0 0 400 310"
@@ -134,8 +145,31 @@ const CoverVisual = ({
         H {size.height} mm
       </text>
 
-      {/* Depth dimension (along the top edge) */}
-      <text x={baseX + w + dx / 2 + 8} y={topY - dy - 8} textAnchor="middle" className={dimText}>
+      {/* Depth dimension (along the bottom angled edge) */}
+      <line x1={d1.x} y1={d1.y} x2={d2.x} y2={d2.y} className={dimLine} strokeWidth="1" />
+      <line
+        x1={d1.x - offX * 0.4}
+        y1={d1.y - offY * 0.4}
+        x2={d1.x + offX * 0.4}
+        y2={d1.y + offY * 0.4}
+        className={dimLine}
+        strokeWidth="1"
+      />
+      <line
+        x1={d2.x - offX * 0.4}
+        y1={d2.y - offY * 0.4}
+        x2={d2.x + offX * 0.4}
+        y2={d2.y + offY * 0.4}
+        className={dimLine}
+        strokeWidth="1"
+      />
+      <text
+        x={depthTextX}
+        y={depthTextY}
+        textAnchor="middle"
+        className={dimText}
+        transform={`rotate(${depthAngle}, ${depthTextX}, ${depthTextY})`}
+      >
         D {size.depth} mm
       </text>
     </svg>
