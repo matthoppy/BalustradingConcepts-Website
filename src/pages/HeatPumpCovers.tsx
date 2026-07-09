@@ -6,8 +6,17 @@ import Footer from "@/components/Footer";
 import FixedContactButtons from "@/components/FixedContactButtons";
 import HeatPumpQuoteForm from "@/components/HeatPumpQuoteForm";
 import HeatPumpCoverConfigurator from "@/components/HeatPumpCoverConfigurator";
-import { sizesByStyle, sizeLabel } from "@/data/heatPumpCovers";
+import { coverStyles, sizesByStyle, sizeLabel } from "@/data/heatPumpCovers";
 import heroImage from "@/assets/heatpump-cover-hero.jpg";
+import askoImage from "@/assets/asko-cover.jpg";
+import chathamImage from "@/assets/chatham-cover.jpg";
+import futunaImage from "@/assets/futuna-cover.jpg";
+
+const styleImages: Record<string, string> = {
+  Asko: askoImage,
+  Chatham: chathamImage,
+  Futuna: futunaImage,
+};
 
 const HeatPumpCovers = () => {
   useEffect(() => {
@@ -128,6 +137,47 @@ const HeatPumpCovers = () => {
                   </Button>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Style Photos */}
+        <section className="py-16 bg-background">
+          <div className="container mx-auto px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 uppercase">
+                Our Styles
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Three contemporary designs — tap a style to start building your cover
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+              {coverStyles.map((style) => (
+                <a
+                  key={style.name}
+                  href="#styles"
+                  onClick={() => setSelectedStyle(style.name)}
+                  className="group bg-card border border-border overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                >
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img
+                      src={styleImages[style.name]}
+                      alt={`${style.name} style aluminium heat pump cover`}
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold text-card-foreground mb-1 group-hover:text-primary transition-colors">
+                      {style.name}
+                    </h3>
+                    <p className="text-primary font-medium mb-2">{style.tagline}</p>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{style.description}</p>
+                  </div>
+                </a>
+              ))}
             </div>
           </div>
         </section>
