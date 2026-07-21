@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import FixedContactButtons from "@/components/FixedContactButtons";
 import HeatPumpQuoteForm from "@/components/HeatPumpQuoteForm";
 import HeatPumpCoverConfigurator from "@/components/HeatPumpCoverConfigurator";
+import Seo, { serviceJsonLd } from "@/components/Seo";
 import { coverStyles, sizesByStyle, sizeLabel } from "@/data/heatPumpCovers";
 import heroImage from "@/assets/heatpump-cover-hero.jpg";
 import askoImage from "@/assets/asko-cover.jpg";
@@ -52,6 +53,16 @@ const HeatPumpCovers = () => {
 
   return (
     <>
+      <Seo
+        title="Aluminium Heat Pump Covers Auckland | ScreenPro Range"
+        description="NZ-made aluminium heat pump covers in 3 styles and 6 sizes, plus fully custom builds. 25 Dulux colours, 10-year warranty. Supplied and installed across Auckland."
+        path="/heat-pump-covers"
+        jsonLd={serviceJsonLd(
+          "Aluminium Heat Pump Covers",
+          "ScreenPro aluminium heat pump cover supply, custom fabrication and installation across Auckland.",
+          "/heat-pump-covers"
+        )}
+      />
       <Navigation />
       <FixedContactButtons />
 

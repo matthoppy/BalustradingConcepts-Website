@@ -5,6 +5,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import FixedContactButtons from "@/components/FixedContactButtons";
 import Gallery from "@/components/Gallery";
+import Seo, { serviceJsonLd } from "@/components/Seo";
 import heroImage from "@/assets/hero-balustrading.jpg";
 
 const Balustrades = () => {
@@ -32,6 +33,16 @@ const Balustrades = () => {
 
   return (
     <>
+      <Seo
+        title="Glass & Aluminium Balustrades Auckland | Residential & Commercial"
+        description="Custom glass and aluminium balustrades for Auckland homes, decks, stairs and commercial buildings. Frameless systems, NZ Building Code compliant. Free quotes."
+        path="/balustrades"
+        jsonLd={serviceJsonLd(
+          "Glass & Aluminium Balustrading",
+          "Custom glass and aluminium balustrade design and installation for residential and commercial projects in Auckland.",
+          "/balustrades"
+        )}
+      />
       <Navigation />
       <FixedContactButtons />
 

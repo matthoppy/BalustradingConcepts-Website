@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import FixedContactButtons from "@/components/FixedContactButtons";
+import Seo from "@/components/Seo";
 
 const PrivacyPolicy = () => {
   useEffect(() => {
@@ -10,6 +11,11 @@ const PrivacyPolicy = () => {
 
   return (
     <>
+      <Seo
+        title="Privacy Policy | Balustrading Concepts NZ"
+        description="How Balustrading Concepts Limited collects, uses and protects your personal information under the Privacy Act 2020."
+        path="/privacy-policy"
+      />
       <Navigation />
       <FixedContactButtons />
       <main className="bg-background text-foreground">

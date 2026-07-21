@@ -48,16 +48,22 @@ const About = () => {
             <img
               src={aboutImage}
               alt="Quality glass balustrading craftsmanship"
+              loading="lazy"
+              decoding="async"
               className="w-full h-[280px] object-cover shadow-lg rounded-lg"
             />
             <img
               src={aboutImage3}
               alt="Modern glass balustrading installation"
+              loading="lazy"
+              decoding="async"
               className="w-full h-[280px] object-cover shadow-lg rounded-lg"
             />
             <img
               src={aboutImage2}
               alt="Aluminium deck balustrading installation example"
+              loading="lazy"
+              decoding="async"
               className="w-full h-[280px] object-cover shadow-lg rounded-lg"
             />
           </div>
