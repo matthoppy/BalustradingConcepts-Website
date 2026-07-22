@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import FixedContactButtons from "@/components/FixedContactButtons";
+import Seo from "@/components/Seo";
 
 const TermsOfTrade = () => {
   useEffect(() => {
@@ -10,6 +11,11 @@ const TermsOfTrade = () => {
 
   return (
     <>
+      <Seo
+        title="Terms & Conditions of Trade | Balustrading Concepts NZ"
+        description="Terms and conditions of trade for Balustrading Concepts Limited, Auckland."
+        path="/terms-of-trade"
+      />
       <Navigation />
       <FixedContactButtons />
       <main className="bg-background text-foreground">

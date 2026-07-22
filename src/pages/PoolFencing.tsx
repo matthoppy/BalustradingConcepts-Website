@@ -5,6 +5,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import FixedContactButtons from "@/components/FixedContactButtons";
 import Gallery from "@/components/Gallery";
+import Seo, { serviceJsonLd } from "@/components/Seo";
 import heroImage from "@/assets/pool-fencing-hero.jpg";
 
 const PoolFencing = () => {
@@ -23,6 +24,16 @@ const PoolFencing = () => {
 
   return (
     <>
+      <Seo
+        title="Glass Pool Fencing Auckland | NZBC F9 Compliant | Balustrading Concepts"
+        description="Frameless and semi-frameless glass pool fences for Auckland homes. NZBC F9 compliant with council sign-off documentation. Toughened safety glass. Free quotes."
+        path="/pool-fencing"
+        jsonLd={serviceJsonLd(
+          "Glass Pool Fencing",
+          "Compliant frameless and semi-frameless glass pool fencing design and installation across Auckland.",
+          "/pool-fencing"
+        )}
+      />
       <Navigation />
       <FixedContactButtons />
       

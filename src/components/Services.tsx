@@ -1,25 +1,25 @@
-import { Building2, Home, Wrench, Shield, Ruler, Waves } from "lucide-react";
+import { Fence, Fan, Wrench, Shield, Ruler, Waves } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Services = () => {
   const services = [
     {
-      icon: Home,
-      title: "Residential Balustrading",
-      description: "Custom glass balustrading solutions for homes, balconies, and staircases.",
-      link: "/residential-balustrading",
+      icon: Fence,
+      title: "Balustrades",
+      description: "Custom glass and aluminium balustrading for residential and commercial projects.",
+      link: "/balustrades",
     },
     {
       icon: Waves,
-      title: "Pool Fencing",
-      description: "Safety-compliant pool fencing solutions for residential and commercial properties.",
+      title: "Pool Fences",
+      description: "Safety-compliant glass pool fencing for residential and commercial properties.",
       link: "/pool-fencing",
     },
     {
-      icon: Building2,
-      title: "Commercial Projects",
-      description: "Large-scale installations for offices, shopping centers, and public spaces.",
-      link: "/commercial-projects",
+      icon: Fan,
+      title: "Heat Pump Covers",
+      description: "Premium aluminium covers that conceal and protect your heat pump or aircon unit in style.",
+      link: "/heat-pump-covers",
     },
     {
       icon: Ruler,

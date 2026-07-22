@@ -8,6 +8,7 @@ import Gallery from "@/components/Gallery";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import FixedContactButtons from "@/components/FixedContactButtons";
+import Seo from "@/components/Seo";
 
 const Index = () => {
   const location = useLocation();
@@ -26,6 +27,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      <Seo
+        title="Glass Balustrades Auckland | Balustrading Concepts NZ"
+        description="Auckland's glass balustrade, pool fence & heat pump cover specialists. Custom design, NZ Building Code compliant, professional installation. Free quotes — call 09 828 8858."
+        path="/"
+      />
       <Navigation />
       <Hero />
       <About />
