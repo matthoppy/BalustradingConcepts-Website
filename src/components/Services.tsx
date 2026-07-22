@@ -1,4 +1,4 @@
-import { Building2, Home, Wrench, Shield, Ruler, Waves } from "lucide-react";
+import { Building2, Home, Wrench, Shield, Ruler, Waves, Fan } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Services = () => {
@@ -20,6 +20,12 @@ const Services = () => {
       title: "Commercial Projects",
       description: "Large-scale installations for offices, shopping centers, and public spaces.",
       link: "/commercial-projects",
+    },
+    {
+      icon: Fan,
+      title: "Heat Pump Covers",
+      description: "Premium aluminium covers that conceal and protect your heat pump or aircon unit in style.",
+      link: "/heat-pump-covers",
     },
     {
       icon: Ruler,

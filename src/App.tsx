@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import ResidentialBalustrading from "./pages/ResidentialBalustrading";
 import PoolFencing from "./pages/PoolFencing";
 import CommercialProjects from "./pages/CommercialProjects";
+import HeatPumpCovers from "./pages/HeatPumpCovers";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfTrade from "./pages/TermsOfTrade";
 
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/residential-balustrading" element={<ResidentialBalustrading />} />
           <Route path="/pool-fencing" element={<PoolFencing />} />
           <Route path="/commercial-projects" element={<CommercialProjects />} />
+          <Route path="/heat-pump-covers" element={<HeatPumpCovers />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-trade" element={<TermsOfTrade />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
