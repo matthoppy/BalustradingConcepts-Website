@@ -1,0 +1,3 @@
+# Server-side 301s for retired service URLs (Cloudflare Pages)
+/residential-balustrading /balustrades 301
+/commercial-projects /balustrades 301

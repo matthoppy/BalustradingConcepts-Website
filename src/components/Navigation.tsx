@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, ChevronDown, Home, Waves, Building2, Fan } from "lucide-react";
+import { Menu, X, ChevronDown, Fence, Waves, Fan } from "lucide-react";
 import { Button } from "./ui/button";
 import logo from "@/assets/logo.png";
 import { Link } from "react-router-dom";
@@ -27,9 +27,8 @@ const Navigation = () => {
   ];
 
   const serviceItems = [
-    { label: "Residential Balustrading", href: "/residential-balustrading", icon: Home },
-    { label: "Pool Fencing", href: "/pool-fencing", icon: Waves },
-    { label: "Commercial Projects", href: "/commercial-projects", icon: Building2 },
+    { label: "Balustrades", href: "/balustrades", icon: Fence },
+    { label: "Pool Fences", href: "/pool-fencing", icon: Waves },
     { label: "Heat Pump Covers", href: "/heat-pump-covers", icon: Fan },
   ];
 
