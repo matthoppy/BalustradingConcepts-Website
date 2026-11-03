@@ -85,6 +85,22 @@ Other Notes: ${data.otherNotes || 'N/A'}
           email: data.email,
           message: message,
           captchaToken: captchaValue,
+          // For the admin dashboard: which form, and every field by name.
+          kind: 'balustrade',
+          source: 'quote-modal',
+          fields: {
+            companyName: data.companyName,
+            siteAddress: data.siteAddress,
+            siteSuburb: data.siteSuburb,
+            sitePostcode: data.sitePostcode,
+            balustradeHeight: data.balustradeHeight,
+            buildingType: data.buildingType,
+            location: data.location,
+            protectingFall: data.protectingFall,
+            totalLinealMetres: data.totalLinealMetres,
+            requiredDate: data.requiredDate,
+            otherNotes: data.otherNotes,
+          },
         }),
       });
 

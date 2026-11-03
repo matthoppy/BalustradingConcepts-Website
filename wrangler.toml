@@ -1,9 +1,30 @@
-name = "balustrading-concepts-website"
+name = "balustradingconcepts-website"
 compatibility_date = "2024-01-01"
 pages_build_output_dir = "dist"
 
-[env.production]
-name = "balustrading-concepts-website"
+# Bindings for the Pages Functions (functions/). Cloudflare Pages reads this
+# file on every build, so the bindings below apply to the Production
+# deployment without touching the dashboard. Secrets and variables are still
+# set in the dashboard (Settings → Variables and Secrets); see
+# docs/ADMIN_DASHBOARD.md for the list.
+#
+# Preview deployments get no bindings on purpose: the quote form still emails
+# from a preview, it just does not write test enquiries into the real
+# database.
 
-[env.preview]
-name = "balustrading-concepts-website-preview"
+# The dashboard's database: enquiries, sessions, settings. Created 3 Nov 2026
+# in Oceania; tables from db/schema.sql.
+[[d1_databases]]
+binding = "DB"
+database_name = "balustrading"
+database_id = "27bce962-f358-48f6-8638-32a855e8f29d"
+
+# Enquiry photos. Swap for an R2 bucket bound as FILES once R2 is enabled on
+# the account; the functions prefer FILES when both are bound.
+[[kv_namespaces]]
+binding = "FILES_KV"
+id = "99263713aabf47249821b001a611ef7f"
+
+# [[r2_buckets]]
+# binding = "FILES"
+# bucket_name = "balustrading-files"

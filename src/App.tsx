@@ -2,6 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
@@ -10,6 +11,9 @@ import PoolFencing from "./pages/PoolFencing";
 import HeatPumpCovers from "./pages/HeatPumpCovers";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfTrade from "./pages/TermsOfTrade";
+
+// The admin dashboard is its own bundle: customers never download it.
+const AdminApp = lazy(() => import("./admin/AdminApp"));
 
 const queryClient = new QueryClient();
 
@@ -29,6 +33,14 @@ const App = () => (
           <Route path="/commercial-projects" element={<Navigate to="/balustrades" replace />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-trade" element={<TermsOfTrade />} />
+          <Route
+            path="/admin/*"
+            element={
+              <Suspense fallback={<div className="p-8 text-sm text-muted-foreground">Loading the dashboard…</div>}>
+                <AdminApp />
+              </Suspense>
+            }
+          />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

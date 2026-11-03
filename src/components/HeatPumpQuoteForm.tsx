@@ -97,6 +97,23 @@ Other Notes: ${data.otherNotes || "N/A"}
           email: data.email,
           message,
           captchaToken: captchaValue,
+          // For the admin dashboard: which form, and every field by name.
+          kind: "heatpump",
+          source: "heatpump-form",
+          fields: {
+            style: data.style,
+            colour: data.colour,
+            requirement: data.requirement,
+            quantity: data.quantity,
+            unitWidth: data.unitWidth,
+            unitDepth: data.unitDepth,
+            unitHeight: data.unitHeight,
+            knownSize: data.knownSize,
+            siteAddress: data.siteAddress,
+            siteSuburb: data.siteSuburb,
+            sitePostcode: data.sitePostcode,
+            otherNotes: data.otherNotes,
+          },
         }),
       });
 
