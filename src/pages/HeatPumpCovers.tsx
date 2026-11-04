@@ -8,10 +8,12 @@ import HeatPumpQuoteForm from "@/components/HeatPumpQuoteForm";
 import HeatPumpCoverConfigurator from "@/components/HeatPumpCoverConfigurator";
 import Seo, { serviceJsonLd } from "@/components/Seo";
 import { coverStyles, sizesByStyle, sizeLabel } from "@/data/heatPumpCovers";
-import heroImage from "@/assets/heatpump-cover-hero.jpg";
+import { imageUrl, siteImages } from "@/content/siteImages";
 import askoImage from "@/assets/asko-cover.jpg";
 import chathamImage from "@/assets/chatham-cover.jpg";
 import futunaImage from "@/assets/futuna-cover.jpg";
+
+const heroImage = imageUrl(siteImages.heatPumpHero);
 
 const styleImages: Record<string, string> = {
   Asko: askoImage,

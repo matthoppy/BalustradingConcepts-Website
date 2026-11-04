@@ -1,7 +1,9 @@
 import { CheckCircle } from "lucide-react";
-import aboutImage from "@/assets/about-image.jpg";
-import aboutImage2 from "@/assets/about-image-2.jpg";
-import aboutImage3 from "@/assets/about-image-3.jpg";
+import { imageUrl, siteImages } from "@/content/siteImages";
+
+// The three pictures beside the text, in page order, from the site manifest
+// (changed from /admin → Projects → Page pictures).
+const aboutImages = siteImages.about;
 
 const About = () => {
   const features = [
@@ -45,27 +47,16 @@ const About = () => {
 
           {/* Images */}
           <div className="grid grid-cols-1 gap-4">
-            <img
-              src={aboutImage}
-              alt="Quality glass balustrading craftsmanship"
-              loading="lazy"
-              decoding="async"
-              className="w-full h-[280px] object-cover shadow-lg rounded-lg"
-            />
-            <img
-              src={aboutImage3}
-              alt="Modern glass balustrading installation"
-              loading="lazy"
-              decoding="async"
-              className="w-full h-[280px] object-cover shadow-lg rounded-lg"
-            />
-            <img
-              src={aboutImage2}
-              alt="Aluminium deck balustrading installation example"
-              loading="lazy"
-              decoding="async"
-              className="w-full h-[280px] object-cover shadow-lg rounded-lg"
-            />
+            {aboutImages.map((image) => (
+              <img
+                key={image.src}
+                src={imageUrl(image)}
+                alt={image.alt}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-[280px] object-cover shadow-lg rounded-lg"
+              />
+            ))}
           </div>
         </div>
       </div>

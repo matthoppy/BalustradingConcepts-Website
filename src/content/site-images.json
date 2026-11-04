@@ -1,0 +1,402 @@
+{
+  "version": 1,
+  "hero": {
+    "src": "/images/site/hero-balustrading.jpg",
+    "alt": "Glass balustrade on an Auckland deck",
+    "v": 1
+  },
+  "poolHero": {
+    "src": "/images/site/pool-fencing-hero.jpg",
+    "alt": "Frameless glass pool fence",
+    "v": 1
+  },
+  "heatPumpHero": {
+    "src": "/images/site/heatpump-cover-hero.jpg",
+    "alt": "Aluminium heat pump cover",
+    "v": 1
+  },
+  "about": [
+    {
+      "src": "/images/site/about-image.jpg",
+      "alt": "Quality glass balustrading craftsmanship",
+      "v": 1
+    },
+    {
+      "src": "/images/site/about-image-3.jpg",
+      "alt": "Modern glass balustrading installation",
+      "v": 1
+    },
+    {
+      "src": "/images/site/about-image-2.jpg",
+      "alt": "Aluminium deck balustrading installation example",
+      "v": 1
+    }
+  ],
+  "projects": {
+    "balustrade": [
+      {
+        "title": "Parnell Project",
+        "style": "Finline",
+        "photos": [
+          "/images/site/gallery-1.jpg",
+          "/images/site/gallery-76.jpg",
+          "/images/site/gallery-93.jpg"
+        ],
+        "alt": "Finline balustrading at Parnell project"
+      },
+      {
+        "title": "Framed Glass Balustrade",
+        "style": "Avon",
+        "photos": [
+          "/images/site/gallery-13.jpg",
+          "/images/site/gallery-14.jpg",
+          "/images/site/gallery-15.jpg",
+          "/images/site/gallery-16.jpg",
+          "/images/site/gallery-12.jpg"
+        ],
+        "alt": "Avon framed glass balustrade installation"
+      },
+      {
+        "title": "Arney Crestent Job",
+        "style": "Finline",
+        "photos": [
+          "/images/site/gallery-6.jpg",
+          "/images/site/gallery-7.jpg",
+          "/images/site/gallery-8.jpg",
+          "/images/site/gallery-9.jpg"
+        ],
+        "alt": "Finline balustrading on deck at Arney Crestent"
+      },
+      {
+        "title": "Birkenhead",
+        "style": "Finline",
+        "photos": [
+          "/images/site/gallery-10.jpg",
+          "/images/site/gallery-11.jpg"
+        ],
+        "alt": "Finline balustrading at Birkenhead property"
+      },
+      {
+        "title": "Fineline Safa Slat Balustrade",
+        "style": "Fineline Safa",
+        "photos": [
+          "/images/site/gallery-17.jpg",
+          "/images/site/gallery-18.jpg",
+          "/images/site/gallery-19.jpg",
+          "/images/site/gallery-20.jpg"
+        ],
+        "alt": "Fineline Safa slat type balustrade installation"
+      },
+      {
+        "title": "Titirangi Glass Balustrade",
+        "style": "Mini Post",
+        "photos": [
+          "/images/site/gallery-21.jpg",
+          "/images/site/gallery-22.jpg",
+          "/images/site/gallery-23.jpg",
+          "/images/site/gallery-24.jpg"
+        ],
+        "alt": "Mini Post glass balustrade at Titirangi property"
+      },
+      {
+        "title": "Siena Glass Balustrade",
+        "style": "Siena",
+        "photos": [
+          "/images/site/gallery-25.jpg",
+          "/images/site/gallery-26.jpg"
+        ],
+        "alt": "Siena style glass balustrade installation"
+      },
+      {
+        "title": "Glass Standoff Balustrade",
+        "style": "Standoff",
+        "photos": [
+          "/images/site/gallery-27.jpg",
+          "/images/site/gallery-28.jpg"
+        ],
+        "alt": "Glass standoff style balustrade installation on timber deck"
+      },
+      {
+        "title": "Glass Channel Balustrade",
+        "style": "Panorama with Etchlite",
+        "photos": [
+          "/images/site/gallery-29.jpg",
+          "/images/site/gallery-30.jpg",
+          "/images/site/gallery-31.jpg",
+          "/images/site/gallery-32.jpg"
+        ],
+        "alt": "Panorama glass channel balustrade with Etchlite frosted glass"
+      },
+      {
+        "title": "Taupo Bay Bach",
+        "style": "Spectra",
+        "photos": [
+          "/images/site/gallery-41.jpg",
+          "/images/site/gallery-42.jpg",
+          "/images/site/gallery-43.jpg",
+          "/images/site/gallery-44.jpg",
+          "/images/site/gallery-45.jpg"
+        ],
+        "alt": "Spectra glass balustrade at beachfront Taupo Bay bach"
+      },
+      {
+        "title": "Millwater Project",
+        "style": "Windsor balustrade and Assure Panels + Gates",
+        "photos": [
+          "/images/site/gallery-46.jpg",
+          "/images/site/gallery-47.jpg",
+          "/images/site/gallery-48.jpg"
+        ],
+        "alt": "Windsor balustrade with Assure panels and gates at Millwater"
+      },
+      {
+        "title": "Privacy Screen",
+        "style": "Extreme Etchlite glass",
+        "photos": [
+          "/images/site/gallery-49.jpg",
+          "/images/site/gallery-50.jpg",
+          "/images/site/gallery-51.jpg"
+        ],
+        "alt": "Extreme Etchlite glass privacy screen installation"
+      },
+      {
+        "title": "Balustrade and Privacy Screen",
+        "style": "Avon and Safa Slat",
+        "photos": [
+          "/images/site/gallery-56.jpg",
+          "/images/site/gallery-57.jpg",
+          "/images/site/gallery-58.jpg",
+          "/images/site/gallery-59.jpg"
+        ],
+        "alt": "Avon balustrade and Safa Slat privacy screen installation on timber deck"
+      },
+      {
+        "title": "Aluminium Balustrade",
+        "style": "Windsor",
+        "photos": [
+          "/images/site/gallery-60.jpg",
+          "/images/site/gallery-61.jpg",
+          "/images/site/gallery-62.jpg",
+          "/images/site/gallery-63.jpg",
+          "/images/site/gallery-64.jpg"
+        ],
+        "alt": "Windsor aluminium balustrade on elevated timber deck with views"
+      },
+      {
+        "title": "Glass Balustrade with Privacy Screen",
+        "style": "Spectra and Safa Slat",
+        "photos": [
+          "/images/site/gallery-65.jpg",
+          "/images/site/gallery-66.jpg",
+          "/images/site/gallery-67.jpg",
+          "/images/site/gallery-68.jpg",
+          "/images/site/gallery-69.jpg",
+          "/images/site/gallery-70.jpg"
+        ],
+        "alt": "Spectra glass balustrade with Safa Slat privacy screen on elevated deck"
+      },
+      {
+        "title": "Glass Balustrade",
+        "style": "Panorama",
+        "photos": [
+          "/images/site/gallery-71.jpg",
+          "/images/site/gallery-72.jpg",
+          "/images/site/gallery-73.jpg",
+          "/images/site/gallery-74.jpg",
+          "/images/site/gallery-75.jpg"
+        ],
+        "alt": "Panorama glass balustrade installation"
+      },
+      {
+        "title": "Stairway Handrail",
+        "style": "Ascot",
+        "photos": [
+          "/images/site/gallery-77.jpg",
+          "/images/site/gallery-78.jpg",
+          "/images/site/gallery-79.jpg"
+        ],
+        "alt": "Ascot handrail installation on curved concrete stairs"
+      }
+    ],
+    "commercial": [
+      {
+        "title": "Evril Orr Retirement Home",
+        "style": "Finline and Ascot Handrails",
+        "photos": [
+          "/images/site/gallery-102.jpg",
+          "/images/site/gallery-99.jpg",
+          "/images/site/gallery-100.jpg",
+          "/images/site/gallery-101.jpg",
+          "/images/site/gallery-103.jpg",
+          "/images/site/gallery-104.jpg",
+          "/images/site/gallery-105.jpg",
+          "/images/site/gallery-106.jpg",
+          "/images/site/gallery-107.jpg",
+          "/images/site/gallery-108.jpg",
+          "/images/site/gallery-109.jpg",
+          "/images/site/gallery-110.jpg",
+          "/images/site/gallery-111.jpg",
+          "/images/site/gallery-112.jpg",
+          "/images/site/gallery-113.jpg",
+          "/images/site/gallery-114.jpg"
+        ],
+        "alt": "Finline and Ascot handrails at Evril Orr Retirement Home commercial project"
+      },
+      {
+        "title": "Pukekohe Project",
+        "style": "Finline",
+        "photos": [
+          "/images/site/gallery-115.jpg",
+          "/images/site/gallery-116.jpg",
+          "/images/site/gallery-117.jpg",
+          "/images/site/gallery-118.jpg"
+        ],
+        "alt": "Finline commercial balustrading at Pukekohe Project"
+      },
+      {
+        "title": "Glass Balustrade",
+        "style": "Standoff",
+        "photos": [
+          "/images/site/gallery-119.jpg",
+          "/images/site/gallery-120.jpg",
+          "/images/site/gallery-121.jpg"
+        ],
+        "alt": "Standoff glass balustrade commercial installation"
+      },
+      {
+        "title": "Helensville Library",
+        "style": "Ascot with Handrail",
+        "photos": [
+          "/images/site/gallery-33.jpg",
+          "/images/site/gallery-34.jpg",
+          "/images/site/gallery-35.jpg",
+          "/images/site/gallery-36.jpg",
+          "/images/site/gallery-37.jpg"
+        ],
+        "alt": "Ascot commercial balustrade with handrail at Helensville Library"
+      },
+      {
+        "title": "Commercial Fencing",
+        "style": "Assure Panels",
+        "photos": [
+          "/images/site/gallery-38.jpg",
+          "/images/site/gallery-39.jpg",
+          "/images/site/gallery-40.jpg"
+        ],
+        "alt": "Assure panel commercial fencing installation"
+      },
+      {
+        "title": "Commercial Handrail",
+        "style": "Ascot with Handrail",
+        "photos": [
+          "/images/site/gallery-52.jpg",
+          "/images/site/gallery-53.jpg",
+          "/images/site/gallery-54.jpg",
+          "/images/site/gallery-55.jpg"
+        ],
+        "alt": "Ascot commercial handrail installation on stairs and deck"
+      },
+      {
+        "title": "Oranga School",
+        "style": "Extreme Ascot",
+        "photos": [
+          "/images/site/gallery-80.jpg",
+          "/images/site/gallery-81.jpg"
+        ],
+        "alt": "Extreme Ascot commercial balustrading installation at Oranga School"
+      },
+      {
+        "title": "Glen Eden Apartments",
+        "style": "Hampton",
+        "photos": [
+          "/images/site/gallery-82.jpg",
+          "/images/site/gallery-83.jpg",
+          "/images/site/gallery-84.jpg"
+        ],
+        "alt": "Hampton style commercial balustrading at Glen Eden Apartments"
+      },
+      {
+        "title": "Accessibility Walkway",
+        "style": "Handrail",
+        "photos": [
+          "/images/site/gallery-85.jpg",
+          "/images/site/gallery-86.jpg",
+          "/images/site/gallery-87.jpg"
+        ],
+        "alt": "Commercial handrail installation for accessibility walkway"
+      },
+      {
+        "title": "Dealership Project",
+        "style": "Ascot",
+        "photos": [
+          "/images/site/gallery-88.jpg",
+          "/images/site/gallery-89.jpg"
+        ],
+        "alt": "Ascot style commercial balustrading at dealership"
+      },
+      {
+        "title": "Lincoln Project",
+        "style": "Windsor",
+        "photos": [
+          "/images/site/gallery-90.jpg",
+          "/images/site/gallery-91.jpg",
+          "/images/site/gallery-92.jpg"
+        ],
+        "alt": "Windsor style commercial balustrading at Lincoln Project"
+      },
+      {
+        "title": "Diocesan School Project",
+        "style": "Windsor",
+        "photos": [
+          "/images/site/gallery-94.jpg",
+          "/images/site/gallery-95.jpg",
+          "/images/site/gallery-96.jpg",
+          "/images/site/gallery-97.jpg",
+          "/images/site/gallery-98.jpg"
+        ],
+        "alt": "Windsor style commercial balustrading at Diocesan School"
+      }
+    ],
+    "poolfence": [
+      {
+        "title": "Millwater Pool Fence",
+        "style": "Mini Posts",
+        "photos": [
+          "/images/site/pool-fence-8.jpg",
+          "/images/site/pool-fence-9.jpg",
+          "/images/site/pool-fence-10.jpg",
+          "/images/site/pool-fence-11.jpg",
+          "/images/site/pool-fence-12.jpg",
+          "/images/site/pool-fence-18.jpg"
+        ],
+        "alt": "Mini Posts hidden pool fencing installation at Millwater"
+      },
+      {
+        "title": "Grey Lynn Project",
+        "style": "Finline",
+        "photos": [
+          "/images/site/pool-fence-13.jpg",
+          "/images/site/pool-fence-14.jpg",
+          "/images/site/pool-fence-15.jpg",
+          "/images/site/pool-fence-16.jpg",
+          "/images/site/pool-fence-17.jpg"
+        ],
+        "alt": "Finline hidden pool fencing at Grey Lynn residential property"
+      },
+      {
+        "title": "Pool Fencing with Deck",
+        "style": "Ascot and Spectra",
+        "photos": [
+          "/images/site/pool-fence-1.jpg",
+          "/images/site/pool-fence-2.jpg",
+          "/images/site/pool-fence-3.jpg",
+          "/images/site/pool-fence-4.jpg",
+          "/images/site/pool-fence-5.jpg",
+          "/images/site/pool-fence-6.jpg",
+          "/images/site/pool-fence-7.jpg"
+        ],
+        "alt": "Ascot and Spectra hidden pool fencing around elevated pool on timber deck"
+      }
+    ]
+  }
+}

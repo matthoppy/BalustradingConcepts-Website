@@ -1,0 +1,41 @@
+# Build check on every pull request and push to main.
+#
+# Cloudflare Pages builds main itself, but nothing stood between a broken
+# build and the site before this. The dashboard and the Pages Functions are
+# type-checked and tested here too; the functions are not covered by the
+# site's own tsconfig.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      - name: Type-check the site and the functions
+        run: npm run typecheck
+
+      # Lint is scoped to the dashboard, the content manifest and the
+      # functions: the rest of the site reports pre-existing warnings from
+      # the shadcn components. Widen this as those are cleared.
+      - name: Lint the dashboard and functions
+        run: npx eslint src/admin src/content functions
+
+      - name: Unit tests
+        run: npm test
+
+      # The real gate: if this fails, the site does not deploy.
+      - name: Build
+        run: npm run build

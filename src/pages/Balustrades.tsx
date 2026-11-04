@@ -6,7 +6,9 @@ import Footer from "@/components/Footer";
 import FixedContactButtons from "@/components/FixedContactButtons";
 import Gallery from "@/components/Gallery";
 import Seo, { serviceJsonLd } from "@/components/Seo";
-import heroImage from "@/assets/hero-balustrading.jpg";
+import { imageUrl, siteImages } from "@/content/siteImages";
+
+const heroImage = imageUrl(siteImages.hero);
 
 const Balustrades = () => {
   useEffect(() => {

@@ -1,5 +1,7 @@
 import { Button } from "./ui/button";
-import heroImage from "@/assets/hero-balustrading.jpg";
+import { imageUrl, siteImages } from "@/content/siteImages";
+
+const heroImage = imageUrl(siteImages.hero);
 
 const Hero = () => {
   return (

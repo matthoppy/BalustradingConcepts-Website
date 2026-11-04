@@ -5,6 +5,10 @@ This project runs entirely on Cloudflare Pages:
 - **Backend API**: Cloudflare Pages Function at `functions/api/submit-contact-form.ts`
 - **Email**: Resend (called server-side from the Pages Function)
 
+> The admin dashboard at `/admin` and the enquiry database are covered in
+> [docs/ADMIN_DASHBOARD.md](docs/ADMIN_DASHBOARD.md). The bindings it needs
+> (D1 and KV) are declared in `wrangler.toml` and applied on every build.
+
 ## Prerequisites
 
 1. A Cloudflare account with Pages enabled
@@ -114,7 +118,8 @@ Cloudflare Pages will automatically:
 ### POST /api/submit-contact-form
 
 Handles contact form submissions:
-- Server-side reCAPTCHA verification against Google
+- Server-side Turnstile verification
+- Keeps the enquiry for the admin dashboard when the D1 binding is present
 - Email delivery via the Resend REST API
 - Optional photo attachment (base64-encoded)
 
